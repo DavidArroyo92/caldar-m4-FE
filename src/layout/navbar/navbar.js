@@ -31,7 +31,7 @@ function Navbar() {
                             Buildings
                         </li>
                     </Link>
-                    <Link to="/custumers">
+                    <Link to="/customers">
                         <li>
                             Custumers
                         </li>
