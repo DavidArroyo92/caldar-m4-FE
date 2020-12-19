@@ -1,0 +1,26 @@
+.App {
+  text-align: center;
+}
+
+*{
+  padding: 0px;
+  margin: 0px;
+  box-shadow: border-box;
+  list-style: none;
+  text-decoration: none;
+  font-family: 'Josefin Sans', sans-serif;
+}
+
+body{
+  background-color: white;
+}
+
+.wrapper{
+  display: flex;
+  position: relative;
+}
+
+.wrapper .mainContent{
+  width: 100%;
+  margin-left: 200px;
+}

@@ -1,0 +1,11 @@
+.headerContainer{
+    height: 70px;
+    padding: 20px;
+    background: orangered;
+    border-bottom:1px solid #e0e4e8;
+    color: white;
+}
+
+.headerContainer h1{
+    color: white;
+}
