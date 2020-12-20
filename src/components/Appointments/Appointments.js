@@ -1,13 +1,13 @@
 import React from 'react'
 
-function Custumers() {
+function Appointments() {
     return (
         <div>
             <h2>
-                custumers
+                appointments
             </h2>
         </div>
     )
 }
 
-export default Custumers
+export default Appointments

@@ -11,9 +11,9 @@ function Navbar() {
                     </h3>
                 </div>
                 <ul className={styles.navbarLinks}>
-                    <Link to="/Appointment" >
+                    <Link to="/Appointments" >
                         <li>
-                            Appointment
+                            Appointments
                         </li>
                     </Link>
                     <Link to="/Boilers">
@@ -31,9 +31,9 @@ function Navbar() {
                             Buildings
                         </li>
                     </Link>
-                    <Link to="/Custumers">
+                    <Link to="/Customers">
                         <li>
-                            Custumers
+                            Customers
                         </li>
                     </Link>
                     <Link to="/Technicians">
