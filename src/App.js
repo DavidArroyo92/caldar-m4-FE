@@ -2,13 +2,12 @@ import React from 'react';
 import styles from './App.module.css';
 import Navbar from './layout/navbar/navbar';
 import Header from './layout/header/header';
-import Main from './layout/main/main';
-import Appointment from './components/appointment';
-import Boilers from './components/boilers';
-import BoilersTypes from './components/boilersTypes';
-import Buildings from './components/buildings';
-import Custumers from './components/custumers';
-import Technicians from './components/technicians';
+import Appointment from './components/Appointment/Appointment';
+import Boilers from './components/Boilers/Boilers';
+import BoilersTypes from './components/BoilersTypes/BoilersTypes';
+import Buildings from './components/Buildings/Buildings';
+import Custumers from './components/Custumers/Custumers';
+import Technicians from './components/Technicians/Technicians';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
 
 
@@ -20,17 +19,16 @@ function App() {
         <Navbar/>
           <div className={styles.mainContent}>
             <Header/>
-            <Main/>
+            <Switch>
+              <Route path="/Appointment" component={Appointment}/>
+              <Route path="/Boilers" component={Boilers}/>
+              <Route path="/BoilersTypes" component={BoilersTypes}/>
+              <Route path="/Buildings" component={Buildings}/>
+              <Route path="/Custumers" component={Custumers}/>
+              <Route path="/Technicians" component={Technicians} />
+            </Switch>
           </div>
         </div>
-        <Switch>
-          <Route path="appoinment" component={Appointment}/>
-          <Route path="boilers" component={Boilers}/>
-          <Route path="boilersTypes" component={BoilersTypes}/>
-          <Route path="buildings" component={Buildings}/>
-          <Route path="custumers" component={Custumers}/>
-          <Route path="technicians" component={Technicians} />
-        </Switch>
       </div>
    </Router>
   );
