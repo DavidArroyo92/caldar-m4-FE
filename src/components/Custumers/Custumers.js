@@ -3,9 +3,9 @@ import React from 'react'
 function Custumers() {
     return (
         <div>
-            <h1>
+            <h2>
                 custumers
-            </h1>
+            </h2>
         </div>
     )
 }

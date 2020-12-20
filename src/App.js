@@ -2,12 +2,12 @@ import React from 'react';
 import styles from './App.module.css';
 import Navbar from './layout/navbar/navbar';
 import Header from './layout/header/header';
-import Appointment from './components/Appointment';
-import Boilers from './components/Boilers';
-import BoilersTypes from './components/BoilersTypes';
-import Buildings from './components/Buildings';
-import Custumers from './components/Custumers';
-import Technicians from './components/Technicians';
+import Appointment from './components/Appointment/Appointment';
+import Boilers from './components/Boilers/Boilers';
+import BoilersTypes from './components/BoilersTypes/BoilersTypes';
+import Buildings from './components/Buildings/Buildings';
+import Custumers from './components/Custumers/Custumers';
+import Technicians from './components/Technicians/Technicians';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
 
 

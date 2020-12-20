@@ -3,9 +3,9 @@ import React from 'react'
 function Buildings() {
     return (
         <div>
-            <h1>
+            <h2>
                 buildings
-            </h1>
+            </h2>
         </div>
     )
 }
