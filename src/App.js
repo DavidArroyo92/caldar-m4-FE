@@ -6,7 +6,7 @@ import Appointment from './components/Appointment/Appointment';
 import Boilers from './components/Boilers/Boilers';
 import BoilersTypes from './components/BoilersTypes/BoilersTypes';
 import Buildings from './components/Buildings/Buildings';
-import Custumers from './components/Custumers/Custumers';
+import Custumers from './components/Customers/Customers';
 import Technicians from './components/Technicians/Technicians';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
 

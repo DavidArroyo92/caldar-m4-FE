@@ -1,13 +1,13 @@
 import React from 'react'
 
-function Custumers() {
+function Customers() {
     return (
         <div>
             <h2>
-                custumers
+                customers
             </h2>
         </div>
     )
 }
 
-export default Custumers
+export default Customers
