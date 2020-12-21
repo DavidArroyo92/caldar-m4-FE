@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types';
-
+import styles from '../../layout/main/main.module.css'
 class BuildingItem extends Component {
 
     getStyle = () => {
@@ -16,14 +16,31 @@ class BuildingItem extends Component {
         } = this.props.building;
         return (
             <div style={this.getStyle()} >
+                <table className={styles.tableContain}border='1'>
+                    <thread>
+                        <tr>
+                            <th>ID</th>
+                            <th>NAME</th>
+                            <th>EMAIL</th>
+                            <th>PHONE</th>
+                            <th>ADRESS</th>
+                        </tr>
+                    </thread>
                 
                <p>
-                  BoilerID {boilerId} - Name: {businessName} - Email: {email} - Phone:{phone} - Adress:{adress}
+                   <tr>
+                    <th>{boilerId}</th>
+                    <th>{businessName}</th>
+                    <th>{email} </th>
+                    <th>{phone} </th>
+                    <th>{adress}</th>
                    <button onClick={this.props.delBuilding.bind(this, id)} 
                    style={btnStyle}>x</button>
                    <button onClick={this.props.editBuilding.bind(this, this.props.building)}
                    style={btnStyleEdit}>Edit</button>
+                   </tr>
                </p>
+               </table>
             </div>
         )
     }
