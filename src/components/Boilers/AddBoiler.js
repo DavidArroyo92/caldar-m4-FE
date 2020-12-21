@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import styles from "../../layout/main/main.module.css";
 
 export class AddBoiler extends Component {
   state = {
@@ -10,10 +11,20 @@ export class AddBoiler extends Component {
     hourEventualCost: "",
   };
 
-  componentDidUpdate(prevProps, prevState) {
-    if (this.props.boilerEdit !== prevProps.boilerEdit) {
+  componentDidMount(){
+      if (this.props.boilerEdit) {
       this.handleEdit(this.props.boilerEdit);
     }
+  }
+  handleCleanForm = () => {
+    this.setState({
+      id: "",
+      typeId: "",
+      maintainceRate: "",
+      hourMaintainceCost: "",
+      hourEventualCost: "",
+    });
+    this.props.handleShowForm();
   }
 
   handleEdit = (boilerEdit) => {
@@ -63,7 +74,7 @@ export class AddBoiler extends Component {
           <input
             type="text"
             name="typeId"
-            style={inputStyle}
+            className={styles.input}
             placeholder="Type boiler..."
             value={this.state.typeId}
             onChange={this.onChange}
@@ -71,7 +82,7 @@ export class AddBoiler extends Component {
           <input
             type="text"
             name="maintainceRate"
-            style={inputStyle}
+            className={styles.input}
             placeholder="Maintaince rate ..."
             value={this.state.maintainceRate}
             onChange={this.onChange}
@@ -79,7 +90,7 @@ export class AddBoiler extends Component {
           <input
             type="text"
             name="hourMaintainceCost"
-            style={inputStyle}
+            className={styles.input}
             placeholder="Hour maintaince cost ..."
             value={this.state.hourMaintainceCost}
             onChange={this.onChange}
@@ -87,13 +98,20 @@ export class AddBoiler extends Component {
           <input
             type="text"
             name="hourEventualCost"
-            style={inputStyle}
+            className={styles.input}
             placeholder="Hour maintaince cost ..."
             value={this.state.hourEventualCost}
             onChange={this.onChange}
           />
 
-          <input type="submit" value="Submit" style={inputStyle} />
+          <input type="submit" value="Submit" className={styles.input} />
+          <input
+            type="button"
+            value="Cancel"
+            className={styles.input}
+            onClick={this.handleCleanForm}
+          />
+
         </form>
       </div>
     );
@@ -104,14 +122,8 @@ export class AddBoiler extends Component {
 AddBoiler.propTypes = {
   addBoiler: PropTypes.func.isRequired,
   updateBoiler: PropTypes.func.isRequired,
+  handleShowForm: PropTypes.func.isRequired,
   boilerEdit: PropTypes.object,
-};
-
-const inputStyle = {
-  padding: "10px",
-  width: "50%",
-  margin: "5px",
-  borderRadius: "5px",
 };
 
 export default AddBoiler;

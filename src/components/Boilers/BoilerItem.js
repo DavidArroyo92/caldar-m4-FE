@@ -1,14 +1,8 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import styles from "../../layout/main/main.module.css";
 
 export class BoilerItem extends Component {
-  getStyle = () => {
-    return {
-      background: "#f5f5f5",
-      padding: "10px",
-      borderBottom: "1px #ccc dotted",
-    };
-  };
 
   render() {
     const {
@@ -19,24 +13,27 @@ export class BoilerItem extends Component {
       hourEventualCost,
     } = this.props.boiler;
     return (
-      <div style={this.getStyle()}>
-        <p>
-          Nro {id} - Type {typeId} - Maintaince {maintainceRate} - Maintaince
-          Cost {hourMaintainceCost} - Eventual Cost {hourEventualCost}
+      <tr>
+        <td>{id}</td>
+        <td>{typeId}</td>
+        <td>{maintainceRate}</td>
+        <td>{hourMaintainceCost}</td>
+        <td>{hourEventualCost}</td>
+        <td>
           <button
             onClick={this.props.delBoiler.bind(this, id)}
-            style={btnStyle}
+            className={styles.btnStyle}
           >
             delete
           </button>
           <button
             onClick={this.props.editBoiler.bind(this, this.props.boiler)}
-            style={btnStyle}
+            className={styles.btnStyle}
           >
             edit
           </button>
-        </p>
-      </div>
+        </td>
+      </tr>
     );
   }
 }
@@ -45,16 +42,6 @@ export class BoilerItem extends Component {
 BoilerItem.propTypes = {
   boiler: PropTypes.object.isRequired,
   delBoiler: PropTypes.func.isRequired,
-};
-
-const btnStyle = {
-  background: "#fff",
-  color: "#000",
-  border: "none",
-  padding: "5px 9px",
-  borderRadius: "5px",
-  cursor: "pointer",
-  float: "right",
 };
 
 export default BoilerItem;

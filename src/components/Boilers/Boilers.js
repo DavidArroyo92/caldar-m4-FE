@@ -2,12 +2,13 @@ import React, { Component } from "react";
 import BoilersList from "./BoilersList";
 import AddBoiler from "./AddBoiler";
 import { v4 as uuidv4 } from "uuid";
-import styles from '../../layout/main/main.module.css'
+import styles from "../../layout/main/main.module.css";
 
 class Boilers extends Component {
   state = {
     boilers: [],
     boilerEdit: null,
+    showForm: false,
   };
 
   componentDidMount() {
@@ -15,10 +16,21 @@ class Boilers extends Component {
     this.setState({ boilers: dataBoilers });
   }
 
+  // Show form
+  handleShowForm = () => {
+    this.setState({
+      showForm: !this.state.showForm,
+      boilerEdit: null
+    });
+    window.scrollTo(0, 0);
+  };
+
   // Edit Boiler
   editBoiler = (boiler) => {
+    const boilerNew = boiler;
     this.setState({
-      boilerEdit: boiler,
+      boilerEdit: boilerNew,
+      showForm: true,
     });
     window.scrollTo(0, 0);
   };
@@ -41,6 +53,7 @@ class Boilers extends Component {
         }
         return boiler;
       }),
+      showForm: false,
     });
   };
 
@@ -48,6 +61,7 @@ class Boilers extends Component {
   delBoiler = (id) => {
     this.setState({
       boilers: [...this.state.boilers.filter((boiler) => boiler.id !== id)],
+      showForm: false,
     });
   };
 
@@ -66,22 +80,31 @@ class Boilers extends Component {
       hourEventualCost,
     };
 
-    this.setState({ boilers: [...this.state.boilers, newBoiler] });
+    this.setState({
+      boilers: [...this.state.boilers, newBoiler],
+      showForm: false,
+    });
   };
 
   render() {
     return (
       <div className={styles.info}>
-        <AddBoiler
-          addBoiler={this.addBoiler}
-          updateBoiler={this.updateBoiler}
-          boilerEdit={this.state.boilerEdit}
-        />
-        <BoilersList
-          boilers={this.state.boilers}
-          delBoiler={this.delBoiler}
-          editBoiler={this.editBoiler}
-        />
+        {this.state.showForm ? (
+          <AddBoiler
+            addBoiler={this.addBoiler}
+            updateBoiler={this.updateBoiler}
+            boilerEdit={this.state.boilerEdit}
+            handleShowForm={this.handleShowForm}
+          />
+        ) : (
+          <BoilersList
+            boilers={this.state.boilers}
+            delBoiler={this.delBoiler}
+            editBoiler={this.editBoiler}
+            handleShowForm={this.handleShowForm}
+            showForm={this.state.showForm}
+          />
+        )}
       </div>
     );
   }

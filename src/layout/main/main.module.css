@@ -1,9 +1,47 @@
-.info{
-    margin: 1%;
-    width: 99%;
-    height: 100%;
-    color: #717171;
-    line-height: 25px;
-    background-color: white;
-    box-shadow: 3px 3px 3px 3px dimgray;
+.info {
+  margin: 2%;
+  width: 97%;
+  height: 100%;
+  color: #717171;
+  background-color: white;
+}
+
+table {
+  border-collapse: collapse;
+  text-align: inherit;
+}
+.table {
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+  text-align: center;
+}
+
+.table thead th {
+  vertical-align: bottom;
+  border-bottom: 2px solid #dee2e6;
+}
+
+.table td,
+.table th {
+  padding: 0.75rem;
+  vertical-align: top;
+  border-top: 1px solid #dee2e6;
+}
+
+.input {
+  padding: 10px;
+  width: 50%;
+  margin: 5px;
+  border-radius: 5px;
+}
+
+.btnStyle {
+  background: #fff;
+  color: #000;
+  border: none;
+  padding: 5px 9px;
+  border-radius: 5px;
+  cursor: pointer;
+  float: right;
 }
