@@ -90,7 +90,6 @@ AddBuilding = (boilerId, businessName,email,phone,adress) =>{
           showForm: false,
         });
 };
-
   render() {
     return (
         <div className={styles.info}>
