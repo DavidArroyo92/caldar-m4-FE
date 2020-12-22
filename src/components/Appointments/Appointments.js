@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router} from 'react-router-dom';
 import AppointmentList from "./AppointmentList";
 import AddAppointment from "./AddAppointment";
 import styles from '../../layout/main/main.module.css'
@@ -10,6 +9,7 @@ export default class Appointments extends Component {
   state = {
     appointmentValues:[],
     appointmentEdit: null,
+    showForm: false,
   }
 
   componentDidMount(){
@@ -17,16 +17,21 @@ export default class Appointments extends Component {
     this.setState({ appointmentValues: dataAppointments });
   }
 
-  editAppointment = (appointmentX) => {
+  handleShowForm = () => {
     this.setState({
-      appointmentEdit: appointmentX,
+      showForm: !this.state.showForm,
+      appointmentEdit: null
     });
+    window.scrollTo(0, 0);
   };
 
-  cancelAppointment = (appointmentX) => {
+  editAppointment = (appointment) => {
+    const appointmentNew = appointment;
     this.setState({
-      addAppointment: appointmentX,
+      appointmentEdit: appointmentNew,
+      showForm: true,
     });
+    window.scrollTo(0, 0);
   };
 
   updateAppointment = (id,buildingId,boilerId,start_timestamp,end_timestamp) => {
@@ -40,12 +45,15 @@ export default class Appointments extends Component {
         }
         return appointment;
       }),
+      showForm: false,
     });
   };
 
   delAppointment = (id) => {
     this.setState({
-    appointmentValues: [...this.state.appointmentValues.filter((appointment) => appointment.id !== id)] });
+    appointmentValues: [...this.state.appointmentValues.filter((appointment) => appointment.id !== id)],
+    showForm: false,
+  });
   }
 
   addAppointment = (buildingId,boilerId,start_timestamp,end_timestamp) => {
@@ -56,26 +64,32 @@ export default class Appointments extends Component {
       start_timestamp,
       end_timestamp
     };
-    this.setState({appointmentValues: [...this.state.appointmentValues, newAppointment] });
+    this.setState({appointmentValues: [...this.state.appointmentValues, newAppointment],
+      showForm: false,
+    });
   }
 
   render() {
     return (
-      <Router>
         <div className={styles.info}>
-              <React.Fragment>
+        {this.state.showForm ? (
+
                 <AddAppointment
-                addAppointment={this.addAppointment}
-                updateAppointment={this.updateAppointment}
-                appointmentEdit={this.state.appointmentEdit}/>
+                  addAppointment={this.addAppointment}
+                  updateAppointment={this.updateAppointment}
+                  appointmentEdit={this.state.appointmentEdit}
+                  handleShowForm={this.handleShowForm}
+                />
+                ) : (
                 <AppointmentList
-                appointmentValues = {this.state.appointmentValues}
-                cancelAppointment={this.cancelAppointment}
-                delAppointment={this.delAppointment}
-                editAppointment={this.editAppointment}/>
-              </React.Fragment>
+                  appointmentValues = {this.state.appointmentValues}
+                  delAppointment={this.delAppointment}
+                  editAppointment={this.editAppointment}
+                  handleShowForm={this.handleShowForm}
+                  showForm={this.state.showForm}
+                />
+        )}
         </div>
-      </Router>
     );
   }
 }

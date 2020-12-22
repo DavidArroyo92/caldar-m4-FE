@@ -1,26 +1,32 @@
 import React, { Component } from 'react';
 import PropTypes from "prop-types";
+import styles from "../../layout/main/main.module.css";
 
 export default class AppointmentItem extends Component {
-    getStyle = () => {
-        return {
-          background: "#f5f5f5", padding: "10px",borderBottom: "1px #ccc dotted"
-        };
-    };
     render() {
         const {id,buildingId, boilerId,start_timestamp, end_timestamp } = this.props.appointment;
         return (
-            <div style={this.getStyle()}>
-                <div>
-                    Id: {id} - Building: {buildingId} - Boiler: {boilerId} - Start Date: {start_timestamp} - End Date: {end_timestamp}
-                    <button onClick={this.props.delAppointment.bind(this,id)} style={btnStyle}>
-                        x
+            <tr>
+                <td>{id}</td>
+                <td>{buildingId}</td>
+                <td>{boilerId}</td>
+                <td>{start_timestamp}</td>
+                <td>{end_timestamp}</td>
+                <td>
+                    <button
+                        onClick={this.props.delAppointment.bind(this, id)}
+                        className={styles.btnStyle}
+                    >
+                        X
                     </button>
-                    <button onClick={this.props.editAppointment.bind(this, this.props.appointment)} style={btnStyle}>
+                    <button
+                        onClick={this.props.editAppointment.bind(this, this.props.appointment)}
+                        className={styles.btnStyle}
+                    >
                         Edit
                     </button>
-                </div>
-            </div>
+                </td>
+            </tr>
         )
     }
 }
@@ -31,14 +37,3 @@ AppointmentItem.propTypes = {
     delAppointment:PropTypes.func.isRequired,
     editAppointment:PropTypes.func.isRequired,
 }
-
-const btnStyle = {
-    background: "red",
-    color: "white",
-    border: "1px solid white",
-    padding: "5px 10px",
-    borderRadius: "10px",
-    cursor: "pointer",
-    float: "right",
-};
-

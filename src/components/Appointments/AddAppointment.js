@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import PropTypes from "prop-types"
+import PropTypes from "prop-types";
+import styles from "../../layout/main/main.module.css";
 
 export default class AddAppointment extends Component {
     state = {
@@ -10,11 +11,21 @@ export default class AddAppointment extends Component {
         end_timestamp:""
     }
 
-    componentDidUpdate(prevProps) {
-        if (this.props.appointmentEdit !== prevProps.appointmentEdit) {
+    componentDidMount() {
+        if (this.props.appointmentEdit) {
           this.handleEdit(this.props.appointmentEdit);
         }
       }
+    handleCleanForm = () => {
+        this.setState({
+            id:"",
+            buildingId:"",
+            boilerId:"",
+            start_timestamp:"",
+            end_timestamp:""
+        });
+        this.props.handleShowForm();
+    }
 
       handleEdit = (appointmentEdit) => {
         this.setState({
@@ -63,7 +74,7 @@ export default class AddAppointment extends Component {
                         <input
                             type="text"
                             name="buildingId"
-                            style={inputStyle}
+                            className={styles.input}
                             placeholder="Building Id..."
                             value={this.state.buildingId}
                             onChange={this.onChange}
@@ -71,7 +82,7 @@ export default class AddAppointment extends Component {
                         <input
                             type="text"
                             name="boilerId"
-                            style={inputStyle}
+                            className={styles.input}
                             placeholder="Boiler Id..."
                             value={this.state.boilerId}
                             onChange={this.onChange}
@@ -79,40 +90,26 @@ export default class AddAppointment extends Component {
                         <input
                             type="date"
                             name="start_timestamp"
-                            style={inputStyle}
-                            required pattern="\d{4}-\d{2}-\d{2}"
+                            className={styles.input}
                             value={this.state.start_timestamp}
                             onChange={this.onChange}
                         />
                         <input
                             type="date"
                             name="end_timestamp"
-                            style={inputStyle}
+                            className={styles.input}
                             value={this.state.end_timestamp}
                             onChange={this.onChange}
                         />
-                        <div>
-                        {this.state.id ?
+                         <input type="submit" value="Submit"
+                         className={styles.input}
+                         />
                         <input
-                            type="submit"
-                            value="Save"
-                            style={inputButton}
-                        />
-                        :
-                        <input
-                        type="submit"
-                        value="Add"
-                        style={inputButton}
-                    />}
-                    {this.state.id ?
-                        <input
-                        type="submit"
+                        type="button"
                         value="Cancel"
-                        style={inputButton}
-                    />
-                        :
-                        ""}
-                    </div>
+                        className={styles.input}
+                        onClick={this.handleCleanForm}
+                        />
                 </form>
             </div >
         )
@@ -123,22 +120,6 @@ export default class AddAppointment extends Component {
 AddAppointment.propTypes = {
     addAppointment:PropTypes.func.isRequired,
     appointmentEdit: PropTypes.object,
+    handleShowForm: PropTypes.func.isRequired,
     updateAppointment: PropTypes.func.isRequired,
 }
-
-const inputStyle = {
-    padding: "10px",
-    width: "50%",
-    margin: "5px",
-    borderRadius: "5px",
-  };
-
-const inputButton = {
-padding: "10px",
-width: "10%",
-margin: "5px",
-borderRadius: "5px",
-};
-
-
-
