@@ -75,11 +75,11 @@ import styles from '../../layout/main/main.module.css'
 
     render(){
         return(
-            <div>
-                <h3>
+            <div className={styles.formShow}>
+                <h3 className={styles.title}>
                 {this.state.id ? "Edit building" : "Add new Building"}
                 </h3>
-                <form onSubmit ={this.onSubmit}>
+                <form onSubmit ={this.onSubmit} className={styles.form}>
                     <input type="hidden" name="id" value={this.state.id} />
                     <input
                     type="text"

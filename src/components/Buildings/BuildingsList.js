@@ -9,19 +9,19 @@ class BuildingsList extends Component{
   render(){
     return (
       <div>
-          <h1>
+          <h1 className={styles.title}>
             Buildings{" "}
             <input
             type="button"
-            value="New"
-            className={styles.inputStyle}
+            value="+"
+            className={styles.btnStyleNew}
             onClick={() =>this.props.handleShowForm()}
             />
           </h1>
           <table className={styles.table}>
             <thead>
               <tr>
-                <th>id</th>
+                <th>Id</th>
                 <th>Business Name</th>
                 <th>E-mail</th>
                 <th>Phone</th>

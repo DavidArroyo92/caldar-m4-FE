@@ -27,7 +27,7 @@ class BuildingItem extends Component {
                         <td>
                             <button 
                                 onClick={this.props.delBuilding.bind(this, id)} 
-                                className={styles.propsbtnStyle}>
+                                className={styles.btnStyle}>
                                     x
                             </button>
                             <button 
