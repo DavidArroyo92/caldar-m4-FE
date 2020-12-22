@@ -16,11 +16,21 @@ class Technicians extends Component {
     this.setState({ technicians: dataTechnicians });
   }
 
+  // Show form
+  handleShowForm = () => {
+    this.setState({
+      showForm: !this.state.showForm,
+      technicianEdit: null
+    });
+    window.scrollTo(0, 0);
+  };
+
   // Edit Technician
   editTechnician = (technician) => {
     const technicianNew = technician;
     this.setState({
       technicianEdit: technicianNew,
+      showForm: true,
     });
     window.scrollTo(0, 0);
   };
@@ -49,6 +59,7 @@ class Technicians extends Component {
         }
         return technician;
       }),
+      showForm: false,
     });
   };
 
@@ -56,6 +67,7 @@ class Technicians extends Component {
   delTechnician = (id) => {
     this.setState({
       technicians: [...this.state.technicians.filter((technician) => technician.id !== id)],
+      showForm: false,
     });
   };
 
@@ -82,18 +94,21 @@ class Technicians extends Component {
 
     this.setState({
       technicians: [...this.state.technicians, newTechnician],
+      showForm: false,
     });
   };
 
   render() {
     return (
       <div className={styles.info}>
+          {this.state.showForm ? (
           <AddTechnician
             addTechnician={this.addTechnician}
             updateTechnician={this.updateTechnician}
             technicianEdit={this.state.technicianEdit}
             handleShowForm={this.handleShowForm}
           />
+          ) : (
           <TechniciansList
             technicians={this.state.technicians}
             delTechnician={this.delTechnician}
@@ -101,7 +116,7 @@ class Technicians extends Component {
             handleShowForm={this.handleShowForm}
             showForm={this.state.showForm}
           />
-        )
+        )}
       </div>
     );
   }

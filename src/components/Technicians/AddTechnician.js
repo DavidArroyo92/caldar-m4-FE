@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import styles from "../../layout/main/main.module.css";
 
 export class AddTechnician extends Component {
     state = {
@@ -13,11 +14,24 @@ export class AddTechnician extends Component {
         daily_capacity: "",
       };
 
-    componentDidUpdate(prevProps, prevState) {
-        if (this.props.technicianEdit !== prevProps.technicianEdit) {
-          this.handleEdit(this.props.technicianEdit);
-        }
+    componentDidMount(){
+      if (this.props.technicianEdit) {
+      this.handleEdit(this.props.technicianEdit);
     }
+  }
+    handleCleanForm = () => {
+      this.setState({
+        id:"",
+        first_name: "",
+        last_name: "",
+        email: "",
+        typeIds: "",
+        skillsId: "",
+        hour_rate: "",
+        daily_capacity: "",
+        });
+        this.props.handleShowForm();
+  }
     
     handleEdit = (technicianEdit) => {
         this.setState({
@@ -79,7 +93,7 @@ export class AddTechnician extends Component {
                         <input
                             type="text"
                             name="first_name"
-                            style={inputStyle}
+                            className={styles.input}
                             placeholder="First Name..."
                             value={this.state.first_name}
                             onChange={this.onChange}
@@ -87,7 +101,7 @@ export class AddTechnician extends Component {
                         <input
                             type="text"
                             name="last_name"
-                            style={inputStyle}
+                            className={styles.input}
                             placeholder="Last Name..."
                             value={this.state.last_name}
                             onChange={this.onChange}
@@ -95,7 +109,7 @@ export class AddTechnician extends Component {
                         <input
                             type="email"
                             name="email"
-                            style={inputStyle}
+                            className={styles.input}
                             placeholder="Email..."
                             value={this.state.email}
                             onChange={this.onChange}
@@ -103,7 +117,7 @@ export class AddTechnician extends Component {
                         <input
                             type="text"
                             name="typeIds"
-                            style={inputStyle}
+                            className={styles.input}
                             placeholder="Type Ids..."
                             value={this.state.typeIds}
                             onChange={this.onChange}
@@ -111,7 +125,7 @@ export class AddTechnician extends Component {
                         <input
                             type="text"
                             name="skillsId"
-                            style={inputStyle}
+                            className={styles.input}
                             placeholder="Skills Id..."
                             value={this.state.skillsId}
                             onChange={this.onChange}
@@ -119,7 +133,7 @@ export class AddTechnician extends Component {
                         <input
                             type="text"
                             name="hour_rate"
-                            style={inputStyle}
+                            className={styles.input}
                             placeholder="Hour rate..."
                             value={this.state.hour_rate}
                             onChange={this.onChange}
@@ -127,7 +141,7 @@ export class AddTechnician extends Component {
                         <input
                             type="number"
                             name="daily_capacity"
-                            style={inputStyle}
+                            className={styles.input}
                             placeholder="Daily capacity..."
                             value={this.state.daily_capacity}
                             onChange={this.onChange}
@@ -135,7 +149,13 @@ export class AddTechnician extends Component {
                         <input
                             type="submit"
                             value="Submit"
-                            style={submitStyle}
+                            className={styles.input}
+                        />
+                        <input
+                            type="button"
+                            value="Cancel"
+                            className={styles.input}
+                            onClick={this.handleCleanForm}
                         />
                 </form>
             </div>
@@ -147,25 +167,12 @@ export class AddTechnician extends Component {
 AddTechnician.propTypes = {
     addTechnician: PropTypes.func.isRequired,
     updateTechnician: PropTypes.func.isRequired,
+    handleShowForm: PropTypes.func.isRequired,
     technicianEdit: PropTypes.object,
 }
 
-const inputStyle = {
-    padding: "10px",
-    width: "50%",
-    margin: "0.5% 25%",
-    borderRadius: "5px",
-};
-const submitStyle = {
-    background: "#232f3e",
-    color: "#fff",
-    padding: "10px",
-    width: "25%",
-    margin: "0.5% 37.5%",
-    borderRadius: "5px",
-}
 const AddTecStyle = {
     padding: '1%',
     textAlign: 'center',
 }
-export default AddTechnician
+export default AddTechnician;
