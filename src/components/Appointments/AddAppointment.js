@@ -68,7 +68,7 @@ export default class AddAppointment extends Component {
     render() {
         return (
             <div>
-                <h3>{this.state.id ? "Edit appointment" : "Add new appointment"}</h3>
+                <h1>{this.state.id ? "Edit appointment" : "Add new appointment"}</h1>
                 <form onSubmit={this.onSubmit}>
                     <input type="hidden" name="id" value={this.state.id} />
                         <input
@@ -101,9 +101,20 @@ export default class AddAppointment extends Component {
                             value={this.state.end_timestamp}
                             onChange={this.onChange}
                         />
-                         <input type="submit" value="Submit"
-                         className={styles.input}
-                         />
+
+                         {this.state.id ?
+                        <input
+                            type="submit"
+                            value="Save"
+                            className={styles.input}
+                        />
+                        :
+                        <input
+                        type="submit"
+                        value="Add"
+                        className={styles.input}
+                    />}
+
                         <input
                         type="button"
                         value="Cancel"
