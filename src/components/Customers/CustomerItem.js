@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import styles from "../../layout/main/main.module.css";
 
 export class CustomerItem extends Component {
   getStyle = () => {
@@ -19,25 +20,27 @@ export class CustomerItem extends Component {
       fiscalAddress,
     } = this.props.customer;
     return (
-      <div style={this.getStyle()}>
-        <p>
-          Nro {id} - Type {customerType} - Email {email} - Buildings{" "}
-          {buildingsIds.map((building) => building + " ")} - Fiscal address{" "}
-          {fiscalAddress}
+      <tr>
+        <td>{id}</td>
+        <td>{customerType}</td>
+        <td>{email}</td>
+        <td>{buildingsIds.map((building) => building + " ")}</td>
+        <td>{fiscalAddress}</td>
+        <td>
           <button
             onClick={this.props.delCustomer.bind(this, id)}
-            style={btnStyle}
+            className={styles.btnStyle}
           >
             delete
           </button>
           <button
             onClick={this.props.editCustomer.bind(this, this.props.customer)}
-            style={btnStyle}
+            className={styles.btnStyle}
           >
             edit
           </button>
-        </p>
-      </div>
+        </td>
+      </tr>
     );
   }
 }
@@ -47,16 +50,6 @@ CustomerItem.propTypes = {
   customer: PropTypes.object.isRequired,
   delCustomer: PropTypes.func.isRequired,
   editCustomer: PropTypes.func.isRequired,
-};
-
-const btnStyle = {
-  background: "#fff",
-  color: "#000",
-  border: "none",
-  padding: "5px 9px",
-  borderRadius: "5px",
-  cursor: "pointer",
-  float: "right",
 };
 
 export default CustomerItem;

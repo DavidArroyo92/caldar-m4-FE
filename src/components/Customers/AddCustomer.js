@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import styles from "../../layout/main/main.module.css";
 
 export class AddCustomer extends Component {
   state = {
@@ -10,11 +11,22 @@ export class AddCustomer extends Component {
     fiscalAddress: "",
   };
 
-  componentDidUpdate(prevProps, prevState) {
-    if (this.props.customerEdit !== prevProps.customerEdit) {
+  componentDidMount() {
+    if (this.props.customerEdit) {
       this.handleEdit(this.props.customerEdit);
     }
   }
+
+  handleCleanForm = () => {
+    this.setState({
+      id: "",
+      typeId: "",
+      maintainceRate: "",
+      hourMaintainceCost: "",
+      hourEventualCost: "",
+    });
+    this.props.handleShowForm();
+  };
 
   handleEdit = (customerEdit) => {
     this.setState({
@@ -64,7 +76,7 @@ export class AddCustomer extends Component {
           <input
             type="text"
             name="customerType"
-            style={inputStyle}
+            className={styles.input}
             placeholder="Type customer..."
             value={this.state.customerType}
             onChange={this.onChange}
@@ -72,7 +84,7 @@ export class AddCustomer extends Component {
           <input
             type="text"
             name="email"
-            style={inputStyle}
+            className={styles.input}
             placeholder="Email ..."
             value={this.state.email}
             onChange={this.onChange}
@@ -80,7 +92,7 @@ export class AddCustomer extends Component {
           <input
             type="text"
             name="buildingsIds"
-            style={inputStyle}
+            className={styles.input}
             placeholder="Buildings separated by commas..."
             value={this.state.buildingsIds}
             onChange={this.onChange}
@@ -88,13 +100,19 @@ export class AddCustomer extends Component {
           <input
             type="text"
             name="fiscalAddress"
-            style={inputStyle}
+            className={styles.input}
             placeholder="Fiscal address ..."
             value={this.state.fiscalAddress}
             onChange={this.onChange}
           />
 
-          <input type="submit" value="Submit" style={inputStyle} />
+          <input type="submit" value="Submit" className={styles.input} />
+          <input
+            type="button"
+            value="Cancel"
+            className={styles.input}
+            onClick={this.handleCleanForm}
+          />
         </form>
       </div>
     );
@@ -105,14 +123,8 @@ export class AddCustomer extends Component {
 AddCustomer.propTypes = {
   addCustomer: PropTypes.func.isRequired,
   updateCustomer: PropTypes.func.isRequired,
+  handleShowForm: PropTypes.func.isRequired,
   customerEdit: PropTypes.object,
-};
-
-const inputStyle = {
-  padding: "10px",
-  width: "50%",
-  margin: "5px",
-  borderRadius: "5px",
 };
 
 export default AddCustomer;
