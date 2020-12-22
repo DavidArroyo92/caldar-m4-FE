@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types';
+import styles from '../../layout/main/main.module.css'
 
  export class AddBuilding extends Component {
      state = {
@@ -11,13 +12,25 @@ import PropTypes from 'prop-types';
          adress:'',
      };
 
-     componentDidUpdate(prevProps, prevState) {
-        if (this.props.buildingEdit !== prevProps.buildingEdit) {
-          this.handleInput(this.props.buildingEdit);
+     componentDidMount() {
+        if (this.props.buildingEdit) {
+          this.handleEdit(this.props.buildingEdit);
         }
       }
+
+      handleCleanForm = () => {
+        this.setState({
+        id: "",
+        boilerId: "",
+        businessName: "",
+        email: "",
+        phone: "",
+        adress: "",
+        });
+        this.props.handleShowForm();
+      }
     
-      handleInput = (buildingEdit) => {
+      handleEdit = (buildingEdit) => {
         this.setState({
         id: buildingEdit.id,
         boilerId: buildingEdit.boilerId,
@@ -54,10 +67,10 @@ import PropTypes from 'prop-types';
              businessName:"",
              email:"",
              phone:"",
-             adress:""
+             adress:"",
             });
+     };
 
-     }
      onChange = (e) => this.setState({ [e.target.name]: e.target.value});
 
     render(){
@@ -66,12 +79,12 @@ import PropTypes from 'prop-types';
                 <h3>
                 {this.state.id ? "Edit building" : "Add new Building"}
                 </h3>
-                <form onSubmit ={this.onSubmit} style={{display:'flex'}}>
+                <form onSubmit ={this.onSubmit}>
                     <input type="hidden" name="id" value={this.state.id} />
                     <input
                     type="text"
                     name="boilerId"
-                    style={inputStyle}
+                    className={styles.inputStyle}
                     placeholder="Add Boiler ID"
                     value={this.state.boilerId}
                     onChange={this.onChange}
@@ -79,7 +92,7 @@ import PropTypes from 'prop-types';
                     <input
                     type="text"
                     name="businessName"
-                    style={inputStyle}
+                    className={styles.inputStyle}
                     placeholder="Add Business Name"
                     value={this.state.businessName}
                     onChange={this.onChange}
@@ -87,7 +100,7 @@ import PropTypes from 'prop-types';
                     <input
                     type="text"
                     name="email"
-                    style={inputStyle}
+                    className={styles.inputStyle}
                     placeholder="Add e-mail"
                     value={this.state.email}
                     onChange={this.onChange}
@@ -95,7 +108,7 @@ import PropTypes from 'prop-types';
                     <input
                     type="text"
                     name="adress"
-                    style={inputStyle}
+                    className={styles.inputStyle}
                     placeholder="Add adress..."
                     value={this.state.adress}
                     onChange={this.onChange}
@@ -103,35 +116,34 @@ import PropTypes from 'prop-types';
                     <input
                     type="text"
                     name="phone"
-                    style={inputStyle}
+                    className={styles.inputStyle}
                     placeholder="Add phone..."
                     value={this.state.phone}
                     onChange={this.onChange}
                     />
 
                     <input 
+                    type="button"
+                    value= "Cancel"
+                    className={styles.inputStyle}
+                    onClick={this.handleCleanForm}
+                    />
+                    <input
                     type="submit"
-                    value= "submit"
-                    className="btn"
-                    style={inputStyle}
+                    value="submit"
+                    className={styles.inputStyle}
                     />
                 </form>
             </div>
-        )
+        );
     }
 }
-
-const inputStyle = {
-    padding:"10px",
-    width: "50%",
-    margin: "5px",
-    borderRadius: "5px",
-};
 
 //proptypes
 AddBuilding.propTypes = {
    addBuilding: PropTypes.func.isRequired,
    updateBuilding: PropTypes.func.isRequired,
+   handleShowForm: PropTypes.func.isRequired,
    buildingEdit: PropTypes.object,
   }
 

@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import BuildingItem from './BuildingItem';
+import styles from "../../layout/main/main.module.css";
 import PropTypes from 'prop-types';
 
 class BuildingsList extends Component{
@@ -8,6 +9,27 @@ class BuildingsList extends Component{
   render(){
     return (
       <div>
+          <h1>
+            Buildings{" "}
+            <input
+            type="button"
+            value="New"
+            className={styles.inputStyle}
+            onClick={() =>this.props.handleShowForm()}
+            />
+          </h1>
+          <table className={styles.table}>
+            <thead>
+              <tr>
+                <th>id</th>
+                <th>Business Name</th>
+                <th>E-mail</th>
+                <th>Phone</th>
+                <th>Address</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+          <tbody>
         {this.props.buildings.map((building) => (
           <BuildingItem
             key={building.id}
@@ -16,6 +38,8 @@ class BuildingsList extends Component{
             editBuilding={this.props.editBuilding}
           />
         ))}
+        </tbody>
+        </table>
       </div>
     );
   }
@@ -25,7 +49,9 @@ class BuildingsList extends Component{
 BuildingsList.propTypes = {
   buildings: PropTypes.array.isRequired,
   editBuilding: PropTypes.func.isRequired,
-  delBuilding: PropTypes.func.isRequired
-}
+  delBuilding: PropTypes.func.isRequired,
+  handleShowForm: PropTypes.func.isRequired,
+  showForm: PropTypes.bool.isRequired,
+};
 
 export default BuildingsList;

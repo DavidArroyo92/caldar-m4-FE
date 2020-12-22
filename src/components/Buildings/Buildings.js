@@ -10,18 +10,30 @@ class Buildings extends Component {
   state = {
     buildings: [],
     buildingEdit: null,
-
-  }
+    showForm: false,
+  };
 
 //Get Data from JSON.Files
 componentDidMount(){
   const getBuilding = require('../../data/buildingData.json');
   this.setState({buildings: getBuilding});
 }
+
+//Show form
+handleShowForm = () =>{
+  this.setState({
+    showForm: !this.state.showForm,
+    boilerEdit: null
+  });
+  window.scrollTo(0,0);
+};
+
 // Edit Building
 editBuilding = (building) => {
+  const buildingNew = building;
   this.setState({
-    buildingEdit: building,
+    buildingEdit: buildingNew,
+    showForm: true,
   });
   window.scrollTo(0, 0);
 };
@@ -47,6 +59,7 @@ updateBuilding = (
       }
       return building;
     }),
+    showForm: false,
   });
 };
 
@@ -55,8 +68,8 @@ updateBuilding = (
 delBuilding = (id) =>{
   this.setState({ 
       buildings: [
-          ...this.state.buildings.filter(building => building.id!==id),
-        ],
+          ...this.state.buildings.filter((building) => building.id!==id)],
+        showForm: false,
     });
 };
 
@@ -73,24 +86,30 @@ AddBuilding = (boilerId, businessName,email,phone,adress) =>{
   };
   this.setState({ 
       buildings: [
-          ...this.state.buildings, newBuilding]
+          ...this.state.buildings, newBuilding],
+          showForm: false,
         });
 };
 
   render() {
     return (
         <div className={styles.info}>
-
+                {this.state.showForm ? (
                 <AddBuilding 
                   addBuilding ={this.AddBuilding} 
                   updateBuilding={this.updateBuilding}
                   buildingEdit={this.state.buildingEdit}
+                  handleShowForm={this.handleShowForm}
                 />
+                ) : (
                 <BuildingsList
                   buildings={this.state.buildings}  
                   delBuilding={this.delBuilding}
                   editBuilding={this.editBuilding}
+                  handleShowForm={this.handleShowForm}
+                  showForm={this.state.showForm}
                 />
+              )}
         </div>
     );
   }
