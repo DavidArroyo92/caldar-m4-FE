@@ -13,10 +13,10 @@ import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
 
 function App() {
   return (
-   <Router>
+    <Router>
       <div className="App">
         <div className={styles.wrapper}>
-        <Navbar/>
+          <Navbar />
           <div className={styles.mainContent}>
             <Header/>
             <Switch>
@@ -30,7 +30,7 @@ function App() {
           </div>
         </div>
       </div>
-   </Router>
+    </Router>
   );
 }
 
