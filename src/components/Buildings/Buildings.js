@@ -1,13 +1,13 @@
 import React from 'react'
 
-function Boilers() {
+function Buildings() {
     return (
         <div>
             <h2>
-                boilers
+                buildings
             </h2>
         </div>
     )
 }
 
-export default Boilers
+export default Buildings

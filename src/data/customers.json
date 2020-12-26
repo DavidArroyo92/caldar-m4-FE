@@ -1,0 +1,73 @@
+[
+  {
+    "id": 1,
+    "customerType": "particular",
+    "email": "jfollin0@g.co",
+    "buildingsIds": [14, 60, 17, 36, 66, 32, 84, 55, 22, 100],
+    "fiscalAddress": "9173 La Follette Trail"
+  },
+  {
+    "id": 2,
+    "customerType": "business",
+    "email": "fnew1@51.la",
+    "buildingsIds": [43, 77, 65, 80, 7, 26, 56, 50, 61, 66],
+    "fiscalAddress": "446 Anthes Terrace"
+  },
+  {
+    "id": 3,
+    "customerType": "particular",
+    "email": "dashman2@bing.com",
+    "buildingsIds": [96, 80, 5, 12, 99, 43, 20, 95, 20, 84],
+    "fiscalAddress": "69 Butternut Junction"
+  },
+  {
+    "id": 4,
+    "customerType": "particular",
+    "email": "khancke3@zdnet.com",
+    "buildingsIds": [92, 22, 47, 42, 61, 11, 86, 10, 23, 57],
+    "fiscalAddress": "96653 School Plaza"
+  },
+  {
+    "id": 5,
+    "customerType": "business",
+    "email": "cpoppleton4@virginia.edu",
+    "buildingsIds": [67, 28, 32, 14, 50, 47, 5, 77, 14, 15],
+    "fiscalAddress": "56803 Anhalt Street"
+  },
+  {
+    "id": 6,
+    "customerType": "particular",
+    "email": "galeksich5@purevolume.com",
+    "buildingsIds": [36, 1, 25, 90, 84, 35, 24, 15, 11, 9],
+    "fiscalAddress": "44 Brentwood Court"
+  },
+  {
+    "id": 7,
+    "customerType": "particular",
+    "email": "cparminter6@cmu.edu",
+    "buildingsIds": [53, 10, 98, 11, 30, 75, 33, 80, 85, 71],
+    "fiscalAddress": "18 Fair Oaks Center"
+  },
+  {
+    "id": 8,
+    "customerType": "business",
+    "email": "gstook7@japanpost.jp",
+    "buildingsIds": [48, 69, 77, 32, 16, 16, 63, 45, 27, 84],
+    "fiscalAddress": "86935 Barby Way"
+  },
+  {
+    "id": 9,
+    "customerType": "business",
+    "email": "sceliz8@cdc.gov",
+    "buildingsIds": [77, 13, 98, 59, 68, 84, 58, 91, 46, 81],
+    "fiscalAddress": "068 Lien Plaza"
+  },
+  {
+    "id": 10,
+    "customerType": "particular",
+    "email": "tbennett9@guardian.co.uk",
+    "buildingsIds": [48, 87, 35, 11, 10, 19, 23, 20, 89, 91],
+    "fiscalAddress": "7 Kedzie Parkway"
+  }
+]
+  

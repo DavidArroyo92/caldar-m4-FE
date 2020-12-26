@@ -11,32 +11,32 @@ function Navbar() {
                     </h3>
                 </div>
                 <ul className={styles.navbarLinks}>
-                    <Link to="/appointment" >
+                    <Link to="/Appointments" >
                         <li>
-                            Appointment
+                            Appointments
                         </li>
                     </Link>
-                    <Link to="/boilers">
+                    <Link to="/Boilers">
                         <li>
                             Boilers
                         </li>
                     </Link>
-                    <Link to="/boilersTypes">
+                    <Link to="/BoilersTypes">
                         <li>
                             BoilersTypes
                         </li>
                     </Link>
-                    <Link to="/buildings">
+                    <Link to="/Buildings">
                         <li>
                             Buildings
                         </li>
                     </Link>
-                    <Link to="/custumers">
+                    <Link to="/Customers">
                         <li>
-                            Custumers
+                            Customers
                         </li>
                     </Link>
-                    <Link to="/technicians">
+                    <Link to="/Technicians">
                         <li>
                             Technicians
                         </li>
