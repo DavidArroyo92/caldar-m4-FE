@@ -1,6 +1,12 @@
 import React, {Component} from 'react';
 import BuildingItem from './BuildingItem';
 import styles from "../../layout/main/main.module.css";
+import {
+  AddBuilding as AddBuildingAction,
+delBuilding as delBuildingAction,
+editBuilding as editBuildingAction 
+} from '../../redux/actions/buildingsActions'
+import { connect} from 'react-redux';
 import PropTypes from 'prop-types';
 
 class BuildingsList extends Component{
@@ -12,10 +18,10 @@ class BuildingsList extends Component{
           <h1 className={styles.title}>
             Buildings{" "}
             <input
-            type="button"
-            value="+"
-            className={styles.btnStyleNew}
-            onClick={() =>this.props.handleShowForm()}
+              type="button"
+              value="+"
+              className={styles.btnStyleNew}
+              onClick={() =>this.props.handleShowForm()}
             />
           </h1>
           <table className={styles.table}>
@@ -43,6 +49,20 @@ class BuildingsList extends Component{
   }
 }
 
+const mapDispatchToProps = (dispatch) =>{
+  return {
+    AddBuilding:(id) => dispatch(AddBuildingAction(id)),
+    delBuilding: (id) => dispatch(delBuildingAction(id)),
+    editBuilding: (buildings) => dispatch(editBuildingAction(buildings))
+  };
+};
+
+const mapStateToProps = state =>{
+  return{
+    buildings: state.buildings.list
+  };
+};
+
 //proptypes
 BuildingsList.propTypes = {
   buildings: PropTypes.array.isRequired,
@@ -52,4 +72,4 @@ BuildingsList.propTypes = {
   showForm: PropTypes.bool.isRequired,
 };
 
-export default BuildingsList;
+export default connect(mapStateToProps, mapDispatchToProps)(BuildingsList);

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import AddBuilding from './components/AddBuilding';
-import BuildingsList from './components/BuildingsList';
+import AddBuilding from './AddBuilding';
+import BuildingsList from './BuildingsList';
 import { v4 as uuidv4 } from 'uuid';
 import styles from "../../layout/main/main.module.css";
 
