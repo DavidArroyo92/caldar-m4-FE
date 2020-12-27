@@ -3,9 +3,9 @@ import React from 'react'
 function Technicians() {
     return (
         <div>
-            <h1>
+            <h2>
                 technicians
-            </h1>
+            </h2>
         </div>
     )
 }
