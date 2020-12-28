@@ -28,9 +28,9 @@ class BoilersList extends Component {
             </tr>
           </thead>
           <tbody>
-            {this.props.boilers.map((boiler) => (
+            {this.props.boilers?.map((boiler) => (
               <BoilerItem
-                key={boiler.id}
+                key={boiler._id}
                 boiler={boiler}
                 editBoiler={this.props.editBoiler}
                 delBoiler={this.props.delBoiler}
