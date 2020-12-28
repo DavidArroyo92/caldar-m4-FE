@@ -1,4 +1,3 @@
-import { GET_TECHNICIANS_FULFILLED, GET_TECHNICIANS_REJECTED } from "../types/types-technicians";
 import {
     GET_TECHNICIANS_FETCHING,
     GET_TECHNICIANS_FULFILLED,
@@ -6,15 +5,15 @@ import {
     ADD_TECHNICIANS_FETCHING,
     ADD_TECHNICIANS_FULFILLED,
     ADD_TECHNICIANS_REJECTED,
-    DELETE_TECHNICIANS_FETCHING,
-    DELETE_TECHNICIANS_FULFILLED,
-    DELETE_TECHNICIANS_REJECTED,
+    DEL_TECHNICIANS_FETCHING,
+    DEL_TECHNICIANS_FULFILLED,
+    DEL_TECHNICIANS_REJECTED,
     EDIT_TECHNICIANS_FETCHING,
     EDIT_TECHNICIANS_FULFILLED,
     EDIT_TECHNICIANS_REJECTED
 } from '../types/types-technicians';
 
-const URL = '';
+const URL = 'https://app-caldar-gm4.herokuapp.com/technician';
 
 const getTechniciansFetching = () => ({
     type: GET_TECHNICIANS_FETCHING,
@@ -54,9 +53,15 @@ const addTechniciansRejected = () => ({
     type: ADD_TECHNICIANS_REJECTED,
 });
 
-export const addTechnicians = () => (dispatch) => {
+export const addTechnicians = technician => (dispatch) => {
     dispatch(addTechniciansFetching());
-    return fetch(URL, {method: 'POST'})
+    return fetch(URL, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'aplication/json'
+        },
+        body: JSON.stringify(technician)
+    }).then(data=> data.json())
         .then(data => data.json())
         .then(response => {
             dispatch(addTechniciansFulfilled(response));
@@ -79,10 +84,15 @@ const editTechniciansRejected = () => ({
     type: EDIT_TECHNICIANS_REJECTED,
 });
 
-export const editTechnicians = () => (dispatch) => {
+export const editTechnicians = technician => (dispatch) => {
     dispatch(editTechniciansFetching());
-    return fetch(URL, {method: 'PUT'})
-        .then(data => data.json())
+    return fetch(`${URL}/${id}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'aplication/json'
+        },
+        body: JSON.stringify(technician)
+    }).then(data=> data.json())
         .then(response => {
             dispatch(editTechniciansFulfilled(response));
         })
@@ -92,24 +102,25 @@ export const editTechnicians = () => (dispatch) => {
 };
 
 const deleteTechniciansFetching = () => ({
-    type: DELETE_TECHNICIANS_FETCHING,
+    type: DEL_TECHNICIANS_FETCHING,
 });
 
 const deleteTechniciansFulfilled = (payload) => ({
-    type: DELETE_TECHNICIANS_FULFILLED,
+    type: DEL_TECHNICIANS_FULFILLED,
     payload,
 });
 
 const deleteTechniciansRejected = () => ({
-    type: DELETE_TECHNICIANS_REJECTED,
+    type: DEL_TECHNICIANS_REJECTED,
 });
 
-export const deleteTechnicians = () => (dispatch) => {
+export const deleteTechnicians = id => (dispatch) => {
     dispatch(deleteTechniciansFetching());
-    return fetch(URL, {method:'DELETE'})
+    return fetch(`${URL}/${id}`, {
+        method:'DELETE'})
         .then(data => data.json())
         .then(response => {
-            dispatch(deleteTechniciansFulfilled(response));
+            dispatch(deleteTechniciansFulfilled(id));
         })
         .catch(() => {
             dispatch(deleteTechniciansRejected ());
