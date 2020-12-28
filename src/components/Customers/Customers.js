@@ -1,19 +1,23 @@
 import React, { Component } from "react";
 import CustomersList from "./CustomersList";
 import AddCustomer from "./AddCustomer";
-import { v4 as uuidv4 } from "uuid";
 import styles from "../../layout/main/main.module.css";
+import { connect } from "react-redux";
+import {
+  getCustomers as getCustomersActions,
+  delCustomer as delCustomerActions,
+  addCustomer as addCustomerActions,
+  editCustomer as updateCustomerActions,
+} from "../../redux/actions/customersActions";
 
 class Customers extends Component {
   state = {
-    customers: [],
     customerEdit: null,
     showForm: false,
   };
 
   componentDidMount() {
-    const dataCustomers = require("../../data/customers.json");
-    this.setState({ customers: dataCustomers });
+    this.props.getCustomers();
   }
 
   // Show form
@@ -34,70 +38,20 @@ class Customers extends Component {
     window.scrollTo(0, 0);
   };
 
-  // Update Customer
-  updateCustomer = (
-    id,
-    customerType,
-    email,
-    buildingsString,
-    fiscalAddress
-  ) => {
-    const buildingsIds = buildingsString.split(",");
-    this.setState({
-      customers: this.state.customers.map((customer) => {
-        if (customer.id === id) {
-          customer.customerType = customerType;
-          customer.email = email;
-          customer.buildingsIds = buildingsIds;
-          customer.fiscalAddress = fiscalAddress;
-        }
-        return customer;
-      }),
-      showForm: false,
-    });
-  };
-
-  // Delete Customer
-  delCustomer = (id) => {
-    this.setState({
-      customers: [
-        ...this.state.customers.filter((customer) => customer.id !== id),
-      ],
-      showForm: false,
-    });
-  };
-
-  // Add Customer
-  addCustomer = (customerType, email, buildingsString, fiscalAddress) => {
-    const buildingsIds = buildingsString.split(",");
-    const newCustomer = {
-      id: uuidv4(),
-      customerType,
-      email,
-      buildingsIds,
-      fiscalAddress,
-    };
-
-    this.setState({
-      customers: [...this.state.customers, newCustomer],
-      showForm: false,
-    });
-  };
-
   render() {
     return (
       <div className={styles.info}>
         {this.state.showForm ? (
           <AddCustomer
-            addCustomer={this.addCustomer}
-            updateCustomer={this.updateCustomer}
+            addCustomer={this.props.addCustomer}
+            updateCustomer={this.props.updateCustomer}
             customerEdit={this.state.customerEdit}
             handleShowForm={this.handleShowForm}
           />
         ) : (
           <CustomersList
-            customers={this.state.customers}
-            delCustomer={this.delCustomer}
+            customers={this.props.customers}
+            delCustomer={this.props.delCustomer}
             editCustomer={this.editCustomer}
             handleShowForm={this.handleShowForm}
             showForm={this.state.showForm}
@@ -108,4 +62,27 @@ class Customers extends Component {
   }
 }
 
-export default Customers;
+const mapDispatchToProps = (dispatch) => ({
+  getCustomers: () => dispatch(getCustomersActions()),
+  delCustomer: (id) => dispatch(delCustomerActions(id)),
+  addCustomer: (customerType, email, buildingsIds, fiscalAddress) =>
+    dispatch(
+      addCustomerActions(customerType, email, buildingsIds, fiscalAddress)
+    ),
+  updateCustomer: (id, customerType, email, buildingsIds, fiscalAddress) =>
+    dispatch(
+      updateCustomerActions(
+        id,
+        customerType,
+        email,
+        buildingsIds,
+        fiscalAddress
+      )
+    ),
+});
+
+const mapStateToProps = (state) => ({
+  customers: state.customers.list,
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Customers);

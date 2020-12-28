@@ -1,0 +1,160 @@
+import {
+  GET_CUSTOMER_FETCHING,
+  GET_CUSTOMER_FULFILLED,
+  GET_CUSTOMER_REJECTED,
+  ADD_CUSTOMER_FETCHING,
+  ADD_CUSTOMER_FULFILLED,
+  ADD_CUSTOMER_REJECTED,
+  DEL_CUSTOMER_FETCHING,
+  DEL_CUSTOMER_FULFILLED,
+  DEL_CUSTOMER_REJECTED,
+  EDIT_CUSTOMER_FETCHING,
+  EDIT_CUSTOMER_FULFILLED,
+  EDIT_CUSTOMER_REJECTED,
+} from "../types/types-customers";
+
+//DECLARATE CONST AND IMPORT API
+const URL = "https://app-caldar-gm4.herokuapp.com/customers";
+
+//ACTION TO GET CUSTOMER DATA
+
+const getCustomerFetching = () => ({
+  type: GET_CUSTOMER_FETCHING,
+});
+
+const getCustomerFulfilled = (payload) => ({
+  type: GET_CUSTOMER_FULFILLED,
+  payload,
+});
+
+const getCustomerRejected = () => ({
+  type: GET_CUSTOMER_REJECTED,
+});
+
+export const getCustomers = () => (dispatch) => {
+  dispatch(getCustomerFetching());
+  return fetch(URL)
+    .then((data) => data.json())
+    .then((response) => {
+      dispatch(getCustomerFulfilled(response));
+    })
+    .catch(() => {
+      dispatch(getCustomerRejected());
+    });
+};
+
+//ACTION TO ADD CUSTOMER DATA
+const addCustomerFetching = () => ({
+  type: ADD_CUSTOMER_FETCHING,
+});
+
+const addCustomerFulfilled = (payload) => ({
+  type: ADD_CUSTOMER_FULFILLED,
+  payload,
+});
+
+const addCustomerRejected = () => ({
+  type: ADD_CUSTOMER_REJECTED,
+});
+
+export const addCustomer = (
+  customerType,
+  email,
+  buildingsIds,
+  fiscalAddress
+) => (dispatch) => {
+  dispatch(addCustomerFetching());
+  const dataSend = { customerType, email, buildingsIds, fiscalAddress };
+  const requestOptions = {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(dataSend),
+  };
+
+  return fetch(URL, requestOptions)
+    .then((data) => data.json())
+    .then((response) => {
+      dispatch(addCustomerFulfilled(response));
+    })
+    .then(() => dispatch(getCustomers()))
+    .catch(() => {
+      dispatch(addCustomerRejected());
+    });
+};
+
+//ACTION TO DELETE CUSTOMER DATA
+
+const delCustomerFetching = () => ({
+  type: DEL_CUSTOMER_FETCHING,
+});
+
+const delCustomerFulfilled = (payload) => ({
+  type: DEL_CUSTOMER_FULFILLED,
+  payload,
+});
+
+const delCustomerRejected = () => ({
+  type: DEL_CUSTOMER_REJECTED,
+});
+
+export const delCustomer = (id) => (dispatch) => {
+  dispatch(delCustomerFetching());
+  const dataSend = { id };
+  const requestOptions = {
+    method: "DELETE",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(dataSend),
+  };
+
+  return fetch(`${URL}/${id}`, requestOptions)
+    .then((data) => data.json())
+    .then((response) => {
+      dispatch(delCustomerFulfilled(id));
+    })
+    .then(() => dispatch(getCustomers()))
+    .catch(() => {
+      dispatch(delCustomerRejected());
+    });
+};
+
+//ACTION TO EDIT CUSTOMER DATA
+
+const editCustomerFetching = () => ({
+  type: EDIT_CUSTOMER_FETCHING,
+});
+
+const editCustomerFulfilled = (payload) => ({
+  type: EDIT_CUSTOMER_FULFILLED,
+  payload,
+});
+
+const editCustomerRejected = () => ({
+  type: EDIT_CUSTOMER_REJECTED,
+});
+
+export const editCustomer = (
+  id,
+  customerType,
+  email,
+  buildingsIds,
+  fiscalAddress
+) => (dispatch) => {
+  dispatch(editCustomerFetching());
+
+  const dataSend = { id, customerType, email, buildingsIds, fiscalAddress };
+  const requestOptions = {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(dataSend),
+  };
+
+  return fetch(`${URL}/${id}`, requestOptions)
+    .then((data) => data.json())
+    .then((response) => {
+      dispatch(editCustomerFulfilled(response));
+    })
+    .then(() => dispatch(getCustomers()))
+    .catch(() => {
+      dispatch(editCustomerRejected());
+    });
+};

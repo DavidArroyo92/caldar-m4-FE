@@ -28,9 +28,9 @@ class Customers extends Component {
             </tr>
           </thead>
           <tbody>
-            {this.props.customers.map((customer, index) => (
+            {this.props.customers?.map((customer, index) => (
               <CustomerItem
-                key={customer.id}
+                key={customer._id}
                 customer={customer}
                 delCustomer={this.props.delCustomer}
                 editCustomer={this.props.editCustomer}
