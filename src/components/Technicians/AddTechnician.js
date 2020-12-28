@@ -87,7 +87,7 @@ export class AddTechnician extends Component {
     render() {
         return (
             <div>
-                <h3 style={AddTecStyle}>{this.state.id ? "Edit Technician" : "Add new Technician"}</h3>
+                <h3>{this.state.id ? "Edit Technician" : "Add new Technician"}</h3>
                 <form onSubmit={this.onSubmit}>
                     <input type="hidden" name="id" value={this.state.id} />
                         <input
@@ -171,8 +171,4 @@ AddTechnician.propTypes = {
     technicianEdit: PropTypes.object,
 }
 
-const AddTecStyle = {
-    padding: '1%',
-    textAlign: 'center',
-}
 export default AddTechnician;
