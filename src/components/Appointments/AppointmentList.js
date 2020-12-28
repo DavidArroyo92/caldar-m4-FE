@@ -2,8 +2,10 @@ import React, { Component } from 'react';
 import AppointmentItem  from './AppointmentItem';
 import PropTypes from "prop-types";
 import styles from "../../layout/main/main.module.css";
+import {AddAppointment as AddAppointmentAction,delAppointment as delAppointmentAction, editAppointment as editAppointmentAction} from '../../redux/actions/appointmentsActions'
+import { connect } from 'react-redux';
 
-export default class AppointmentList extends Component {
+class AppointmentsList extends Component {
   render() {
     return (
       <div>
@@ -42,6 +44,20 @@ export default class AppointmentList extends Component {
   }
 }
 
+const mapDispatchToProps = (dispatch) =>{
+  return {
+    AddAppointment:(appointment) => dispatch(AddAppointmentAction(appointment)),
+    delAppointment: (id) => dispatch(delAppointmentAction(id)),
+    editAppointment: (appointment) => dispatch(editAppointmentAction(appointment))
+  };
+};
+
+const mapStateToProps = state =>{
+  return{
+    appointments: state.appointments.list
+  };
+};
+
 //PropTypes
 AppointmentList.propTypes = {
     appointmentValues:PropTypes.array.isRequired,
@@ -50,3 +66,5 @@ AppointmentList.propTypes = {
     handleShowForm: PropTypes.func.isRequired,
     showForm: PropTypes.bool.isRequired,
 };
+
+export default connect(mapStateToProps, mapDispatchToProps)(AppointmentsList);
