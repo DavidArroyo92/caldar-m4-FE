@@ -75,16 +75,16 @@ import styles from '../../layout/main/main.module.css'
 
     render(){
         return(
-            <div className={styles.formShow}>
-                <h3 className={styles.title}>
+            <div>
+                <h3>
                 {this.state.id ? "Edit building" : "Add new Building"}
                 </h3>
-                <form onSubmit ={this.onSubmit} className={styles.form}>
+                <form onSubmit ={this.onSubmit} >
                     <input type="hidden" name="id" value={this.state.id} />
                     <input
                     type="text"
                     name="boilerId"
-                    className={styles.inputStyle}
+                    className={styles.input}
                     placeholder="Add Boiler ID"
                     value={this.state.boilerId}
                     onChange={this.onChange}
@@ -92,7 +92,7 @@ import styles from '../../layout/main/main.module.css'
                     <input
                     type="text"
                     name="businessName"
-                    className={styles.inputStyle}
+                    className={styles.input}
                     placeholder="Add Business Name"
                     value={this.state.businessName}
                     onChange={this.onChange}
@@ -100,7 +100,7 @@ import styles from '../../layout/main/main.module.css'
                     <input
                     type="text"
                     name="email"
-                    className={styles.inputStyle}
+                    className={styles.input}
                     placeholder="Add e-mail"
                     value={this.state.email}
                     onChange={this.onChange}
@@ -108,7 +108,7 @@ import styles from '../../layout/main/main.module.css'
                     <input
                     type="text"
                     name="adress"
-                    className={styles.inputStyle}
+                    className={styles.input}
                     placeholder="Add adress..."
                     value={this.state.adress}
                     onChange={this.onChange}
@@ -116,7 +116,7 @@ import styles from '../../layout/main/main.module.css'
                     <input
                     type="text"
                     name="phone"
-                    className={styles.inputStyle}
+                    className={styles.input}
                     placeholder="Add phone..."
                     value={this.state.phone}
                     onChange={this.onChange}
@@ -125,13 +125,13 @@ import styles from '../../layout/main/main.module.css'
                     <input 
                     type="button"
                     value= "Cancel"
-                    className={styles.inputStyle}
+                    className={styles.input}
                     onClick={this.handleCleanForm}
                     />
                     <input
                     type="submit"
                     value="submit"
-                    className={styles.inputStyle}
+                    className={styles.input}
                     />
                 </form>
             </div>

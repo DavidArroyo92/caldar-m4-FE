@@ -3,6 +3,14 @@ import AddBuilding from './AddBuilding';
 import BuildingsList from './BuildingsList';
 import { v4 as uuidv4 } from 'uuid';
 import styles from "../../layout/main/main.module.css";
+import {
+    getBuildings as getBuildingAction,
+    AddBuilding as AddBuildingAction,
+    delBuilding as delBuildingAction,
+    editBuilding as editBuildingAction 
+} from '../../redux/actions/buildingsActions';
+import { connect} from 'react-redux';
+import {bindActionCreators} from 'redux'
 
 
 //Set Building Object
@@ -19,6 +27,7 @@ componentDidMount(){
   const getBuilding = require("../../data/buildingData.json");
   this.setState({buildings: getBuilding});
 }
+
 
 // Show form
 handleShowForm = () => {
@@ -115,4 +124,21 @@ render() {
   }
 }  
 
-export default Buildings;
+const mapDispatchToProps = (dispatch) =>{
+  return bindActionCreators({
+    getBuildings:getBuildingAction,
+    AddBuilding:AddBuildingAction,
+    delBuilding:delBuildingAction,
+    editBuilding: editBuildingAction
+  }, dispatch);
+};
+
+const mapStateToProps = state =>{
+  return{
+    isLoading: state.buildings.isLoading,
+    buildings: state.buildings.list,
+    error: state.buildings.error
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Buildings);

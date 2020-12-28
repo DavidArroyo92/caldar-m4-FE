@@ -11,7 +11,7 @@ import {
     EDIT_BUILDING_FETCHING,
     EDIT_BUILDING_FULFILLED,
     EDIT_BUILDING_REJECTED
-} from '../types/types-buildings'
+} from '../types/types-buildings.js'
 
 //DECLARATE CONST AND IMPORT API 
 const URL= 'https://rr-caldar-gm4.herokuapp.com/Buildings';
@@ -45,6 +45,7 @@ export const getBuildings = () => dispatch =>{
 };
 
 //ACTION TO ADD BUILDING DATA
+
 const addBuildingFetching = () => ({
     type: ADD_BUILDING_FETCHING,
 });
@@ -117,13 +118,13 @@ const editBuildingFulfilled = (payload) => ({
 
 });
 
-const addBuildingRejected = () => ({
+const editBuildingRejected = () => ({
     type: EDIT_BUILDING_REJECTED,
 });
 
 export const editBuilding = building => dispatch =>{
     dispatch(editBuildingFetching());
-    return fetch(`${URL}/${id}`, {
+    return fetch(URL, {
         method: 'PUT',
         headers: {
             'Content-Type': 'aplication/json'

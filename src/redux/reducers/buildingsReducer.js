@@ -10,7 +10,8 @@ import {
     DEL_BUILDING_REJECTED,
     EDIT_BUILDING_FETCHING,
     EDIT_BUILDING_FULFILLED,
-    EDIT_BUILDING_REJECTED} from '../actions/buildingsActions'
+    EDIT_BUILDING_REJECTED} 
+from '../types/types-buildings.js'
 
 const initialState = {
     isLoading: false,
