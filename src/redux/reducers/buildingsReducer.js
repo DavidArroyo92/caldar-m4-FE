@@ -49,13 +49,7 @@ const buildingsReducer = (state = initialState, action) =>{
                 ...state,
                 isLoading: false,
                 list:[
-                    ...state.list,
-                    {
-                        id: action.id,
-                        text: action.text,
-                        completed: false
-                    }
-
+                    ...state.list, action.payload
                 ]
             };
         case ADD_BUILDING_REJECTED:
@@ -76,7 +70,7 @@ const buildingsReducer = (state = initialState, action) =>{
                 ...state,
                 list: state.list.filter(
                     (building) =>{
-                        return building.id !== action.id
+                        return building.id !== action.payload
                     })
                 };
         case DEL_BUILDING_REJECTED:
@@ -117,3 +111,5 @@ const buildingsReducer = (state = initialState, action) =>{
              return state;
     }
 }
+
+export default buildingsReducer;
