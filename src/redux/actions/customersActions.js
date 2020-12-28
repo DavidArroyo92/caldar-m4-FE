@@ -97,19 +97,19 @@ const delCustomerRejected = () => ({
   type: DEL_CUSTOMER_REJECTED,
 });
 
-export const delCustomer = (id) => (dispatch) => {
+export const delCustomer = (_id) => (dispatch) => {
   dispatch(delCustomerFetching());
-  const dataSend = { id };
+  const dataSend = { _id };
   const requestOptions = {
     method: "DELETE",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(dataSend),
   };
 
-  return fetch(`${URL}/${id}`, requestOptions)
+  return fetch(`${URL}/${_id}`, requestOptions)
     .then((data) => data.json())
     .then((response) => {
-      dispatch(delCustomerFulfilled(id));
+      dispatch(delCustomerFulfilled(_id));
     })
     .then(() => dispatch(getCustomers()))
     .catch(() => {
@@ -133,7 +133,7 @@ const editCustomerRejected = () => ({
 });
 
 export const editCustomer = (
-  id,
+  _id,
   customerType,
   email,
   buildingsIds,
@@ -141,14 +141,14 @@ export const editCustomer = (
 ) => (dispatch) => {
   dispatch(editCustomerFetching());
 
-  const dataSend = { id, customerType, email, buildingsIds, fiscalAddress };
+  const dataSend = { _id, customerType, email, buildingsIds, fiscalAddress };
   const requestOptions = {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(dataSend),
   };
 
-  return fetch(`${URL}/${id}`, requestOptions)
+  return fetch(`${URL}/${_id}`, requestOptions)
     .then((data) => data.json())
     .then((response) => {
       dispatch(editCustomerFulfilled(response));

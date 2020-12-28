@@ -30,7 +30,7 @@ class Customers extends Component {
           <tbody>
             {this.props.customers?.map((customer, index) => (
               <CustomerItem
-                key={customer._id}
+                key={index}
                 customer={customer}
                 delCustomer={this.props.delCustomer}
                 editCustomer={this.props.editCustomer}

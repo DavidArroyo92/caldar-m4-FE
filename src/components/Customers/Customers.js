@@ -64,15 +64,15 @@ class Customers extends Component {
 
 const mapDispatchToProps = (dispatch) => ({
   getCustomers: () => dispatch(getCustomersActions()),
-  delCustomer: (id) => dispatch(delCustomerActions(id)),
+  delCustomer: (_id) => dispatch(delCustomerActions(_id)),
   addCustomer: (customerType, email, buildingsIds, fiscalAddress) =>
     dispatch(
       addCustomerActions(customerType, email, buildingsIds, fiscalAddress)
     ),
-  updateCustomer: (id, customerType, email, buildingsIds, fiscalAddress) =>
+  updateCustomer: (_id, customerType, email, buildingsIds, fiscalAddress) =>
     dispatch(
       updateCustomerActions(
-        id,
+        _id,
         customerType,
         email,
         buildingsIds,

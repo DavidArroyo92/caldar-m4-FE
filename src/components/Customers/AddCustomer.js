@@ -56,13 +56,6 @@ export class AddCustomer extends Component {
         this.state.fiscalAddress
       );
     }
-    this.setState({
-      _id: "",
-      customerType: "",
-      email: "",
-      buildingsIds: "",
-      fiscalAddress: "",
-    });
     this.handleCleanForm();
   };
 
