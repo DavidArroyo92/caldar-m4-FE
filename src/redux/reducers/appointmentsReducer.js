@@ -10,7 +10,8 @@ import {
     DEL_APPOINTMENT_REJECTED,
     EDIT_APPOINTMENT_FETCHING,
     EDIT_APPOINTMENT_FULFILLED,
-    EDIT_APPOINTMENT_REJECTED} from "../actions/appointmentsActions"
+    EDIT_APPOINTMENT_REJECTED,
+} from '../types/types-appointments'
 
 const initialState = {
     isLoading: false,
@@ -69,7 +70,7 @@ const appointmentsReducer = (state = initialState, action) =>{
                 ...state,
                 list: state.list.filter(
                     (appointment) =>{
-                        return appointment.id !== action.payload
+                        return appointment._id !== action.payload
                     })
                 };
         case DEL_APPOINTMENT_REJECTED:
@@ -91,7 +92,7 @@ const appointmentsReducer = (state = initialState, action) =>{
                 list:[
                     ...state.list,
                     {
-                        id: action.id,
+                        _id: action._id,
                         text: action.text,
                         completed: false
                     }

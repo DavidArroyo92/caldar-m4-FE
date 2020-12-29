@@ -13,10 +13,8 @@ import {
     EDIT_APPOINTMENT_REJECTED
 } from '../types/types-appointments'
 
-//DECLARATE CONST AND IMPORT API
-const URL= 'https://rr-caldar-gm4.herokuapp.com/Appointments';
+const URL= 'https://app-caldar-gm4.herokuapp.com/appointment';
 
-//ACTION TO GET APPOINTMENT DATA
 
 const getAppointmentFetching = () => ({
     type: GET_APPOINTMENT_FETCHING,
@@ -44,7 +42,7 @@ export const getAppointments = () => dispatch =>{
         });
 };
 
-//ACTION TO ADD APPOINTMENT DATA
+
 const addAppointmentFetching = () => ({
     type: ADD_APPOINTMENT_FETCHING,
 });
@@ -59,24 +57,25 @@ const addAppointmentRejected = () => ({
     type: ADD_APPOINTMENT_REJECTED,
 });
 
-export const AddAppointment = APPOINTMENT => dispatch =>{
+export const addAppointment = (buildingId,boilerId,start_timestamp,end_timestamp ) => dispatch =>{
     dispatch(addAppointmentFetching());
-    return fetch(URL, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'aplication/json'
-        },
-        body: JSON.stringify(APPOINTMENT)
-    }).then(data=> data.json())
+    const dataSend = { buildingId,boilerId,start_timestamp,end_timestamp };
+    const requestOptions = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(dataSend),
+    };
+    return fetch(URL,requestOptions)
+        .then(data=> data.json())
         .then(response =>{
             dispatch(addAppointmentFulfilled(response));
         })
+        .then(() => dispatch(getAppointments()))
         .catch(() =>{
             dispatch(addAppointmentRejected())
         });
 };
 
-//ACTION TO DELETE APPOINTMENT DATA
 
 const delAppointmentFetching = () => ({
     type: DEL_APPOINTMENT_FETCHING,
@@ -92,20 +91,25 @@ const delAppointmentRejected = () => ({
     type: DEL_APPOINTMENT_REJECTED,
 });
 
-export const delAppointment = id => dispatch =>{
+export const delAppointment = (_id) => dispatch =>{
     dispatch(delAppointmentFetching());
-    return fetch(`${URL}/${id}`, {
-        method: 'DELETE'
-    }).then(data=> data.json())
+    const dataSend = { _id };
+    const requestOptions = {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(dataSend),
+    };
+    return fetch(`${URL}/${_id}`, requestOptions)
+    .then(data=> data.json())
         .then(response =>{
-            dispatch(delAppointmentFulfilled(id));
+            dispatch(delAppointmentFulfilled(_id));
         })
+        .then(() => dispatch(getAppointments()))
         .catch(() =>{
             dispatch(delAppointmentRejected())
         });
 };
 
-//ACTION TO EDIT APPOINTMENT DATA
 
 const editAppointmentFetching = () => ({
     type: EDIT_APPOINTMENT_FETCHING,
@@ -121,18 +125,20 @@ const editAppointmentRejected = () => ({
     type: EDIT_APPOINTMENT_REJECTED,
 });
 
-export const editAppointment = APPOINTMENT => dispatch =>{
+export const editAppointment = (_id,buildingId,boilerId,start_timestamp,end_timestamp ) => dispatch =>{
     dispatch(editAppointmentFetching());
-    return fetch(`${URL}/${id}`, {
-        method: 'PUT',
-        headers: {
-            'Content-Type': 'aplication/json'
-        },
-        body: JSON.stringify(APPOINTMENT)
-    }).then(data=> data.json())
-        .then(response =>{
+    const dataSend = {_id, buildingId,boilerId,start_timestamp,end_timestamp };
+    const requestOptions = {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(dataSend),
+  };
+    return fetch(`${URL}/${_id}`, requestOptions)
+        .then(data=> data.json())
+        .then(response => {
             dispatch(editAppointmentFulfilled(response));
         })
+        .then(() => dispatch(getAppointments()))
         .catch(() =>{
             dispatch(editAppointmentRejected())
         });
