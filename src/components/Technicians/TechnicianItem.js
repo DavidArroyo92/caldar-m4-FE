@@ -5,12 +5,12 @@ import styles from "../../layout/main/main.module.css";
 export class Technicianitem extends Component {
 
     render() {
-        const { id, first_name, last_name, email, typeIds, skillsId, hour_rate, daily_capacity} = this.props.technician;
+        const { id, firstName, lastName, email, typeIds, skillsId, hour_rate, daily_capacity} = this.props.technician;
         return (
             <tr>
                 <td>{id   }  </td>
-                <td>{first_name   }  </td>
-                <td>{last_name}</td>
+                <td>{firstName   }  </td>
+                <td>{lastName}</td>
                 <td>{email}</td>
                 <td>{typeIds}</td>
                 <td>{skillsId}</td>

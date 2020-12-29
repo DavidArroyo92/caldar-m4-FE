@@ -5,8 +5,8 @@ import styles from "../../layout/main/main.module.css";
 export class AddTechnician extends Component {
     state = {
         id:"",
-        first_name: "",
-        last_name: "",
+        firstName: "",
+        lastName: "",
         email: "",
         typeIds: "",
         skillsId: "",
@@ -22,8 +22,8 @@ export class AddTechnician extends Component {
     handleCleanForm = () => {
       this.setState({
         id:"",
-        first_name: "",
-        last_name: "",
+        firstName: "",
+        lastName: "",
         email: "",
         typeIds: "",
         skillsId: "",
@@ -36,8 +36,8 @@ export class AddTechnician extends Component {
     handleEdit = (technicianEdit) => {
         this.setState({
             id: technicianEdit.id,
-            first_name: technicianEdit.first_name,
-            last_name: technicianEdit.last_name,
+            firstName: technicianEdit.firstName,
+            lastName: technicianEdit.lastName,
             email: technicianEdit.email,
             typeIds: technicianEdit.typeIds,
             skillsId: technicianEdit.skillsId,
@@ -52,8 +52,8 @@ export class AddTechnician extends Component {
         if (this.state.id) {
             this.props.updateTechnician(
                 this.state.id,
-                this.state.first_name,
-                this.state.last_name,
+                this.state.firstName,
+                this.state.lastName,
                 this.state.email,
                 this.state.typeIds,
                 this.state.skillsId,
@@ -62,8 +62,8 @@ export class AddTechnician extends Component {
             );
         } else {
             this.props.addTechnician(
-                this.state.first_name,
-                this.state.last_name,
+                this.state.firstName,
+                this.state.lastName,
                 this.state.email,
                 this.state.typeIds,
                 this.state.skillsId,
@@ -72,8 +72,8 @@ export class AddTechnician extends Component {
             );
         }
         this.setState({
-            first_name:"",
-            last_name:"",
+            firstName:"",
+            lastName:"",
             email:"",
             typeIds: "",
             skillsId:"",
@@ -95,7 +95,7 @@ export class AddTechnician extends Component {
                             name="first_name"
                             className={styles.input}
                             placeholder="First Name..."
-                            value={this.state.first_name}
+                            value={this.state.firstName}
                             onChange={this.onChange}
                         />
                         <input
@@ -103,7 +103,7 @@ export class AddTechnician extends Component {
                             name="last_name"
                             className={styles.input}
                             placeholder="Last Name..."
-                            value={this.state.last_name}
+                            value={this.state.lastName}
                             onChange={this.onChange}
                         />
                         <input

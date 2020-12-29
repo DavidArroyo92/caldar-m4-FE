@@ -54,8 +54,8 @@ const addTechniciansRejected = () => ({
 });
 
 export const addTechnicians = (
-    first_name,
-    last_name,
+    firstName,
+    lastName,
     email,
     typeIds,
     skillsId,
@@ -64,8 +64,8 @@ export const addTechnicians = (
 ) => (dispatch) => {
     dispatch(addTechniciansFetching());
     const dataSend = {
-        first_name,
-        last_name,
+        firstName,
+        lastName,
         email,
         typeIds,
         skillsId,
@@ -103,8 +103,8 @@ const editTechniciansRejected = () => ({
 
 export const editTechnicians = (
     _id,
-    first_name,
-    last_name,
+    firstName,
+    lastName,
     email,
     typeIds,
     skillsId,
@@ -114,8 +114,8 @@ export const editTechnicians = (
     dispatch(editTechniciansFetching());
     const dataSend = {
         _id,
-        first_name,
-        last_name,
+        firstName,
+        lastName,
         email,
         typeIds,
         skillsId,

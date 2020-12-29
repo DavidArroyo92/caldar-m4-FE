@@ -66,11 +66,11 @@ class Technicians extends Component {
 const mapDispatchToProps = (dispatch) => ({
   getTechnicians: () => dispatch(getTechniciansActions()),
   delTechnicians: (_id) => dispatch(delTechniciansActions(_id)),
-  addTechnicians: (first_name, last_name, email, typeIds, skillsId, hour_rate, daily_capacity) =>
+  addTechnicians: (firstName, lastName, email, typeIds, skillsId, hour_rate, daily_capacity) =>
     dispatch(
       addTechniciansActions(
-        first_name,
-        last_name,
+        firstName,
+        lastName,
         email,
         typeIds,
         skillsId,
@@ -80,8 +80,8 @@ const mapDispatchToProps = (dispatch) => ({
     ),
   updateTechnicians: (
     _id,
-    first_name,
-    last_name,
+    firstName,
+    lastName,
     email,
     typeIds,
     skillsId,
@@ -91,8 +91,8 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(
       updateTechniciansActions(
         _id,
-        first_name,
-        last_name,
+        firstName,
+        lastName,
         email,
         typeIds,
         skillsId,
