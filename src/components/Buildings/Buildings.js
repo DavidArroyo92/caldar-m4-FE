@@ -79,14 +79,14 @@ editBuilding = (building) => {
 
 //Delete building
 
-delBuilding = (id) =>{
-  this.setState({ 
-      buildings: [
-          ...this.state.buildings.filter((building) => building.id !==id),
-            ],
-        showForm: false,
-    });
-};
+// delBuilding = (id) =>{
+//   this.setState({ 
+//       buildings: [
+//           ...this.state.buildings.filter((building) => building.id !==id),
+//             ],
+//         showForm: false,
+//     });
+// };
 
 // //Add Building
 
@@ -132,15 +132,15 @@ render() {
 const mapDispatchToProps = (dispatch) =>({
     getBuildings: () => dispatch(getBuildingActions()),
     delBuilding:(_id) => dispatch(delBuildingActions(_id)),
-    addBuilding: (boilerId, businessName,email,phone,adress) =>
+    addBuilding: (boilersId, businessName,email,phone,adress) =>
       dispatch(
-        AddBuildingActions(boilerId, businessName,email,phone,adress )
+        AddBuildingActions(boilersId, businessName,email,phone,adress )
       ),
-    updateBuilding:(_id,boilerId, businessName,email,phone,adress ) =>
+    updateBuilding:(_id, boilersId, businessName,email,phone,adress ) =>
         dispatch(
           updateBuildingActions(
             _id,
-            boilerId,
+              boilersId,
              businessName,
              email,
              phone,

@@ -22,6 +22,7 @@ class BuildingsList extends Component{
           <thead>
               <tr>
                 <th>Id</th>
+                <th>BoilersId</th>
                 <th>Business Name</th>
                 <th>E-mail</th>
                 <th>Phone</th>
@@ -30,9 +31,9 @@ class BuildingsList extends Component{
               </tr>
             </thead>
           <tbody>
-        {this.props.buildings?.map((building) => (
+        {this.props.buildings?.map((building, index) => (
           <BuildingItem
-            key={building._id}
+            key={index}
             building={building}
             delBuilding={this.props.delBuilding}
             editBuilding={this.props.editBuilding}

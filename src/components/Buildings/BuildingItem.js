@@ -8,7 +8,7 @@ export class BuildingItem extends Component {
         const  
             {
                 _id, 
-                boilerId, 
+                boilersId,
                 businessName, 
                 email, 
                 phone, 
@@ -20,7 +20,7 @@ export class BuildingItem extends Component {
                             {_id}
                         </td>
                         <td>
-                            {boilerId}
+                            {boilersId}
                         </td>
                         <td>
                             {businessName}

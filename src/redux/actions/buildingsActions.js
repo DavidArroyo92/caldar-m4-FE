@@ -61,6 +61,7 @@ const addBuildingRejected = () => ({
 });
 
 export const AddBuilding = (
+    boilersId,
     businessName,
     email,
     phone,
@@ -68,16 +69,15 @@ export const AddBuilding = (
 ) => (dispatch) => {
     dispatch(addBuildingFetching());
     const dataSend = {
+        boilersId,
         businessName,
         email,
         phone,
         adress
     }; 
     const requestOptions = {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'aplication/json'
-        },
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(dataSend),
     };
     return fetch(URL, requestOptions)
@@ -85,6 +85,7 @@ export const AddBuilding = (
         .then((response) =>{
             dispatch(addBuildingFulfilled(response));
         })
+        .then(() => dispatch(getBuildings()))
         .catch(() =>{
             dispatch(addBuildingRejected())
         });
@@ -110,10 +111,8 @@ export const delBuilding = (_id) => (dispatch) =>{
     dispatch(delBuildingFetching());
     const dataSend = {_id};
     const requestOptions = {
-        method: 'DELETE',
-        headers: {
-            'Content-Type': 'aplication/json'
-        },
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(dataSend),
     };
     return fetch(`${URL}/${_id}`, requestOptions)
@@ -121,6 +120,7 @@ export const delBuilding = (_id) => (dispatch) =>{
         .then((response) => {
             dispatch(delBuildingFulfilled(_id));
         })
+        .then(() => dispatch(getBuildings()))
         .catch(() =>{
             dispatch(delBuildingRejected());
         });
@@ -144,6 +144,7 @@ const editBuildingRejected = () => ({
 
 export const editBuilding = (
         _id,
+        boilersId,
         businessName,
         email,
         phone,
@@ -153,10 +154,12 @@ export const editBuilding = (
 
     const dataSend= {
         _id,
+        boilersId,
         businessName,
         email,
         phone,
-        adress}
+        adress
+    }
     const requestOptions = {
         method: 'PUT',
         headers: { "Content-Type": "application/json" },
@@ -167,6 +170,7 @@ export const editBuilding = (
         .then((response) =>{
             dispatch(editBuildingFulfilled(response));
         })
+        .then(() => dispatch(getBuildings()))
         .catch(() =>{
             dispatch(editBuildingRejected())
         });

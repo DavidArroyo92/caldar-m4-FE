@@ -4,8 +4,8 @@ import styles from '../../layout/main/main.module.css'
 
  export class AddBuilding extends Component {
      state = {
-         id:'',
-         boilerId:'',
+         _id:'',
+         boilersId:'',
          businessName:'',
          email:'',
          phone:'',
@@ -21,7 +21,7 @@ import styles from '../../layout/main/main.module.css'
       handleCleanForm = () => {
         this.setState({
         _id: "",
-        boilerId: "",
+        boilersId: "",
         businessName: "",
         email: "",
         phone: "",
@@ -33,7 +33,7 @@ import styles from '../../layout/main/main.module.css'
       handleEdit = (buildingEdit) => {
         this.setState({
         _id: buildingEdit._id,
-        boilerId: buildingEdit.boilerId,
+        boilersId: buildingEdit.boilersId,
         businessName: buildingEdit.businessName,
         email: buildingEdit.email,
         phone: buildingEdit.phone,
@@ -46,7 +46,7 @@ import styles from '../../layout/main/main.module.css'
          if (this.state._id) {
             this.props.updateBuilding(
                 this.state._id,
-                this.state.boilerId,
+                this.state.boilersId,
                 this.state.businessName,
                 this.state.email,
                 this.state.phone,
@@ -54,7 +54,7 @@ import styles from '../../layout/main/main.module.css'
             );
           } else {
          this.props.addBuilding(
-            this.state.boilerId,
+            this.state.boilersId,
             this.state.businessName,
             this.state.email,
             this.state.phone,
@@ -84,10 +84,10 @@ import styles from '../../layout/main/main.module.css'
                     <input type="hidden" name="_id" value={this.state._id} />
                     <input
                     type="text"
-                    name="boilerId"
+                    name="boilersId"
                     className={styles.input}
                     placeholder="Add Boiler ID"
-                    value={this.state.boilerId}
+                    value={this.state.boilersId}
                     onChange={this.onChange}
                     />
                     <input
