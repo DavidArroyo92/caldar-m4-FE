@@ -11,15 +11,12 @@ import './index.css';
 
 const middleware = [thunk];
 const configureStore = () => {
-  const enhancer = composeWithDevTools();
   return createStore(
-    rootReducer, 
-    enhancer,
+    rootReducer,
     compose(applyMiddleware(...middleware))
-    );
+  );
 };
-
-const store = configureStore();
+const store = configureStore( window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 
 ReactDOM.render(
   <React.StrictMode>

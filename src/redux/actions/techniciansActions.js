@@ -53,19 +53,36 @@ const addTechniciansRejected = () => ({
     type: ADD_TECHNICIANS_REJECTED,
 });
 
-export const addTechnicians = technician => (dispatch) => {
+export const addTechnicians = (
+    first_name,
+    last_name,
+    email,
+    typeIds,
+    skillsId,
+    hour_rate,
+    daily_capacity,
+) => (dispatch) => {
     dispatch(addTechniciansFetching());
-    return fetch(URL, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'aplication/json'
-        },
-        body: JSON.stringify(technician)
-    }).then(data=> data.json())
-        .then(data => data.json())
+    const dataSend = {
+        first_name,
+        last_name,
+        email,
+        typeIds,
+        skillsId,
+        hour_rate,
+        daily_capacity,
+    };
+    const requestOptions = {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(dataSend),
+      };
+    return fetch(URL, requestOptions)
+        .then(data=> data.json())
         .then(response => {
             dispatch(addTechniciansFulfilled(response));
         })
+        .then(() => dispatch(getTechnicians()))
         .catch(() => {
             dispatch(addTechniciansRejected ());
         })
@@ -84,46 +101,72 @@ const editTechniciansRejected = () => ({
     type: EDIT_TECHNICIANS_REJECTED,
 });
 
-export const editTechnicians = technician => (dispatch) => {
+export const editTechnicians = (
+    _id,
+    first_name,
+    last_name,
+    email,
+    typeIds,
+    skillsId,
+    hour_rate,
+    daily_capacity,
+) => (dispatch) => {
     dispatch(editTechniciansFetching());
-    return fetch(`${URL}/${id}`, {
-        method: 'PUT',
-        headers: {
-            'Content-Type': 'aplication/json'
-        },
-        body: JSON.stringify(technician)
-    }).then(data=> data.json())
+    const dataSend = {
+        _id,
+        first_name,
+        last_name,
+        email,
+        typeIds,
+        skillsId,
+        hour_rate,
+        daily_capacity,
+      };
+      const requestOptions = {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(dataSend),
+      };
+    return fetch(`${URL}/${_id}`, requestOptions)
+        .then(data=> data.json())
         .then(response => {
             dispatch(editTechniciansFulfilled(response));
         })
+        .then(() => dispatch(getTechnicians()))
         .catch(() => {
             dispatch(editTechniciansRejected ());
         })
 };
 
-const deleteTechniciansFetching = () => ({
+const delTechniciansFetching = () => ({
     type: DEL_TECHNICIANS_FETCHING,
 });
 
-const deleteTechniciansFulfilled = (payload) => ({
+const delTechniciansFulfilled = (payload) => ({
     type: DEL_TECHNICIANS_FULFILLED,
     payload,
 });
 
-const deleteTechniciansRejected = () => ({
+const delTechniciansRejected = () => ({
     type: DEL_TECHNICIANS_REJECTED,
 });
 
-export const deleteTechnicians = id => (dispatch) => {
-    dispatch(deleteTechniciansFetching());
-    return fetch(`${URL}/${id}`, {
-        method:'DELETE'})
+export const delTechnicians = (_id) => (dispatch) => {
+    dispatch(delTechniciansFetching());
+    const dataSend = { _id };
+    const requestOptions = {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(dataSend),
+    };
+    return fetch(`${URL}/${_id}`, requestOptions)
         .then(data => data.json())
         .then(response => {
-            dispatch(deleteTechniciansFulfilled(id));
+            dispatch(delTechniciansFulfilled(_id));
         })
+        .then(() => dispatch(getTechnicians()))
         .catch(() => {
-            dispatch(deleteTechniciansRejected ());
+            dispatch(delTechniciansRejected ());
         })
 };
 
