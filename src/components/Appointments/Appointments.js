@@ -1,20 +1,25 @@
 import React, { Component } from 'react';
 import AppointmentList from "./AppointmentList";
 import AddAppointment from "./AddAppointment";
-import styles from '../../layout/main/main.module.css'
+import styles from '../../layout/main/main.module.css';
+import { connect } from "react-redux";
+import {
+  getAppointments as getAppointmentsActions,
+  delAppointment as delAppointmentActions,
+  addAppointment as addAppointmentActions,
+  editAppointment as updateAppointmentActions,
+} from "../../redux/actions/appointmentsActions";
 
 
-export default class Appointments extends Component {
+class Appointments extends Component {
 
   state = {
-    appointmentValues:[],
     appointmentEdit: null,
     showForm: false,
   }
 
   componentDidMount(){
-    const dataAppointments = require('../../data/appointment.json')
-    this.setState({ appointmentValues: dataAppointments });
+    this.props.getAppointments();
   }
 
   handleShowForm = () => {
@@ -26,64 +31,27 @@ export default class Appointments extends Component {
   };
 
   editAppointment = (appointment) => {
-    const appointmentNew = appointment;
     this.setState({
-      appointmentEdit: appointmentNew,
+      appointmentEdit: appointment,
       showForm: true,
     });
     window.scrollTo(0, 0);
   };
 
-  updateAppointment = (id,buildingId,boilerId,start_timestamp,end_timestamp) => {
-    this.setState({
-      appointmentValues: this.state.appointmentValues.map((appointment) => {
-        if (appointment.id === id) {
-          appointment.buildingId = buildingId;
-          appointment.boilerId = boilerId;
-          appointment.start_timestamp = start_timestamp;
-          appointment.end_timestamp = end_timestamp;
-        }
-        return appointment;
-      }),
-      showForm: false,
-    });
-  };
-
-  delAppointment = (id) => {
-    this.setState({
-    appointmentValues: [...this.state.appointmentValues.filter((appointment) => appointment.id !== id)],
-    showForm: false,
-  });
-  }
-
-  addAppointment = (buildingId,boilerId,start_timestamp,end_timestamp) => {
-    const newAppointment = {
-      id: this.state.appointmentValues.length + 1,
-      buildingId,
-      boilerId,
-      start_timestamp,
-      end_timestamp
-    };
-    this.setState({appointmentValues: [...this.state.appointmentValues, newAppointment],
-      showForm: false,
-    });
-  }
-
   render() {
     return (
         <div className={styles.info}>
         {this.state.showForm ? (
-
                 <AddAppointment
-                  addAppointment={this.addAppointment}
-                  updateAppointment={this.updateAppointment}
+                  addAppointment={this.props.addAppointment}
+                  updateAppointment={this.props.updateAppointment}
                   appointmentEdit={this.state.appointmentEdit}
                   handleShowForm={this.handleShowForm}
                 />
                 ) : (
                 <AppointmentList
-                  appointmentValues = {this.state.appointmentValues}
-                  delAppointment={this.delAppointment}
+                  appointments = {this.props.appointments}
+                  delAppointment={this.props.delAppointment}
                   editAppointment={this.editAppointment}
                   handleShowForm={this.handleShowForm}
                   showForm={this.state.showForm}
@@ -93,4 +61,21 @@ export default class Appointments extends Component {
     );
   }
 }
+const mapDispatchToProps = (dispatch) => ({
+  getAppointments: () => dispatch(getAppointmentsActions()),
+  delAppointment: (_id) => dispatch(delAppointmentActions(_id)),
+  addAppointment: (buildingId, boilerId,start_timestamp, end_timestamp) =>
+    dispatch(
+      addAppointmentActions(buildingId, boilerId,start_timestamp, end_timestamp)
+    ),
+  updateAppointment: (_id, buildingId, boilerId,start_timestamp, end_timestamp) =>
+    dispatch(
+      updateAppointmentActions( _id,buildingId, boilerId,start_timestamp,end_timestamp)
+    ),
+});
 
+const mapStateToProps = (state) => ({
+  appointments: state.appointments.list,
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Appointments);

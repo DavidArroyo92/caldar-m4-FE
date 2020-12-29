@@ -2,19 +2,19 @@ import React, { Component } from 'react';
 import PropTypes from "prop-types";
 import styles from "../../layout/main/main.module.css";
 
-export default class AppointmentItem extends Component {
+class AppointmentItem extends Component {
     render() {
-        const {id,buildingId, boilerId,start_timestamp, end_timestamp } = this.props.appointment;
+        const {_id,buildingId, boilerId,start_timestamp, end_timestamp } = this.props.appointment;
         return (
             <tr>
-                <td>{id}</td>
+                <td>{_id}</td>
                 <td>{buildingId}</td>
                 <td>{boilerId}</td>
                 <td>{start_timestamp}</td>
                 <td>{end_timestamp}</td>
                 <td>
                     <button
-                        onClick={this.props.delAppointment.bind(this, id)}
+                        onClick={this.props.delAppointment.bind(this, _id)}
                         className={styles.btnStyle}
                     >
                         X
@@ -37,3 +37,4 @@ AppointmentItem.propTypes = {
     delAppointment:PropTypes.func.isRequired,
     editAppointment:PropTypes.func.isRequired,
 }
+export default AppointmentItem;

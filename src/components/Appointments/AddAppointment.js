@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import PropTypes from "prop-types";
 import styles from "../../layout/main/main.module.css";
 
-export default class AddAppointment extends Component {
+class AddAppointment extends Component {
     state = {
-        id:"",
+        _id:"",
         buildingId:"",
         boilerId:"",
         start_timestamp:"",
@@ -18,7 +18,7 @@ export default class AddAppointment extends Component {
       }
     handleCleanForm = () => {
         this.setState({
-            id:"",
+            _id:"",
             buildingId:"",
             boilerId:"",
             start_timestamp:"",
@@ -29,7 +29,7 @@ export default class AddAppointment extends Component {
 
       handleEdit = (appointmentEdit) => {
         this.setState({
-          id: appointmentEdit.id,
+          _id: appointmentEdit._id,
           buildingId: appointmentEdit.buildingId,
           boilerId: appointmentEdit.boilerId,
           start_timestamp: appointmentEdit.start_timestamp,
@@ -39,9 +39,9 @@ export default class AddAppointment extends Component {
 
     onSubmit = (e) => {
         e.preventDefault();
-        if (this.state.id) {
+        if (this.state._id) {
             this.props.updateAppointment(
-                this.state.id,
+                this.state._id,
                 this.state.buildingId,
                 this.state.boilerId,
                 this.state.start_timestamp,
@@ -55,22 +55,16 @@ export default class AddAppointment extends Component {
                 this.state.end_timestamp,
             );
         }
-        this.setState({
-            id: "",
-            buildingId: "",
-            boilerId:"",
-            start_timestamp:"",
-            end_timestamp:"",
-          });
+        this.handleCleanForm();
     }
 
     onChange = (e) => this.setState({ [e.target.name]: e.target.value});
     render() {
         return (
             <div>
-                <h1>{this.state.id ? "Edit appointment" : "Add new appointment"}</h1>
+                <h1>{this.state._id ? "Edit appointment" : "Add new appointment"}</h1>
                 <form onSubmit={this.onSubmit}>
-                    <input type="hidden" name="id" value={this.state.id} />
+                    <input type="hidden" name="_id" value={this.state._id} />
                         <input
                             type="text"
                             name="buildingId"
@@ -88,21 +82,23 @@ export default class AddAppointment extends Component {
                             onChange={this.onChange}
                         />
                         <input
-                            type="date"
+                            type="text"
                             name="start_timestamp"
                             className={styles.input}
+                            placeholder="Start Time..."
                             value={this.state.start_timestamp}
                             onChange={this.onChange}
                         />
                         <input
-                            type="date"
+                            type="text"
                             name="end_timestamp"
                             className={styles.input}
+                            placeholder="End Time..."
                             value={this.state.end_timestamp}
                             onChange={this.onChange}
                         />
 
-                         {this.state.id ?
+                         {this.state._id ?
                         <input
                             type="submit"
                             value="Save"
@@ -134,3 +130,5 @@ AddAppointment.propTypes = {
     handleShowForm: PropTypes.func.isRequired,
     updateAppointment: PropTypes.func.isRequired,
 }
+
+export default AddAppointment;
