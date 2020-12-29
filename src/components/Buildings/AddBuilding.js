@@ -20,7 +20,7 @@ import styles from '../../layout/main/main.module.css'
 
       handleCleanForm = () => {
         this.setState({
-        id: "",
+        _id: "",
         boilerId: "",
         businessName: "",
         email: "",
@@ -28,11 +28,11 @@ import styles from '../../layout/main/main.module.css'
         adress: "",
         });
         this.props.handleShowForm();
-      }
+      };
     
       handleEdit = (buildingEdit) => {
         this.setState({
-        id: buildingEdit.id,
+        _id: buildingEdit._id,
         boilerId: buildingEdit.boilerId,
         businessName: buildingEdit.businessName,
         email: buildingEdit.email,
@@ -43,9 +43,9 @@ import styles from '../../layout/main/main.module.css'
 
      onSubmit = (e) => {
          e.preventDefault();
-         if (this.state.id) {
+         if (this.state._id) {
             this.props.updateBuilding(
-                this.state.id,
+                this.state._id,
                 this.state.boilerId,
                 this.state.businessName,
                 this.state.email,
@@ -61,14 +61,15 @@ import styles from '../../layout/main/main.module.css'
             this.state.adress
         );
          }
-         this.setState({
-            id: "",
-             boilerId:"",
-             businessName:"",
-             email:"",
-             phone:"",
-             adress:"",
-            });
+        //  this.setState({
+        //     id: "",
+        //      boilerId:"",
+        //      businessName:"",
+        //      email:"",
+        //      phone:"",
+        //      adress:"",
+        //     });
+        this.handleCleanForm();
      };
 
      onChange = (e) => this.setState({ [e.target.name]: e.target.value});
@@ -77,10 +78,10 @@ import styles from '../../layout/main/main.module.css'
         return(
             <div>
                 <h3>
-                {this.state.id ? "Edit building" : "Add new Building"}
+                {this.state._id ? "Edit building" : "Add new Building"}
                 </h3>
                 <form onSubmit ={this.onSubmit} >
-                    <input type="hidden" name="id" value={this.state.id} />
+                    <input type="hidden" name="_id" value={this.state._id} />
                     <input
                     type="text"
                     name="boilerId"
@@ -141,8 +142,8 @@ import styles from '../../layout/main/main.module.css'
 
 //proptypes
 AddBuilding.propTypes = {
-   addBuilding: PropTypes.func.isRequired,
-   updateBuilding: PropTypes.func.isRequired,
+  addBuilding:PropTypes.func.isRequired,
+  updateBuilding: PropTypes.func.isRequired,
    handleShowForm: PropTypes.func.isRequired,
    buildingEdit: PropTypes.object,
   }

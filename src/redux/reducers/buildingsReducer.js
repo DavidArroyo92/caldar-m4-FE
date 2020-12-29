@@ -30,13 +30,13 @@ const buildingsReducer = (state = initialState, action) =>{
             return{
                 ...state,
                 isLoading: false,
-                list: action.payload
+                list: action.payload,
             };
         case GET_BUILDING_REJECTED:
             return{
                 ...state,
                 isLoading: false,
-                error: true
+                error: true,
             };
         
         case ADD_BUILDING_FETCHING:
@@ -51,13 +51,13 @@ const buildingsReducer = (state = initialState, action) =>{
                 isLoading: false,
                 list:[
                     ...state.list, action.payload
-                ]
+                ],
             };
         case ADD_BUILDING_REJECTED:
             return{
                 ...state,
                 isLoading: false,
-                error: true
+                error: true,
             };
 
         case DEL_BUILDING_FETCHING:
@@ -71,14 +71,14 @@ const buildingsReducer = (state = initialState, action) =>{
                 ...state,
                 list: state.list.filter(
                     (building) =>{
-                        return building.id !== action.payload
-                    })
+                        return building.id !== action.payload;
+                    }),
                 };
         case DEL_BUILDING_REJECTED:
             return{
                 ...state,
                 isLoading: false,
-                error: true
+                error: true,
             };
 
         case EDIT_BUILDING_FETCHING:
@@ -95,22 +95,22 @@ const buildingsReducer = (state = initialState, action) =>{
                     {
                         id: action.id,
                         text: action.text,
-                        completed: false
-                    }
+                        completed: false,
+                    },
                     
-                ]
+                ],
             };
 
         case EDIT_BUILDING_REJECTED:
             return{
                 ...state,
                 isLoading: false,
-                error: true
+                error: true,
             };
 
         default:
              return state;
     }
-}
+};
 
 export default buildingsReducer;

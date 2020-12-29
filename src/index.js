@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { composeWithDevTools } from 'redux-devtools-extension';
 import { createStore, applyMiddleware, compose } from 'redux'; 
 import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
@@ -10,16 +9,16 @@ import rootReducer from './redux/reducers/rootReducer';
 import './index.css';
 
 const middleware = [thunk];
+
 const configureStore = () => {
-  const enhancer = composeWithDevTools();
+
   return createStore(
     rootReducer, 
-    enhancer,
     compose(applyMiddleware(...middleware))
     );
 };
 
-const store = configureStore();
+const store = configureStore( window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 
 ReactDOM.render(
   <React.StrictMode>

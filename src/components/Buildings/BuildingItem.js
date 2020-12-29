@@ -1,14 +1,24 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types';
-import styles from '../../layout/main/main.module.css'
-class BuildingItem extends Component {
+import styles from '../../layout/main/main.module.css';
 
- 
+export class BuildingItem extends Component {
+
     render() {
-        const  {id, boilerId, businessName, email, phone, adress
-        } = this.props.building;
+        const  
+            {
+                _id, 
+                boilerId, 
+                businessName, 
+                email, 
+                phone, 
+                adress
+            } = this.props.building;
         return (
                    <tr>
+                       <td>
+                            {_id}
+                        </td>
                         <td>
                             {boilerId}
                         </td>
@@ -26,7 +36,7 @@ class BuildingItem extends Component {
                         </td>
                         <td>
                             <button 
-                                onClick={this.props.delBuilding.bind(this, id)} 
+                                onClick={this.props.delBuilding.bind(this, _id)} 
                                 className={styles.btnStyle}>
                                     x
                             </button>

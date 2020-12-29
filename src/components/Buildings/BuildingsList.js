@@ -19,6 +19,7 @@ class BuildingsList extends Component{
             />
           </h1>
           <table className={styles.table}>
+          <thead>
               <tr>
                 <th>Id</th>
                 <th>Business Name</th>
@@ -27,10 +28,11 @@ class BuildingsList extends Component{
                 <th>Address</th>
                 <th>Actions</th>
               </tr>
+            </thead>
           <tbody>
-        {this.props.buildings.map((building) => (
+        {this.props.buildings?.map((building) => (
           <BuildingItem
-            key={building.id}
+            key={building._id}
             building={building}
             delBuilding={this.props.delBuilding}
             editBuilding={this.props.editBuilding}

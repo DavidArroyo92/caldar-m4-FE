@@ -1,31 +1,36 @@
 import React, { Component } from 'react';
 import AddBuilding from './AddBuilding';
 import BuildingsList from './BuildingsList';
-import { v4 as uuidv4 } from 'uuid';
+// import { v4 as uuidv4 } from 'uuid';
 import styles from "../../layout/main/main.module.css";
 import {
-    getBuildings as getBuildingAction,
-    AddBuilding as AddBuildingAction,
-    delBuilding as delBuildingAction,
-    editBuilding as editBuildingAction 
+    getBuildings as getBuildingActions,
+    AddBuilding as AddBuildingActions,
+    delBuilding as delBuildingActions,
+    editBuilding as updateBuildingActions 
 } from '../../redux/actions/buildingsActions';
 import { connect} from 'react-redux';
-import {bindActionCreators} from 'redux'
+// import {bindActionCreators} from 'redux'
 
 
 //Set Building Object
 class Buildings extends Component {
   state = {
-    buildings: [],
+    // buildings: [],
     buildingEdit: null,
     showForm: false,
   };
 
 
 //Get Data from JSON.Files
-componentDidMount(){
-  const getBuilding = require("../../data/buildingData.json");
-  this.setState({buildings: getBuilding});
+// componentDidMount(){
+//   const getBuilding = require("../../data/buildingData.json");
+//   this.setState({buildings: getBuilding});
+// }
+
+//Get data from API
+componentDidMount() {
+  this.props.getBuildings();
 }
 
 
@@ -47,30 +52,30 @@ editBuilding = (building) => {
   window.scrollTo(0, 0);
 };
 
-// Update Customer
-updateBuilding = (
-  id,
-  boilerId,
-  businessName,
-  email,
-  phone,
-  adress
-) => {
+// // Update Customer
+// updateBuilding = (
+//   id,
+//   boilerId,
+//   businessName,
+//   email,
+//   phone,
+//   adress
+// ) => {
   
-  this.setState({
-    buildings: this.state.buildings.map((building) => {
-      if (building.id === id) {
-        building.boilerId = boilerId;
-        building.email = email;
-        building.businessName = businessName;
-        building.adress = adress;
-        building.phone = phone;
-      }
-      return building;
-    }),
-    showForm: false,
-  });
-};
+//   this.setState({
+//     buildings: this.state.buildings.map((building) => {
+//       if (building.id === id) {
+//         building.boilerId = boilerId;
+//         building.email = email;
+//         building.businessName = businessName;
+//         building.adress = adress;
+//         building.phone = phone;
+//       }
+//       return building;
+//     }),
+//     showForm: false,
+//   });
+// };
 
 //Delete building
 
@@ -83,37 +88,37 @@ delBuilding = (id) =>{
     });
 };
 
-//Add Building
+// //Add Building
 
-AddBuilding = (boilerId, businessName,email,phone,adress) =>{
-  const newBuilding ={
-    id: uuidv4(),
-    boilerId,
-    businessName,
-    email,
-    phone,
-    adress
-  };
-  this.setState({ 
-      buildings: [...this.state.buildings, newBuilding],
-    showForm: false,
-    });
-};
+// AddBuilding = (boilerId, businessName,email,phone,adress) =>{
+//   const newBuilding ={
+//     id: uuidv4(),
+//     boilerId,
+//     businessName,
+//     email,
+//     phone,
+//     adress
+//   };
+//   this.setState({ 
+//       buildings: [...this.state.buildings, newBuilding],
+//     showForm: false,
+//     });
+// };
 
 render() {
     return (
       <div className={styles.info}>
         {this.state.showForm ? (
           <AddBuilding
-            AddBuilding={this.AddBuilding}
-            updateBuilding={this.updateBuilding}
+            addBuilding={this.props.addBuilding}
+            updateBuilding={this.props.updateBuilding}
             buildingEdit={this.state.buildingEdit}
             handleShowForm={this.handleShowForm}
           />
         ) : (
           <BuildingsList
-            buildings={this.state.buildings}
-            delBuilding={this.delBuilding}
+            buildings={this.props.buildings}
+            delBuilding={this.props.delBuilding}
             editBuilding={this.editBuilding}
             handleShowForm={this.handleShowForm}
             showForm={this.state.showForm}
@@ -124,20 +129,29 @@ render() {
   }
 }  
 
-const mapDispatchToProps = (dispatch) =>{
-  return bindActionCreators({
-    getBuildings:getBuildingAction,
-    AddBuilding:AddBuildingAction,
-    delBuilding:delBuildingAction,
-    editBuilding: editBuildingAction
-  }, dispatch);
-};
-
+const mapDispatchToProps = (dispatch) =>({
+    getBuildings: () => dispatch(getBuildingActions()),
+    delBuilding:(_id) => dispatch(delBuildingActions(_id)),
+    addBuilding: (boilerId, businessName,email,phone,adress) =>
+      dispatch(
+        AddBuildingActions(boilerId, businessName,email,phone,adress )
+      ),
+    updateBuilding:(_id,boilerId, businessName,email,phone,adress ) =>
+        dispatch(
+          updateBuildingActions(
+            _id,
+            boilerId,
+             businessName,
+             email,
+             phone,
+             adress
+          )
+        ),
+  });
+ 
 const mapStateToProps = state =>{
   return{
-    isLoading: state.buildings.isLoading,
     buildings: state.buildings.list,
-    error: state.buildings.error
   };
 };
 
