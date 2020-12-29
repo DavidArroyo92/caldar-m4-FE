@@ -57,30 +57,25 @@ const addBoilerTypeRejected = () => ({
     type: ADD_BOILERTYPE_REJECTED,
 });
 
-export const AddBoilerType = (
-skillsId,
-type,
-stock,
-description
-) => (dispatch) =>{
+export const addBoilerType = (skillsId,type,stock,description ) => dispatch =>{
     dispatch(addBoilerTypeFetching());
-    const dataSend = { skillsId, type, stock, description };
+    const dataSend = { skillsId,type,stock,description };
     const requestOptions = {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(dataSend),
-  };
-
-  return fetch(URL, requestOptions)
-    .then((data) => data.json())
-    .then((response) => {
-      dispatch(addBoilerTypeFulfilled(response));
-    })
-    .then(() => dispatch(getBoilerTypes()))
-    .catch(() => {
-      dispatch(addBoilerTypeRejected());
-    });
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(dataSend),
+    };
+    return fetch(URL,requestOptions)
+        .then(data=> data.json())
+        .then(response =>{
+            dispatch(addBoilerTypeFulfilled(response));
+        })
+        .then(() => dispatch(getBoilerTypes()))
+        .catch(() =>{
+            dispatch(addBoilerTypeRejected())
+        });
 };
+
 
 //ACTION TO DELETE BOILERTYPE DATA
 

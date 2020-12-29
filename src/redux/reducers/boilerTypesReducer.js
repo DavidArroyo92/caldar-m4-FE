@@ -69,7 +69,7 @@ const boilerTypesReducer = (state = initialState, action) =>{
                 ...state,
                 list: state.list.filter(
                     (boilerType) =>{
-                        return boilerType.id !== action.payload
+                        return boilerType._id !== action.payload
                     })
                 };
         case DELETE_BOILERTYPE_REJECTED:

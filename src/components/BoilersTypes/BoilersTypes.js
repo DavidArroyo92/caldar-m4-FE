@@ -12,79 +12,34 @@ import {
 
 class BoilerType extends Component {
   state = {
-    // boilerTypeValue: [],
     boilerTypeEdit: null,
     showForm: false,
   }
 
   componentDidMount() {
-    // const data = require('../../data/boilerType.json');
-    // this.setState({ boilerTypeValue: data });
     this.props.getBoilerTypes();
   }
 
   // Show form
-    handleShowForm = () => {
-      this.setState({
-        showForm: !this.state.showForm,
-        boilerTypeEdit: null,
-      });
-      window.scrollTo(0, 0);
-    };
+  handleShowForm = () => {
+    this.setState({
+      showForm: !this.state.showForm,
+      boilerTypeEdit: null,
+    });
+    window.scrollTo(0, 0);
+  };
 
-    //edit boiler type
-    editBoilerType = (bt) => {
-      this.setState({
-        boilerTypeEdit: bt,
-        showForm: true,
-      });
-      window.scrollTo(0, 0);
-    };
+  //edit boiler type
+  editBoilerType = (bt) => {
+    this.setState({
+      boilerTypeEdit: bt,
+      showForm: true,
+    });
+    window.scrollTo(0, 0);
+  };
   
-  //   //update boiler type
-  //   updateBoilerType = (id, skillsId, type, stock, description) => {
-  //     this.setState({
-  //       boilerTypeValue: this.state.boilerTypeValue.map((boilerType) => {
-  //         if (boilerType.id === id) {
-  //           boilerType.skillsId = skillsId;
-  //           boilerType.type = type;
-  //           boilerType.stock = stock;
-  //           boilerType.description = description;
-  //         }
-  //         return boilerType;
-  //       }),
-  //       showForm: false,
-  //     });
-  //   };
-
-  // // Add boilerType
-  // addBoilerType = (id, skillsId, type, stock, description) => {
-  //   const newBoilerType = {
-  //     id: uuidv4(),
-  //     skillsId,
-  //     type,
-  //     stock,
-  //     description
-  //   };
-
-  //   this.setState({ boilerTypeValue: [...this.state.boilerTypeValue, newBoilerType],
-  //     showForm: false,
-  //   });
-  // };
-
-  // //delete boilerType
-  // deleteBoilerType = (id) => {
-  //   this.setState({ boilerTypeValue: [...this.state.boilerTypeValue.filter(boilerType => boilerType.id!==id)],
-  //     showForm: false,
-  //   });
-  // };
-
-
-
-
   render() {
     return (
-      
       <div className={styles.info}>
         {this.state.showForm ? (
           <AddBoilerType 
@@ -95,7 +50,8 @@ class BoilerType extends Component {
           />
         ) : (
           <BoilerTypeList 
-            boilerTypeValue={this.props.boilerTypeValue} 
+            //boilerTypeValue={this.props.boilerTypeValue}
+            boilerTypes={this.props.boilerTypes} 
             deleteBoilerType={this.props.deleteBoilerType}
             editBoilerType={this.editBoilerType}
             handleShowForm={this.handleShowForm}
