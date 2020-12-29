@@ -1,24 +1,42 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import styles from "../../layout/main/main.module.css";
 
 class AddBoilerType extends Component {
     state = {
-      id: "",
+      _id: "",
       skillsId: "",
       type: "",
       stock: "",
       description: "",
     };
 
-    componentDidUpdate(prevProps, prevState) {
-      if (this.props.boilerTypeEdit !== prevProps.boilerTypeEdit) {
+    componentDidMount() {
+      if (this.props.boilerTypeEdit) {
         this.handleEdit(this.props.boilerTypeEdit);
       }
     }
+
+    handleCleanForm = () => {
+      this.setState({
+        _id: "",
+        skillsId: "",
+        type: "",
+        stock: "",
+        description: "",
+      });
+      this.props.handleShowForm();
+    };
+
+    // componentDidUpdate(prevProps, prevState) {
+    //   if (this.props.boilerTypeEdit !== prevProps.boilerTypeEdit) {
+    //     this.handleEdit(this.props.boilerTypeEdit);
+    //   }
+    // }
   
     handleEdit = (boilerTypeEdit) => {
       this.setState({
-        id: boilerTypeEdit.id,
+        _id: boilerTypeEdit._id,
         skillsId: boilerTypeEdit.skillsId,
         type: boilerTypeEdit.type,
         stock: boilerTypeEdit.stock,
@@ -28,9 +46,9 @@ class AddBoilerType extends Component {
   
     onSubmit = (e) => {
       e.preventDefault();
-      if (this.state.id){
+      if (this.state._id){
         this.props.updateBoilerType(
-          this.state.id,
+          this.state._id,
           this.state.skillsId,
           this.state.type,
           this.state.stock,
@@ -38,20 +56,13 @@ class AddBoilerType extends Component {
         );
       }else {
         this.props.addBoilerType(
-          this.state.id,
           this.state.skillsId,
           this.state.type,
           this.state.stock,
           this.state.description
         );
       }
-      this.setState({
-        id: "",
-        skillsId: "",
-        type: "",
-        stock: "",
-        description:"",
-      });
+      this.handleCleanForm();
     };
   
     onChange = (e) => this.setState({ [e.target.name]: e.target.value });
@@ -59,12 +70,13 @@ class AddBoilerType extends Component {
     render() {
       return (
         <div>
-          <h3>{this.state.id ? "Edit boiler type" : "Add new boiler type"}</h3>
+          <h3>{this.state._id ? "Edit boiler type" : "Add new boiler type"}</h3>
           <form onSubmit={this.onSubmit}>
+            <input type="hidden" name="_id" value={this.state._id} />
             <input
               itemType="text"
               name="skillsId"
-              style={inputStyle}
+              className={styles.input}
               placeholder="Add Skills Id"
               value={this.state.skillsId}
               onChange={this.onChange}
@@ -72,7 +84,7 @@ class AddBoilerType extends Component {
             <input
               type="text"
               name="type"
-              style={inputStyle}
+              className={styles.input}
               placeholder="Add Type"
               value={this.state.type}
               onChange={this.onChange}
@@ -80,7 +92,7 @@ class AddBoilerType extends Component {
             <input
               type="text"
               name="stock"
-              style={inputStyle}
+              className={styles.input}
               placeholder="Add Stock"
               value={this.state.stock}
               onChange={this.onChange}
@@ -88,25 +100,31 @@ class AddBoilerType extends Component {
             <input
               type="text"
               name="description"
-              style={inputStyle}
+              className={styles.input}
               placeholder="Add Description"
               value={this.state.description}
               onChange={this.onChange}
             />
-            {this.state.id ?
+            {this.state._id ?
             <input
               type="submit"
               value="Save"
-              className="btn"
-              style={inputStyle}
+              // className="btn"
+              className={styles.input}
             />
             :
             <input
               type="submit"
               value="Add"
               className="btn"
-              style={inputStyle}
+              className={styles.input}
             />}
+            <input
+              type="button"
+              value="Cancel"
+              className={styles.input}
+              onClick={this.handleCleanForm}
+            />
           </form>
         </div>
       );
@@ -117,14 +135,15 @@ class AddBoilerType extends Component {
   AddBoilerType.propTypes = {
     addBoilerType: PropTypes.func.isRequired,
     updateBoilerType: PropTypes.func.isRequired,
+    handleShowForm: PropTypes.func.isRequired,
     boilerTypeEdit: PropTypes.object,
   };
   
-  const inputStyle = {
-    padding: "10px",
-    width: "20%",
-    margin: "5px",
-    borderRadius: "5px",
-  };
+  // const inputStyle = {
+  //   padding: "10px",
+  //   width: "20%",
+  //   margin: "5px",
+  //   borderRadius: "5px",
+  // };
   
   export default AddBoilerType;
