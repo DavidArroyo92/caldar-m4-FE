@@ -14,7 +14,7 @@ import {
 } from "../types/types-customers";
 
 //DECLARATE CONST AND IMPORT API
-const URL = "https://app-caldar-gm4.herokuapp.com/customers";
+const URL = "https://app-caldar-gm4.herokuapp.com/api/customers";
 
 //ACTION TO GET CUSTOMER DATA
 
