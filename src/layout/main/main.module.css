@@ -44,4 +44,33 @@
     border-radius: 5px;
     cursor: pointer;
     float: right;
-  }
+}
+
+.btnStyleNew{
+    font-size:x-large;
+    background: #fff;
+    color: #000;
+    border:none;
+    padding: 5px 9px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.form{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.title{
+    text-align: center;
+}
+
+.building.Title {
+    text-align: center;
+    padding-top: 10px;
+}
+
+.formShow{
+    margin:50px;
+}
