@@ -31,9 +31,9 @@ class BuildingsList extends Component{
               </tr>
             </thead>
           <tbody>
-        {this.props.buildings?.map((building, index) => (
+        {this.props.buildings?.map((building) => (
           <BuildingItem
-            key={index}
+            key={building._id}
             building={building}
             delBuilding={this.props.delBuilding}
             editBuilding={this.props.editBuilding}
