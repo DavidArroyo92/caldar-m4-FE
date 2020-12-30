@@ -4,7 +4,7 @@ import styles from "../../layout/main/main.module.css";
 
 export class AddTechnician extends Component {
     state = {
-        id:"",
+        _id:"",
         firstName: "",
         lastName: "",
         email: "",
@@ -21,7 +21,7 @@ export class AddTechnician extends Component {
   }
     handleCleanForm = () => {
       this.setState({
-        id:"",
+        _id:"",
         firstName: "",
         lastName: "",
         email: "",
@@ -35,7 +35,7 @@ export class AddTechnician extends Component {
     
     handleEdit = (technicianEdit) => {
         this.setState({
-            id: technicianEdit.id,
+            _id: technicianEdit._id,
             firstName: technicianEdit.firstName,
             lastName: technicianEdit.lastName,
             email: technicianEdit.email,
@@ -49,9 +49,9 @@ export class AddTechnician extends Component {
 
       onSubmit = (e) => {
         e.preventDefault();
-        if (this.state.id) {
+        if (this.state._id) {
             this.props.updateTechnician(
-                this.state.id,
+                this.state._id,
                 this.state.firstName,
                 this.state.lastName,
                 this.state.email,
@@ -87,12 +87,12 @@ export class AddTechnician extends Component {
     render() {
         return (
             <div>
-                <h3>{this.state.id ? "Edit Technician" : "Add new Technician"}</h3>
+                <h3>{this.state._id ? "Edit Technician" : "Add new Technician"}</h3>
                 <form onSubmit={this.onSubmit}>
-                    <input type="hidden" name="id" value={this.state.id} />
+                    <input type="hidden" name="_id" value={this.state._id} />
                         <input
                             type="text"
-                            name="first_name"
+                            name="firstName"
                             className={styles.input}
                             placeholder="First Name..."
                             value={this.state.firstName}
@@ -100,7 +100,7 @@ export class AddTechnician extends Component {
                         />
                         <input
                             type="text"
-                            name="last_name"
+                            name="lastName"
                             className={styles.input}
                             placeholder="Last Name..."
                             value={this.state.lastName}

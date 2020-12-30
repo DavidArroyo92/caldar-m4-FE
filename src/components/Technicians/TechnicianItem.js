@@ -5,10 +5,10 @@ import styles from "../../layout/main/main.module.css";
 export class Technicianitem extends Component {
 
     render() {
-        const { id, firstName, lastName, email, typeIds, skillsId, hour_rate, daily_capacity} = this.props.technician;
+        const { _id, firstName, lastName, email, typeIds, skillsId, hour_rate, daily_capacity} = this.props.technician;
         return (
             <tr>
-                <td>{id   }  </td>
+                <td>{_id   }  </td>
                 <td>{firstName   }  </td>
                 <td>{lastName}</td>
                 <td>{email}</td>
@@ -17,7 +17,7 @@ export class Technicianitem extends Component {
                 <td>{hour_rate}</td>
                 <td>{daily_capacity}</td>
                 <td>
-                    <button onClick={this.props.delTechnician.bind(this, id)} className={styles.btnStyle}>x</button>
+                    <button onClick={this.props.delTechnician.bind(this, _id)} className={styles.btnStyle}>x</button>
                     <button onClick={this.props.editTechnician.bind(this, this.props.technician)} className={styles.btnStyle}>Edit</button>
                 </td>
             </tr>
