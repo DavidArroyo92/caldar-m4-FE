@@ -14,7 +14,7 @@ import {
 } from "../types/types-boilers";
 
 //DECLARATE CONST AND IMPORT API
-const URL = "https://app-caldar-gm4.herokuapp.com/boilers";
+const URL = "https://app-caldar-gm4.herokuapp.com/api/boilers";
 
 //ACTION TO GET BOILER DATA
 

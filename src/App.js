@@ -20,12 +20,12 @@ function App() {
           <div className={styles.mainContent}>
             <Header/>
             <Switch>
-              <Route path="/Appointments" component={Appointments}/>
-              <Route path="/Boilers" component={Boilers}/>
-              <Route path="/BoilersTypes" component={BoilersTypes}/>
-              <Route path="/Buildings" component={Buildings}/>
-              <Route path="/Customers" component={Customers}/>
-              <Route path="/Technicians" component={Technicians} />
+              <Route path="/appointments" component={Appointments}/>
+              <Route path="/boilers" component={Boilers}/>
+              <Route path="/boilersTypes" component={BoilersTypes}/>
+              <Route path="/buildings" component={Buildings}/>
+              <Route path="/customers" component={Customers}/>
+              <Route path="/technicians" component={Technicians} />
             </Switch>
           </div>
         </div>
