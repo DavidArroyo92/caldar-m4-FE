@@ -5,7 +5,7 @@ import BuildingsList from './BuildingsList';
 import styles from "../../layout/main/main.module.css";
 import {
     getBuildings as getBuildingActions,
-    AddBuilding as AddBuildingActions,
+    addBuilding as addBuildingActions,
     delBuilding as delBuildingActions,
     editBuilding as updateBuildingActions 
 } from '../../redux/actions/buildingsActions';
@@ -134,7 +134,7 @@ const mapDispatchToProps = (dispatch) =>({
     delBuilding:(_id) => dispatch(delBuildingActions(_id)),
     addBuilding: (boilersId, businessName,email,phone,adress) =>
       dispatch(
-        AddBuildingActions(boilersId, businessName,email,phone,adress )
+        addBuildingActions(boilersId, businessName,email,phone,adress )
       ),
     updateBuilding:(_id, boilersId, businessName,email,phone,adress ) =>
         dispatch(

@@ -12,7 +12,7 @@ export class BuildingItem extends Component {
                 businessName, 
                 email, 
                 phone, 
-                adress
+                adress,
             } = this.props.building;
         return (
                    <tr>
@@ -55,6 +55,7 @@ export class BuildingItem extends Component {
 BuildingItem.propTypes = {
     building: PropTypes.object.isRequired,
     delBuilding: PropTypes.func.isRequired,
+    editBuilding: PropTypes.func.isRequired,
   };
 
 export default BuildingItem;

@@ -4,12 +4,12 @@ import styles from '../../layout/main/main.module.css'
 
  export class AddBuilding extends Component {
      state = {
-         _id:'',
-         boilersId:'',
-         businessName:'',
-         email:'',
-         phone:'',
-         adress:'',
+         _id:"",
+         boilersId:"",
+         businessName:"",
+         email:"",
+         phone:"",
+         adress:"",
      };
 
      componentDidMount() {
@@ -60,7 +60,7 @@ import styles from '../../layout/main/main.module.css'
             this.state.phone,
             this.state.adress
         );
-         }
+      }
         //  this.setState({
         //     id: "",
         //      boilerId:"",
@@ -69,8 +69,8 @@ import styles from '../../layout/main/main.module.css'
         //      phone:"",
         //      adress:"",
         //     });
-        this.handleCleanForm();
-     };
+      this.handleCleanForm();
+    };
 
      onChange = (e) => this.setState({ [e.target.name]: e.target.value});
 
@@ -142,10 +142,10 @@ import styles from '../../layout/main/main.module.css'
 
 //proptypes
 AddBuilding.propTypes = {
-  addBuilding:PropTypes.func.isRequired,
+  addBuilding: PropTypes.func.isRequired,
   updateBuilding: PropTypes.func.isRequired,
    handleShowForm: PropTypes.func.isRequired,
    buildingEdit: PropTypes.object,
-  }
+  };
 
 export default AddBuilding 

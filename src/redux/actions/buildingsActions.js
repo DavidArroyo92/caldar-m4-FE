@@ -14,7 +14,7 @@ import {
 } from '../types/types-buildings.js'
 
 //DECLARATE CONST AND IMPORT API 
-const URL= "https://app-caldar-gm4.herokuapp.com/buildings";
+const URL= "https://app-caldar-gm4.herokuapp.com/api/buildings";
 
 //ACTION TO GET BUILDING DATA
 
@@ -60,7 +60,7 @@ const addBuildingRejected = () => ({
     type: ADD_BUILDING_REJECTED,
 });
 
-export const AddBuilding = (
+export const addBuilding = (
     boilersId,
     businessName,
     email,
