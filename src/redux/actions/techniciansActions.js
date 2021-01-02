@@ -13,7 +13,7 @@ import {
     EDIT_TECHNICIANS_REJECTED
 } from '../types/types-technicians';
 
-const URL = 'https://app-caldar-gm4.herokuapp.com/technician';
+const URL = 'https://app-caldar-gm4.herokuapp.com/api/technician';
 
 const getTechniciansFetching = () => ({
     type: GET_TECHNICIANS_FETCHING,

@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import TechniciansList from "./TechniciansList";
 import AddTechnician from "./AddTechnician";
-//import { v4 as uuidv4 } from "uuid";
 import styles from "../../layout/main/main.module.css";
 import { connect } from "react-redux";
 import {
@@ -45,7 +44,7 @@ class Technicians extends Component {
           {this.state.showForm ? (
           <AddTechnician
             addTechnician={this.props.addTechnicians}
-            updateTechnician={this.updateTechnicians}
+            updateTechnician={this.props.updateTechnicians}
             technicianEdit={this.state.technicianEdit}
             handleShowForm={this.handleShowForm}
           />

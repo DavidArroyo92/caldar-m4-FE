@@ -71,15 +71,7 @@ export class AddTechnician extends Component {
                 this.state.daily_capacity,
             );
         }
-        this.setState({
-            firstName:"",
-            lastName:"",
-            email:"",
-            typeIds: "",
-            skillsId:"",
-            hour_rate: "",
-            daily_capacity: "",
-        })
+        this.handleCleanForm();
     }
 
     onChange = (e) => this.setState({ [e.target.name]: e.target.value});
