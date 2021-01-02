@@ -21,12 +21,12 @@ class BoilerTypeList extends Component {
               <th>Id</th>
               <th>Skills Id</th>
               <th>Type</th>
-              <th>Description</th>
               <th>Stock</th>
+              <th>Description</th>
+              <th>Actions</th>
             </tr>
           </thead>
           <tbody>
-            {/* {this.props.boilerTypeValue?.map((boilerType, index) => ( */}
               {this.props.boilerTypes?.map((boilerType, index) => (
                 <BoilerTypeItem 
                   key={index} 
@@ -46,7 +46,6 @@ class BoilerTypeList extends Component {
 
 //PropTypes
 BoilerTypeList.propTypes = {
-  // boilerTypeValue: PropTypes.array.isRequired,
   boilerTypes: PropTypes.array.isRequired,
   deleteBoilerType: PropTypes.func.isRequired,
   editBoilerType: PropTypes.func.isRequired,

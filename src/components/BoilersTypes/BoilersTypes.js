@@ -50,7 +50,6 @@ class BoilerType extends Component {
           />
         ) : (
           <BoilerTypeList 
-            //boilerTypeValue={this.props.boilerTypeValue}
             boilerTypes={this.props.boilerTypes} 
             deleteBoilerType={this.props.deleteBoilerType}
             editBoilerType={this.editBoilerType}
@@ -79,8 +78,7 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 const mapStateToProps = (state) => ({
-  BoilerTypes: state.BoilerTypes.list,
+  boilerTypes: state.boilerTypes.list,
 });
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(BoilerType);

@@ -28,12 +28,6 @@ class AddBoilerType extends Component {
       this.props.handleShowForm();
     };
 
-    // componentDidUpdate(prevProps, prevState) {
-    //   if (this.props.boilerTypeEdit !== prevProps.boilerTypeEdit) {
-    //     this.handleEdit(this.props.boilerTypeEdit);
-    //   }
-    // }
-  
     handleEdit = (boilerTypeEdit) => {
       this.setState({
         _id: boilerTypeEdit._id,
@@ -109,14 +103,12 @@ class AddBoilerType extends Component {
             <input
               type="submit"
               value="Save"
-              // className="btn"
               className={styles.input}
             />
             :
             <input
               type="submit"
               value="Add"
-              className="btn"
               className={styles.input}
             />}
             <input
@@ -138,12 +130,6 @@ class AddBoilerType extends Component {
     handleShowForm: PropTypes.func.isRequired,
     boilerTypeEdit: PropTypes.object,
   };
-  
-  // const inputStyle = {
-  //   padding: "10px",
-  //   width: "20%",
-  //   margin: "5px",
-  //   borderRadius: "5px",
-  // };
+
   
   export default AddBoilerType;

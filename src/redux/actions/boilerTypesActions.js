@@ -14,7 +14,7 @@ import {
 } from '../types/types-boilerTypes'
 
 //DECLARATE CONST AND IMPORT API
-const URL= 'https://rr-caldar-gm4.herokuapp.com/BoilerType';
+const URL= 'https://app-caldar-gm4.herokuapp.com/api/boilerType';
 
 //ACTION TO GET BOILERTYPE DATA
 
