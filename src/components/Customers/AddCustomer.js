@@ -4,7 +4,7 @@ import styles from "../../layout/main/main.module.css";
 
 export class AddCustomer extends Component {
   state = {
-    id: "",
+    _id: "",
     customerType: "",
     email: "",
     buildingsIds: "",
@@ -19,7 +19,7 @@ export class AddCustomer extends Component {
 
   handleCleanForm = () => {
     this.setState({
-      id: "",
+      _id: "",
       typeId: "",
       maintainceRate: "",
       hourMaintainceCost: "",
@@ -30,7 +30,7 @@ export class AddCustomer extends Component {
 
   handleEdit = (customerEdit) => {
     this.setState({
-      id: customerEdit.id,
+      _id: customerEdit._id,
       customerType: customerEdit.customerType,
       email: customerEdit.email,
       buildingsIds: customerEdit.buildingsIds.toString(),
@@ -40,9 +40,9 @@ export class AddCustomer extends Component {
 
   onSubmit = (e) => {
     e.preventDefault();
-    if (this.state.id) {
+    if (this.state._id) {
       this.props.updateCustomer(
-        this.state.id,
+        this.state._id,
         this.state.customerType,
         this.state.email,
         this.state.buildingsIds,
@@ -56,13 +56,7 @@ export class AddCustomer extends Component {
         this.state.fiscalAddress
       );
     }
-    this.setState({
-      id: "",
-      customerType: "",
-      email: "",
-      buildingsIds: "",
-      fiscalAddress: "",
-    });
+    this.handleCleanForm();
   };
 
   onChange = (e) => this.setState({ [e.target.name]: e.target.value });
@@ -70,9 +64,9 @@ export class AddCustomer extends Component {
   render() {
     return (
       <div>
-        <h3>{this.state.id ? "Edit customer" : "Add new customer"}</h3>
+        <h3>{this.state._id ? "Edit customer" : "Add new customer"}</h3>
         <form onSubmit={this.onSubmit}>
-          <input type="hidden" name="id" value={this.state.id} />
+          <input type="hidden" name="_id" value={this.state._id} />
           <input
             type="text"
             name="customerType"

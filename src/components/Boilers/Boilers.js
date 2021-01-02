@@ -1,89 +1,41 @@
 import React, { Component } from "react";
 import BoilersList from "./BoilersList";
 import AddBoiler from "./AddBoiler";
-import { v4 as uuidv4 } from "uuid";
 import styles from "../../layout/main/main.module.css";
+import { connect } from "react-redux";
+import {
+  getBoilers as getBoilersActions,
+  delBoiler as delBoilerActions,
+  addBoiler as addBoilerActions,
+  editBoiler as updateBoilerActions,
+} from "../../redux/actions/boilersActions";
 
 class Boilers extends Component {
   state = {
-    boilers: [],
     boilerEdit: null,
     showForm: false,
   };
 
   componentDidMount() {
-    const dataBoilers = require("../../data/boilers.json");
-    this.setState({ boilers: dataBoilers });
+    this.props.getBoilers();
   }
 
   // Show form
   handleShowForm = () => {
     this.setState({
       showForm: !this.state.showForm,
-      boilerEdit: null
+      boilerEdit: null,
     });
     window.scrollTo(0, 0);
   };
 
   // Edit Boiler
   editBoiler = (boiler) => {
-    const boilerNew = boiler;
     this.setState({
-      boilerEdit: boilerNew,
+      boilerEdit: boiler,
       showForm: true,
     });
     window.scrollTo(0, 0);
-  };
-
-  // Update Boiler
-  updateBoiler = (
-    id,
-    typeId,
-    maintainceRate,
-    hourMaintainceCost,
-    hourEventualCost
-  ) => {
-    this.setState({
-      boilers: this.state.boilers.map((boiler) => {
-        if (boiler.id === id) {
-          boiler.typeId = typeId;
-          boiler.maintainceRate = maintainceRate;
-          boiler.hourMaintainceCost = hourMaintainceCost;
-          boiler.hourEventualCost = hourEventualCost;
-        }
-        return boiler;
-      }),
-      showForm: false,
-    });
-  };
-
-  // Delete Boiler
-  delBoiler = (id) => {
-    this.setState({
-      boilers: [...this.state.boilers.filter((boiler) => boiler.id !== id)],
-      showForm: false,
-    });
-  };
-
-  // Add Boiler
-  addBoiler = (
-    typeId,
-    maintainceRate,
-    hourMaintainceCost,
-    hourEventualCost
-  ) => {
-    const newBoiler = {
-      id: uuidv4(),
-      typeId,
-      maintainceRate,
-      hourMaintainceCost,
-      hourEventualCost,
-    };
-
-    this.setState({
-      boilers: [...this.state.boilers, newBoiler],
-      showForm: false,
-    });
   };
 
   render() {
@@ -91,15 +43,15 @@ class Boilers extends Component {
       <div className={styles.info}>
         {this.state.showForm ? (
           <AddBoiler
-            addBoiler={this.addBoiler}
-            updateBoiler={this.updateBoiler}
+            addBoiler={this.props.addBoiler}
+            updateBoiler={this.props.updateBoiler}
             boilerEdit={this.state.boilerEdit}
             handleShowForm={this.handleShowForm}
           />
         ) : (
           <BoilersList
-            boilers={this.state.boilers}
-            delBoiler={this.delBoiler}
+            boilers={this.props.boilers}
+            delBoiler={this.props.delBoiler}
             editBoiler={this.editBoiler}
             handleShowForm={this.handleShowForm}
             showForm={this.state.showForm}
@@ -110,4 +62,38 @@ class Boilers extends Component {
   }
 }
 
-export default Boilers;
+const mapDispatchToProps = (dispatch) => ({
+  getBoilers: () => dispatch(getBoilersActions()),
+  delBoiler: (_id) => dispatch(delBoilerActions(_id)),
+  addBoiler: (typeId, maintainceRate, hourMaintainceCost, hourEventualCost) =>
+    dispatch(
+      addBoilerActions(
+        typeId,
+        maintainceRate,
+        hourMaintainceCost,
+        hourEventualCost
+      )
+    ),
+  updateBoiler: (
+    _id,
+    typeId,
+    maintainceRate,
+    hourMaintainceCost,
+    hourEventualCost
+  ) =>
+    dispatch(
+      updateBoilerActions(
+        _id,
+        typeId,
+        maintainceRate,
+        hourMaintainceCost,
+        hourEventualCost
+      )
+    ),
+});
+
+const mapStateToProps = (state) => ({
+  boilers: state.boilers.list,
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Boilers);

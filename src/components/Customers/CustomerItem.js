@@ -3,17 +3,9 @@ import PropTypes from "prop-types";
 import styles from "../../layout/main/main.module.css";
 
 export class CustomerItem extends Component {
-  getStyle = () => {
-    return {
-      background: "#f5f5f5",
-      padding: "10px",
-      borderBottom: "1px #ccc dotted",
-    };
-  };
-
   render() {
     const {
-      id,
+      _id,
       customerType,
       email,
       buildingsIds,
@@ -21,14 +13,14 @@ export class CustomerItem extends Component {
     } = this.props.customer;
     return (
       <tr>
-        <td>{id}</td>
+        <td>{_id}</td>
         <td>{customerType}</td>
         <td>{email}</td>
-        <td>{buildingsIds.map((building) => building + " ")}</td>
+        <td>{buildingsIds}</td>
         <td>{fiscalAddress}</td>
         <td>
           <button
-            onClick={this.props.delCustomer.bind(this, id)}
+            onClick={this.props.delCustomer.bind(this, _id)}
             className={styles.btnStyle}
           >
             delete
