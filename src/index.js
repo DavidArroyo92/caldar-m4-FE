@@ -11,8 +11,6 @@ import "./index.css";
 
 const middleware = [thunk];
 
-const middleware = [thunk];
-
 const configureStore = () => {
   const enhancer = composeWithDevTools();
   return createStore(
