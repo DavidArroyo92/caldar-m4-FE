@@ -120,7 +120,6 @@ export const delBuilding = (_id) => (dispatch) =>{
         .then((response) => {
             dispatch(delBuildingFulfilled(_id));
         })
-        .then(() => dispatch(getBuildings()))
         .catch(() =>{
             dispatch(delBuildingRejected());
         });
