@@ -1,0 +1,73 @@
+[
+    {
+      "id": 1,
+      "typeId": 2,
+      "maintainceRate": "quarterly",
+      "hourMaintainceCost": "27.02",
+      "hourEventualCost": "31.58"
+    },
+    {
+      "id": 2,
+      "typeId": 1,
+      "maintainceRate": "monthly",
+      "hourMaintainceCost": "35.81",
+      "hourEventualCost": "22.97"
+    },
+    {
+      "id": 3,
+      "typeId": 1,
+      "maintainceRate": "monthly",
+      "hourMaintainceCost": "4.23",
+      "hourEventualCost": "39.54"
+    },
+    {
+      "id": 4,
+      "typeId": 1,
+      "maintainceRate": "yearly",
+      "hourMaintainceCost": "37.87",
+      "hourEventualCost": "42.90"
+    },
+    {
+      "id": 5,
+      "typeId": 1,
+      "maintainceRate": "yearly",
+      "hourMaintainceCost": "37.01",
+      "hourEventualCost": "12.62"
+    },
+    {
+      "id": 6,
+      "typeId": 3,
+      "maintainceRate": "monthly",
+      "hourMaintainceCost": "37.78",
+      "hourEventualCost": "7.44"
+    },
+    {
+      "id": 7,
+      "typeId": 3,
+      "maintainceRate": "quarterly",
+      "hourMaintainceCost": "28.18",
+      "hourEventualCost": "22.74"
+    },
+    {
+      "id": 8,
+      "typeId": 3,
+      "maintainceRate": "quarterly",
+      "hourMaintainceCost": "24.16",
+      "hourEventualCost": "34.51"
+    },
+    {
+      "id": 9,
+      "typeId": 2,
+      "maintainceRate": "monthly",
+      "hourMaintainceCost": "20.03",
+      "hourEventualCost": "37.23"
+    },
+    {
+      "id": 10,
+      "typeId": 2,
+      "maintainceRate": "yearly",
+      "hourMaintainceCost": "1.43",
+      "hourEventualCost": "48.41"
+    }
+  ]
+  
