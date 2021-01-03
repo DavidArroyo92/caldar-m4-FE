@@ -13,7 +13,7 @@ import {
     EDIT_APPOINTMENT_REJECTED
 } from '../types/types-appointments'
 
-const URL= 'https://app-caldar-gm4.herokuapp.com/appointment';
+const URL= 'https://app-caldar-gm4.herokuapp.com/api/appointment';
 
 
 const getAppointmentFetching = () => ({

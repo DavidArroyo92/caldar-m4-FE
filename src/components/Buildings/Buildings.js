@@ -4,7 +4,7 @@ function Buildings() {
     return (
         <div>
             <h2>
-                buildings
+                Buildings
             </h2>
         </div>
     )

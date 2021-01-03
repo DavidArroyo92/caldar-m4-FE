@@ -23,7 +23,7 @@ class AppointmentsList extends Component {
                 <th>BuildingId</th>
                 <th>Start Time</th>
                 <th>End Time</th>
-                <th>Options</th>
+                <th>Actions</th>
               </tr>
             </thead>
         <tbody>
