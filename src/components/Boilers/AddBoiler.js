@@ -4,43 +4,45 @@ import styles from "../../layout/main/main.module.css";
 
 export class AddBoiler extends Component {
   state = {
-    id: "",
+    _id: "",
     typeId: "",
     maintainceRate: "",
     hourMaintainceCost: "",
     hourEventualCost: "",
-  };
+};
 
-  componentDidMount(){
-      if (this.props.boilerEdit) {
+  componentDidMount() {
+    if (this.props.boilerEdit) {
       this.handleEdit(this.props.boilerEdit);
     }
   }
+
   handleCleanForm = () => {
     this.setState({
-      id: "",
+      _id: "",
       typeId: "",
       maintainceRate: "",
       hourMaintainceCost: "",
       hourEventualCost: "",
     });
     this.props.handleShowForm();
-  }
+  };
 
   handleEdit = (boilerEdit) => {
     this.setState({
-      id: boilerEdit.id,
+      _id: boilerEdit._id,
       typeId: boilerEdit.typeId,
       maintainceRate: boilerEdit.maintainceRate,
       hourMaintainceCost: boilerEdit.hourMaintainceCost,
       hourEventualCost: boilerEdit.hourEventualCost,
     });
   };
+
   onSubmit = (e) => {
     e.preventDefault();
-    if (this.state.id) {
+    if (this.state._id) {
       this.props.updateBoiler(
-        this.state.id,
+        this.state._id,
         this.state.typeId,
         this.state.maintainceRate,
         this.state.hourMaintainceCost,
@@ -54,13 +56,7 @@ export class AddBoiler extends Component {
         this.state.hourEventualCost
       );
     }
-    this.setState({
-      id: "",
-      typeId: "",
-      maintainceRate: "",
-      hourMaintainceCost: "",
-      hourEventualCost: "",
-    });
+    this.handleCleanForm();
   };
 
   onChange = (e) => this.setState({ [e.target.name]: e.target.value });
@@ -68,9 +64,9 @@ export class AddBoiler extends Component {
   render() {
     return (
       <div>
-        <h3>{this.state.id ? "Edit boiler" : "Add new boiler"}</h3>
+        <h3>{this.state._id ? "Edit boiler" : "Add new boiler"}</h3>
         <form onSubmit={this.onSubmit}>
-          <input type="hidden" name="id" value={this.state.id} />
+        <input type="hidden" name="_id" value={this.state._id} />
           <input
             type="text"
             name="typeId"
@@ -111,7 +107,6 @@ export class AddBoiler extends Component {
             className={styles.input}
             onClick={this.handleCleanForm}
           />
-
         </form>
       </div>
     );

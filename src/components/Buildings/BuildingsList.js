@@ -3,7 +3,7 @@ import BuildingItem from './BuildingItem';
 import styles from "../../layout/main/main.module.css";
 import PropTypes from 'prop-types';
 
-class BuildingsList extends Component{
+class Buildings extends Component{
 
 
   render(){
@@ -12,25 +12,28 @@ class BuildingsList extends Component{
           <h1 className={styles.title}>
             Buildings{" "}
             <input
-            type="button"
-            value="+"
-            className={styles.btnStyleNew}
-            onClick={() =>this.props.handleShowForm()}
+              type="button"
+              value="+"
+              className={styles.btnStyleNew}
+              onClick={() =>this.props.handleShowForm()}
             />
           </h1>
           <table className={styles.table}>
+          <thead>
               <tr>
                 <th>Id</th>
+                <th>BoilersId</th>
                 <th>Business Name</th>
                 <th>E-mail</th>
                 <th>Phone</th>
                 <th>Address</th>
                 <th>Actions</th>
               </tr>
+            </thead>
           <tbody>
-        {this.props.buildings.map((building) => (
+        {this.props.buildings?.map((building, index) => (
           <BuildingItem
-            key={building.id}
+            key={index}
             building={building}
             delBuilding={this.props.delBuilding}
             editBuilding={this.props.editBuilding}
@@ -43,8 +46,9 @@ class BuildingsList extends Component{
   }
 }
 
+
 //proptypes
-BuildingsList.propTypes = {
+Buildings.propTypes = {
   buildings: PropTypes.array.isRequired,
   editBuilding: PropTypes.func.isRequired,
   delBuilding: PropTypes.func.isRequired,
@@ -52,4 +56,4 @@ BuildingsList.propTypes = {
   showForm: PropTypes.bool.isRequired,
 };
 
-export default BuildingsList;
+export default Buildings;
