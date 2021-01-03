@@ -1,12 +1,13 @@
+
 import React from 'react'
 import styles from './main.module.css'
-import Building from './components/Buildings'
+import Technicians from './components/Technicians';
 
 function Main() {
     return (
         <div className={styles.info}>
             <p>
-            {Building}
+            {Technicians}
             </p>
         </div>
     )
