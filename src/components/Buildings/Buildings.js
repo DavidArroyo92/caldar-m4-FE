@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
 import AddBuilding from './AddBuilding';
 import BuildingsList from './BuildingsList';
+<<<<<<< HEAD
+import { v4 as uuidv4 } from 'uuid';
+=======
 // import { v4 as uuidv4 } from 'uuid';
+>>>>>>> a9e03dbe8f4b6abc328160a5f5144d4e8a270b12
 import styles from "../../layout/main/main.module.css";
 import {
     getBuildings as getBuildingActions,

@@ -1,3 +1,23 @@
+<<<<<<< HEAD
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { composeWithDevTools } from 'redux-devtools-extension';
+import { createStore, applyMiddleware, compose } from 'redux';
+import thunk from 'redux-thunk';
+import { Provider } from 'react-redux';
+import App from './App';
+import reportWebVitals from './reportWebVitals';
+import rootReducer from './redux/reducers/rootReducer';
+import './index.css';
+
+const middleware = [thunk];
+const configureStore = () => {
+  return createStore(
+    rootReducer,
+    compose(applyMiddleware(...middleware))
+  );
+};
+=======
 import React from "react";
 import ReactDOM from "react-dom";
 import { composeWithDevTools } from "redux-devtools-extension";
@@ -19,6 +39,7 @@ const configureStore = () => {
   );
 };
 
+>>>>>>> a9e03dbe8f4b6abc328160a5f5144d4e8a270b12
 const store = configureStore( window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 
 ReactDOM.render(
