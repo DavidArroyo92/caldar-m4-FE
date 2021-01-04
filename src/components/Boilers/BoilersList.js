@@ -7,24 +7,24 @@ class BoilersList extends Component {
   render() {
     return (
       <div>
-        <h1>
-          Boilers{" "}
-          <input
-            type="button"
-            value="New"
-            className={styles.input}
+        <h1>Boilers{" "}
+          <button
+            title="Add"
+            className={styles.btnStyle}
             onClick={() => this.props.handleShowForm()}
-          />
+          >
+            <i className="fas fa-plus"></i>
+          </button>
         </h1>
         <table className={styles.table}>
           <thead>
-            <tr>
-              <th>id</th>
+            <tr className={styles.listHead}>
+              <th>Id</th>
               <th>Type</th>
               <th>Maintaince</th>
               <th>Maintaince Cost</th>
               <th>Eventual Cost</th>
-              <th>Actions</th>
+              <th>Options</th>
             </tr>
           </thead>
           <tbody>

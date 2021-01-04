@@ -8,28 +8,29 @@ class BoilerTypeList extends Component {
     return (
       <div>
         <h1>BoilerTypes{" "}
-          <input
-              type="button"
-              value="New"
-              className={styles.input}
-              onClick={() => this.props.handleShowForm()}
-            />
+          <button
+            title="Add"
+            className={styles.btnStyle}
+            onClick={() => this.props.handleShowForm()}
+          >
+            <i className="fas fa-plus"></i>
+          </button>
         </h1>
         <table className={styles.table}>
           <thead>
-            <tr>
+            <tr className={styles.listHead}>
               <th>Id</th>
               <th>Skills Id</th>
               <th>Type</th>
               <th>Stock</th>
               <th>Description</th>
-              <th>Actions</th>
+              <th>Options</th>
             </tr>
           </thead>
           <tbody>
               {this.props.boilerTypes?.map((boilerType, index) => (
-                <BoilerTypeItem 
-                  key={index} 
+                <BoilerTypeItem
+                  key={index}
                   boilerType={boilerType}
                   deleteBoilerType={this.props.deleteBoilerType}
                   editBoilerType={this.props.editBoilerType}

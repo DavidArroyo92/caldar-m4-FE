@@ -97,26 +97,32 @@ class AddAppointment extends Component {
                             value={this.state.end_timestamp}
                             onChange={this.onChange}
                         />
-
-                         {this.state._id ?
-                        <input
-                            type="submit"
-                            value="Save"
-                            className={styles.input}
-                        />
-                        :
-                        <input
-                        type="submit"
-                        value="Add"
-                        className={styles.input}
-                    />}
-
-                        <input
-                        type="button"
-                        value="Cancel"
-                        className={styles.input}
-                        onClick={this.handleCleanForm}
-                        />
+                        <div  className={styles.formsBtn}>
+                            {this.state._id ?
+                                <button
+                                    title="Save"
+                                    className={styles.btnStyle}
+                                >
+                                    <i className="far fa-save"></i>
+                                </button>
+                                :
+                                <button
+                                    title="Add"
+                                    className={styles.btnStyle}
+                                >
+                                        <i className="fas fa-plus"></i>
+                                </button>
+                            }
+                            <div>
+                                <button
+                                    title="Cancel"
+                                    className={styles.btnStyle}
+                                    onClick={this.handleCleanForm}
+                                >
+                                        <i className="fas fa-ban"></i>
+                                </button>
+                            </div>
+                        </div>
                 </form>
             </div >
         )

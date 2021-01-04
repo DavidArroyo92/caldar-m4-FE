@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom';
 import styles from './navbar.module.css';
 
 function Navbar() {
+    
     return (
             <nav className={styles.navbarContainer}>
                 <div className={styles.logo}>
@@ -11,34 +12,34 @@ function Navbar() {
                     </h3>
                 </div>
                 <ul className={styles.navbarLinks}>
-                    <Link to="/Appointments" >
+                    <Link to="/appointments" >
                         <li>
-                            Appointments
+                            <i className="far fa-calendar-plus"></i> Appointments
                         </li>
                     </Link>
-                    <Link to="/Boilers">
+                    <Link to="/boilers">
                         <li>
-                            Boilers
+                            <i className="fas fa-cog"></i> Boilers
                         </li>
                     </Link>
-                    <Link to="/BoilersTypes">
+                    <Link to="/boilersTypes">
                         <li>
-                            BoilersTypes
+                            <i className="fas fa-cogs"></i> BoilersTypes
                         </li>
                     </Link>
-                    <Link to="/Buildings">
+                    <Link to="/buildings">
                         <li>
-                            Buildings
+                            <i className="far fa-building"></i> Buildings
                         </li>
                     </Link>
-                    <Link to="/Customers">
+                    <Link to="/customers">
                         <li>
-                            Customers
+                            <i className="fas fa-user-friends"></i> Customers
                         </li>
                     </Link>
-                    <Link to="/Technicians">
+                    <Link to="/technicians">
                         <li>
-                            Technicians
+                            <i className="fas fa-hard-hat"></i> Technicians
                         </li>
                     </Link>
                 </ul>

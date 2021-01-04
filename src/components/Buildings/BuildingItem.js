@@ -5,17 +5,17 @@ import styles from '../../layout/main/main.module.css';
 export class BuildingItem extends Component {
 
     render() {
-        const  
+        const
             {
-                _id, 
+                _id,
                 boilersId,
-                businessName, 
-                email, 
-                phone, 
+                businessName,
+                email,
+                phone,
                 adress,
             } = this.props.building;
         return (
-                   <tr>
+            <tr className={styles.table}>
                        <td>
                             {_id}
                         </td>
@@ -26,24 +26,28 @@ export class BuildingItem extends Component {
                             {businessName}
                         </td>
                         <td>
-                            {email} 
+                            {email}
                         </td>
                         <td>
-                            {phone} 
+                            {phone}
                         </td>
                         <td>
                             {adress}
                         </td>
                         <td>
-                            <button 
-                                onClick={this.props.delBuilding.bind(this, _id)} 
-                                className={styles.btnStyle}>
-                                    x
-                            </button>
-                            <button 
+                            <button
+                                title="Edit"
                                 onClick={this.props.editBuilding.bind(this, this.props.building)}
-                                className={styles.btnStyle}>
-                                    Edit
+                                className={styles.btnStyle}
+                            >
+                                <i className="far fa-edit"></i>
+                            </button>
+                            <button
+                                title="Delete"
+                                className={styles.btnStyle}
+                                onClick={this.props.delBuilding.bind(this, _id)}
+                            >
+                                <i className="far fa-trash-alt"></i>
                             </button>
                         </td>
                    </tr>

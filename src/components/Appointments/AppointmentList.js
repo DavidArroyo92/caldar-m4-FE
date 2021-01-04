@@ -8,22 +8,23 @@ class AppointmentsList extends Component {
     return (
       <div>
         <h1>Appointments{" "}
-          <input
-              type="button"
-              value="New"
-              className={styles.input}
-              onClick={() => this.props.handleShowForm()}
-            />
+        <button
+          title="Add"
+          className={styles.btnStyle}
+          onClick={() => this.props.handleShowForm()}
+        >
+          <i className="fas fa-plus"></i>
+        </button>
         </h1>
         <table className={styles.table}>
           <thead>
-              <tr>
+              <tr className={styles.listHead}>
                 <th>Id</th>
                 <th>BoilerId</th>
                 <th>BuildingId</th>
                 <th>Start Time</th>
                 <th>End Time</th>
-                <th>Actions</th>
+                <th>Options</th>
               </tr>
             </thead>
         <tbody>

@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { composeWithDevTools } from "redux-devtools-extension";
+//import { composeWithDevTools } from "redux-devtools-extension";
 import { createStore, applyMiddleware, compose } from "redux";
 import thunk from "redux-thunk";
 import { Provider } from "react-redux";
@@ -11,10 +11,10 @@ import "./index.css";
 
 const middleware = [thunk];
 const configureStore = () => {
-  const enhancer = composeWithDevTools();
+  //const enhancer = composeWithDevTools();
   return createStore(
     rootReducer,
-    enhancer,
+    //enhancer,
     compose(applyMiddleware(...middleware))
   );
 };

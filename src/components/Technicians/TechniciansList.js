@@ -7,19 +7,19 @@ class TechniciansList extends Component {
   render() {
     return (
       <div>
-        <h1>
-          Technicians{" "}
-          <input
-            type="button"
-            value="New"
-            className={styles.input}
-            onClick={() => this.props.handleShowForm()}
-          />
+        <h1>Technicians{" "}
+            <button
+              title="Add"
+              className={styles.btnStyle}
+              onClick={() => this.props.handleShowForm()}
+            >
+              <i className="fas fa-plus"></i>
+            </button>
         </h1>
         <table className={styles.table}>
           <thead>
-            <tr>
-              <th>id</th>
+            <tr className={styles.listHead}>
+              <th>Id</th>
               <th>First Name</th>
               <th>Last Name</th>
               <th>Email</th>
@@ -27,6 +27,7 @@ class TechniciansList extends Component {
               <th>Skills Id</th>
               <th>Hour Rate</th>
               <th>Daily Capacity</th>
+              <th>Options</th>
             </tr>
           </thead>
           <tbody>

@@ -37,7 +37,6 @@ class AddBoilerType extends Component {
         description: boilerTypeEdit.description,
       });
     };
-  
     onSubmit = (e) => {
       e.preventDefault();
       if (this.state._id){
@@ -58,13 +57,12 @@ class AddBoilerType extends Component {
       }
       this.handleCleanForm();
     };
-  
     onChange = (e) => this.setState({ [e.target.name]: e.target.value });
 
     render() {
       return (
         <div>
-          <h3>{this.state._id ? "Edit boiler type" : "Add new boiler type"}</h3>
+          <h1>{this.state._id ? "Edit boiler type" : "Add new boiler type"}</h1>
           <form onSubmit={this.onSubmit}>
             <input type="hidden" name="_id" value={this.state._id} />
             <input
@@ -99,30 +97,37 @@ class AddBoilerType extends Component {
               value={this.state.description}
               onChange={this.onChange}
             />
-            {this.state._id ?
-            <input
-              type="submit"
-              value="Save"
-              className={styles.input}
-            />
-            :
-            <input
-              type="submit"
-              value="Add"
-              className={styles.input}
-            />}
-            <input
-              type="button"
-              value="Cancel"
-              className={styles.input}
-              onClick={this.handleCleanForm}
-            />
+            <div  className={styles.formsBtn}>
+              {this.state._id ?
+                <button
+                    title="Save"
+                    className={styles.btnStyle}
+                >
+                    <i className="far fa-save"></i>
+                </button>
+                :
+                <button
+                    title="Add"
+                    className={styles.btnStyle}
+                >
+                        <i className="fas fa-plus"></i>
+                </button>
+              }
+              <div>
+                <button
+                    title="Cancel"
+                    className={styles.btnStyle}
+                    onClick={this.handleCleanForm}
+                >
+                        <i className="fas fa-ban"></i>
+                </button>
+              </div>
+            </div>
           </form>
         </div>
       );
     }
   }
-  
   // PropTypes
   AddBoilerType.propTypes = {
     addBoilerType: PropTypes.func.isRequired,
@@ -130,6 +135,4 @@ class AddBoilerType extends Component {
     handleShowForm: PropTypes.func.isRequired,
     boilerTypeEdit: PropTypes.object,
   };
-
-  
   export default AddBoilerType;
