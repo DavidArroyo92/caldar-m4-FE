@@ -3,6 +3,7 @@ import BuildingItem from './BuildingItem';
 import styles from "../../layout/main/main.module.css";
 import PropTypes from 'prop-types';
 
+
 class Buildings extends Component{
 
 
@@ -15,7 +16,7 @@ class Buildings extends Component{
               type="button"
               value="+"
               className={styles.btnStyleNew}
-              onClick={() =>this.props.handleShowForm()}
+              onClick={() =>showAddModal()}
             />
           </h1>
           <table className={styles.table}>
