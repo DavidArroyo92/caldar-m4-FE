@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import BoilerItem from "./BoilerItem";
+import BoilerTypeItem from "./BoilerTypeItem";
 import styles from "../../layout/main/main.module.css";
 
-class BoilersList extends Component {
+class BoilerTypeList extends Component {
   render() {
     return (
       <div>
-        <h1>Boilers{" "}
+        <h1>BoilerTypes{" "}
           <button
             title="Add"
             className={styles.btnStyle}
@@ -20,22 +20,24 @@ class BoilersList extends Component {
           <thead>
             <tr className={styles.listHead}>
               <th>Id</th>
+              <th>Skills Id</th>
               <th>Type</th>
-              <th>Maintaince</th>
-              <th>Maintaince Cost</th>
-              <th>Eventual Cost</th>
+              <th>Stock</th>
+              <th>Description</th>
               <th>Options</th>
             </tr>
           </thead>
           <tbody>
-            {this.props.boilers?.map((boiler) => (
-              <BoilerItem
-                key={boiler._id}
-                boiler={boiler}
-                editBoiler={this.props.editBoiler}
-                delBoiler={this.props.delBoiler}
-              />
-            ))}
+              {this.props.boilerTypes?.map((boilerType, index) => (
+                <BoilerTypeItem
+                  key={index}
+                  boilerType={boilerType}
+                  deleteBoilerType={this.props.deleteBoilerType}
+                  editBoilerType={this.props.editBoilerType}
+                />
+                )
+              )
+            }
           </tbody>
         </table>
       </div>
@@ -43,13 +45,14 @@ class BoilersList extends Component {
   }
 }
 
-// PropTypes
-BoilersList.propTypes = {
-  boilers: PropTypes.array.isRequired,
-  delBoiler: PropTypes.func.isRequired,
-  editBoiler: PropTypes.func.isRequired,
+//PropTypes
+BoilerTypeList.propTypes = {
+  boilerTypes: PropTypes.array.isRequired,
+  deleteBoilerType: PropTypes.func.isRequired,
+  editBoilerType: PropTypes.func.isRequired,
   handleShowForm: PropTypes.func.isRequired,
   showForm: PropTypes.bool.isRequired,
-};
+}
 
-export default BoilersList;
+export default BoilerTypeList;
+
