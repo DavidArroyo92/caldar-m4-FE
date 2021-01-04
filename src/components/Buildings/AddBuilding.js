@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types';
-import styles from '../../layout/main/main.module.css'
+import styles from '../../layout/main/main.module.css';
+import {Form, Field} from 'react-final-form'
+
 
  export class AddBuilding extends Component {
      state = {
@@ -80,61 +82,86 @@ import styles from '../../layout/main/main.module.css'
                 <h3>
                 {this.state._id ? "Edit building" : "Add new Building"}
                 </h3>
-                <form onSubmit ={this.onSubmit} >
-                    <input type="hidden" name="_id" value={this.state._id} />
-                    <input
-                    type="text"
-                    name="boilersId"
-                    className={styles.input}
-                    placeholder="Add Boiler ID"
-                    value={this.state.boilersId}
-                    onChange={this.onChange}
-                    />
-                    <input
-                    type="text"
-                    name="businessName"
-                    className={styles.input}
-                    placeholder="Add Business Name"
-                    value={this.state.businessName}
-                    onChange={this.onChange}
-                    />
-                    <input
-                    type="text"
-                    name="email"
-                    className={styles.input}
-                    placeholder="Add e-mail"
-                    value={this.state.email}
-                    onChange={this.onChange}
-                    />
-                    <input
-                    type="text"
-                    name="adress"
-                    className={styles.input}
-                    placeholder="Add adress..."
-                    value={this.state.adress}
-                    onChange={this.onChange}
-                    />
-                    <input
-                    type="text"
-                    name="phone"
-                    className={styles.input}
-                    placeholder="Add phone..."
-                    value={this.state.phone}
-                    onChange={this.onChange}
-                    />
+                <Form
+      onSubmit={onSubmit => {
+        console.log(onSubmit);
+      }}
+    >
+      {({ onSubmit }) => (
+        <form onSubmit={onSubmit}>
+          <Field name="_id">
+            {({ input }) => (
+              <input
+                type="hidden"
+                {...input}
+              />
+            )}
+            </Field>
+          <Field name="BoilersId">
+            {({ input }) => (
+              <input
+                placeholder="Add boiler ID"
+                type="text"
+                className={styles.input}
+                {...input}
+              />
+            )}
+          </Field>
+          <Field name="Business Name">
+            {({ input }) => (
+              <input
+                placeholder="Business Name"
+                type="text"
+                className={styles.input}
+                {...input}
+              />
+            )}
+          </Field>
+          <Field name="email">
+            {({ input }) => (
+              <input
+                placeholder="Email"
+                type="email"
+                className={styles.input}
+                {...input}
+              />
+            )}
+          </Field>
+          <Field name="adress">
+            {({ input }) => (
+              <input
+                placeholder="address"
+                type="text"
+                className={styles.input}
+                {...input}
+              />
+            )}
+          </Field>
+          <Field name="phone">
+            {({ input }) => (
+              <input
+                placeholder="Phone"
+                type="text"
+                className={styles.input}
+                {...input}
+              />
+            )}
+          </Field>
+          <button 
+            type="submit"
+            className={styles.input}
+          >Submit
+          </button>
 
-                    <input 
-                    type="button"
-                    value= "Cancel"
-                    className={styles.input}
-                    onClick={this.handleCleanForm}
-                    />
-                    <input
-                    type="submit"
-                    value="submit"
-                    className={styles.input}
-                    />
-                </form>
+          <button 
+          type="submit"
+          className={styles.input}
+          >Cancel</button>
+        </form>
+      )}
+    </Form>
+  );
+                
             </div>
         );
     }
