@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types';
 import styles from '../../layout/main/main.module.css';
-import {Form, Field} from 'react-final-form'
-
+import {Form, Field} from 'react-final-form';
+import {addBuilding as addBuildingActions,} from '../../redux/actions/buildingsActions';
+import {closeModal as closeModalActions,} from '../../redux/actions/modalActions'
+import { connect} from 'react-redux';
 
  export class AddBuilding extends Component {
      state = {
@@ -63,14 +65,7 @@ import {Form, Field} from 'react-final-form'
             this.state.adress
         );
       }
-        //  this.setState({
-        //     id: "",
-        //      boilerId:"",
-        //      businessName:"",
-        //      email:"",
-        //      phone:"",
-        //      adress:"",
-        //     });
+        
       this.handleCleanForm();
     };
 
@@ -83,89 +78,95 @@ import {Form, Field} from 'react-final-form'
                 {this.state._id ? "Edit building" : "Add new Building"}
                 </h3>
                 <Form
-      onSubmit={onSubmit => {
-        console.log(onSubmit);
-      }}
-    >
-      {({ onSubmit }) => (
-        <form onSubmit={onSubmit}>
-          <Field name="_id">
-            {({ input }) => (
-              <input
-                type="hidden"
-                {...input}
-              />
-            )}
-            </Field>
-          <Field name="BoilersId">
-            {({ input }) => (
-              <input
-                placeholder="Add boiler ID"
-                type="text"
-                className={styles.input}
-                {...input}
-              />
-            )}
-          </Field>
-          <Field name="Business Name">
-            {({ input }) => (
-              <input
-                placeholder="Business Name"
-                type="text"
-                className={styles.input}
-                {...input}
-              />
-            )}
-          </Field>
-          <Field name="email">
-            {({ input }) => (
-              <input
-                placeholder="Email"
-                type="email"
-                className={styles.input}
-                {...input}
-              />
-            )}
-          </Field>
-          <Field name="adress">
-            {({ input }) => (
-              <input
-                placeholder="address"
-                type="text"
-                className={styles.input}
-                {...input}
-              />
-            )}
-          </Field>
-          <Field name="phone">
-            {({ input }) => (
-              <input
-                placeholder="Phone"
-                type="text"
-                className={styles.input}
-                {...input}
-              />
-            )}
-          </Field>
-          <button 
-            type="submit"
-            className={styles.input}
-          >Submit
-          </button>
+                      onSubmit={onSubmit => {
+                        console.log(onSubmit);
+                      }}
+                    >
+                      {({ onSubmit }) => (
+                        <form onSubmit={onSubmit}>
+                          <Field name="_id">
+                            {({ input }) => (
+                              <input
+                                type="hidden"
+                                {...input}
+                              />
+                            )}
+                            </Field>
+                          <Field name="BoilersId">
+                            {({ input }) => (
+                              <input
+                                placeholder="Add boiler ID"
+                                type="text"
+                                className={styles.input}
+                                {...input}
+                              />
+                            )}
+                          </Field>
+                          <Field name="Business Name">
+                            {({ input }) => (
+                              <input
+                                placeholder="Business Name"
+                                type="text"
+                                className={styles.input}
+                                {...input}
+                              />
+                            )}
+                          </Field>
+                          <Field name="email">
+                            {({ input }) => (
+                              <input
+                                placeholder="Email"
+                                type="email"
+                                className={styles.input}
+                                {...input}
+                              />
+                            )}
+                          </Field>
+                          <Field name="adress">
+                            {({ input }) => (
+                              <input
+                                placeholder="address"
+                                type="text"
+                                className={styles.input}
+                                {...input}
+                              />
+                            )}
+                          </Field>
+                          <Field name="phone">
+                            {({ input }) => (
+                              <input
+                                placeholder="Phone"
+                                type="text"
+                                className={styles.input}
+                                {...input}
+                              />
+                            )}
+                          </Field>
+                          <button 
+                            type="submit"
+                            className={styles.input}
+                          >Submit
+                          </button>
 
-          <button 
-          type="submit"
-          className={styles.input}
-          >Cancel</button>
-        </form>
-      )}
-    </Form>
-  );
-                
+                          <button 
+                          type="submit"
+                          className={styles.input}
+                          >Cancel</button>
+                        </form>
+                      )}
+                  </Form>
+                );
             </div>
         );
     }
 }
+const mapDispatchToProps = (dispatch) =>({
+  addBuilding: (boilersId, businessName,email,phone,adress) =>
+    dispatch(
+      addBuildingActions(boilersId, businessName,email,phone,adress )
+    ),
+    closeModal: () => dispatch(closeModalActions()),
+});
 
 //proptypes
 AddBuilding.propTypes = {
@@ -175,4 +176,4 @@ AddBuilding.propTypes = {
    buildingEdit: PropTypes.object,
   };
 
-export default AddBuilding 
+export default connect(null, mapDispatchToProps)(AddBuilding) 
