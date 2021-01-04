@@ -73,8 +73,8 @@ const mapStateToProps = (state) =>{
 
 const mapDispatchToProps = (dispatch) =>{
     return {
-        closeModal: CloseModalAction
-    }, dispatch);
+        showModal: () =>dispatch(showModalAction()),
+    }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Modal);  

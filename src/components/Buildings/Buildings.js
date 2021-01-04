@@ -32,13 +32,13 @@ class Buildings extends Component {
   editBuilding = (building) => {
     this.setState({
       buildingEdit: building,
-      showForm: true,
+      showModal: true,
     });
     window.scrollTo(0, 0);
   };
 
   //Show add Modal
-  const showAddModal = () =>{
+  showAddModal = () =>{
     showModal(modalTypes.ADD_BUILDING);
   };
 
