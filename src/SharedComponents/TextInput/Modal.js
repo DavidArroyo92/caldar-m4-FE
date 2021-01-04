@@ -2,8 +2,8 @@ import React, { useState} from 'react';
 import MaterialModal from '@material-ui/core/Modal';
 import {makeStyles} from '@material-ui/core/styles';
 import {connect } from 'react-redux';
-import { closeModal as CloseModalAction} from '../../redux/actions/modalActions';
 import modalTypes from '../../redux/types/types-modals';
+import { showModal as showModalAction } from '../../redux/actions/modalActions';
 
 //Import Components
 import AddBuilding from '../../components/Buildings/AddBuilding';
@@ -63,7 +63,7 @@ const Modal = ({
     )
 };
 
-const mapStateToProps = (state) =>{
+const mapStateToProps = state =>{
     return {
         show: state.modal.show,
         modalType: state.modal.modalType,

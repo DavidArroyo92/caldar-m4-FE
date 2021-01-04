@@ -16,7 +16,7 @@ class Buildings extends Component{
               type="button"
               value="+"
               className={styles.btnStyleNew}
-              onClick={() =>showAddModal()}
+              onClick={() =>this.props.showAddModal()}
             />
           </h1>
           <table className={styles.table}>
@@ -54,6 +54,7 @@ Buildings.propTypes = {
   editBuilding: PropTypes.func.isRequired,
   delBuilding: PropTypes.func.isRequired,
   handleShowForm: PropTypes.func.isRequired,
+  showAddModal: PropTypes.func.isRequired,
   showForm: PropTypes.bool.isRequired,
 };
 

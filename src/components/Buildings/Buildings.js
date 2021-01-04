@@ -9,7 +9,10 @@ import {
     delBuilding as delBuildingActions,
     editBuilding as updateBuildingActions 
 } from '../../redux/actions/buildingsActions';
+
 import { connect} from 'react-redux';
+import { showModal, showModal as showModalAction } from '../../redux/actions/modalActions'
+import modalTypes, {} from '../../redux/types/types-modals.js'
 
 
 //Set Building Object
@@ -19,7 +22,7 @@ class Buildings extends Component {
   state = {
     // buildings: [],
     buildingEdit: null,
-    showModal,
+    showModal: false,
   };
 
 
@@ -59,6 +62,7 @@ class Buildings extends Component {
               editBuilding={this.editBuilding}
               handleShowForm={this.handleShowForm}
               showForm={this.state.showForm}
+              showAddModal={this.showAddModal}
             />
           
         </div>
