@@ -83,7 +83,7 @@ class AddBoilerType extends Component {
 
   const validateType = value => /^([1-4])/i.test(value) ? undefined: ' Invalid Type';
 
-  const validateStock = value => /^([2-9][0-9]|[1-9][0-9]{2}|100)$/i.test(value) ? undefined: ' Invalid Stock';
+  const validateStock = value => /^([1-9]{1,2}|100)$/i.test(value) ? undefined: ' Invalid Stock';
   
   const composeValidator =  (...validators) => value => validators.reduce((error, validator) => error  || validator(value), undefined);
     
