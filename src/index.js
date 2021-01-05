@@ -11,15 +11,8 @@ import "./index.css";
 
 const middleware = [thunk];
 const configureStore = () => {
-<<<<<<< HEAD
   return createStore(
     rootReducer,
-=======
-  //const enhancer = composeWithDevTools();
-  return createStore(
-    rootReducer,
-    //enhancer,
->>>>>>> 1e0479054c852ece8f4ae7b45064a01e82080f64
     compose(applyMiddleware(...middleware))
   );
 };

@@ -11,7 +11,7 @@ class TechniciansList extends Component {
             <button
               title="Add"
               className={styles.btnStyle}
-              onClick={() => this.props.handleShowForm()}
+              onClick={() => this.props.showAddModal()}
             >
               <i className="fas fa-plus"></i>
             </button>
@@ -51,8 +51,7 @@ TechniciansList.propTypes = {
     technicians: PropTypes.array.isRequired,
     delTechnician: PropTypes.func.isRequired,
     editTechnician: PropTypes.func.isRequired,
-    handleShowForm: PropTypes.func.isRequired,
-    showForm: PropTypes.bool.isRequired,
+    showAddModal: PropTypes.func.isRequired,
 }
 
 export default TechniciansList;
