@@ -1,5 +1,6 @@
 import React from 'react';
-import styles from './textInput.module.css';
+//import styles from './textInput.module.css';
+import styles from "../../layout/main/main.module.css";
 
 const TextInput = ({
     input,
@@ -9,7 +10,7 @@ const TextInput = ({
 }) => (
     <>
     <label className={styles.textInpuLabel}>{label}</label>
-    <input className={styles.textInput} {...input} type="text" placeholder={placeholder}/>
+    <input className={styles.input} {...input} type="text" placeholder={placeholder}/>
     { meta.error && meta.touched && <div className={styles.error}>{meta.error}</div>}
     </>
 );

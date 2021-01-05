@@ -1,131 +1,128 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import styles from "../../layout/main/main.module.css";
-
+import { Form, Field } from "react-final-form";
+import TextInput from "../../SharedComponents/TextInput/TextInput";
 export class AddBoiler extends Component {
-  state = {
-    _id: "",
-    typeId: "",
-    maintainceRate: "",
-    hourMaintainceCost: "",
-    hourEventualCost: "",
-};
-
-  componentDidMount() {
-    if (this.props.boilerEdit) {
-      this.handleEdit(this.props.boilerEdit);
-    }
-  }
-
   handleCleanForm = () => {
-    this.setState({
-      _id: "",
-      typeId: "",
-      maintainceRate: "",
-      hourMaintainceCost: "",
-      hourEventualCost: "",
-    });
     this.props.handleShowForm();
   };
 
-  handleEdit = (boilerEdit) => {
-    this.setState({
-      _id: boilerEdit._id,
-      typeId: boilerEdit.typeId,
-      maintainceRate: boilerEdit.maintainceRate,
-      hourMaintainceCost: boilerEdit.hourMaintainceCost,
-      hourEventualCost: boilerEdit.hourEventualCost,
-    });
-  };
-
-  onSubmit = (e) => {
-    e.preventDefault();
-    if (this.state._id) {
+  onSubmit = (values) => {
+    if (values._id) {
       this.props.updateBoiler(
-        this.state._id,
-        this.state.typeId,
-        this.state.maintainceRate,
-        this.state.hourMaintainceCost,
-        this.state.hourEventualCost
+        values._id,
+        values.typeId,
+        values.maintainceRate,
+        values.hourMaintainceCost,
+        values.hourEventualCost
       );
     } else {
       this.props.addBoiler(
-        this.state.typeId,
-        this.state.maintainceRate,
-        this.state.hourMaintainceCost,
-        this.state.hourEventualCost
+        values.typeId,
+        values.maintainceRate,
+        values.hourMaintainceCost,
+        values.hourEventualCost
       );
     }
     this.handleCleanForm();
   };
 
-  onChange = (e) => this.setState({ [e.target.name]: e.target.value });
-
   render() {
+    const boilerEdit = this.props.boilerEdit;
     return (
       <div>
-        <h1>{this.state._id ? "Edit boiler" : "Add new boiler"}</h1>
-        <form onSubmit={this.onSubmit}>
-        <input type="hidden" name="_id" value={this.state._id} />
-          <input
-            type="text"
-            name="typeId"
-            className={styles.input}
-            placeholder="Type boiler..."
-            value={this.state.typeId}
-            onChange={this.onChange}
-          />
-          <input
-            type="text"
-            name="maintainceRate"
-            className={styles.input}
-            placeholder="Maintaince rate ..."
-            value={this.state.maintainceRate}
-            onChange={this.onChange}
-          />
-          <input
-            type="text"
-            name="hourMaintainceCost"
-            className={styles.input}
-            placeholder="Hour maintaince cost ..."
-            value={this.state.hourMaintainceCost}
-            onChange={this.onChange}
-          />
-          <input
-            type="text"
-            name="hourEventualCost"
-            className={styles.input}
-            placeholder="Hour maintaince cost ..."
-            value={this.state.hourEventualCost}
-            onChange={this.onChange}
-          />
-          <div  className={styles.formsBtn}>
-            {this.state._id ?
-              <button
-                  title="Save"
-                  className={styles.btnStyle}
-              >
-                  <i className="far fa-save"></i>
-              </button>
-              :
-              <button
-                  title="Add"
-                  className={styles.btnStyle}
-              >
-                      <i className="fas fa-plus"></i>
-              </button>
+        <h1>
+          {boilerEdit && boilerEdit._id ? "Edit boiler" : "Add new boiler"}
+        </h1>
+        <Form
+          onSubmit={this.onSubmit}
+          initialValues={{
+            _id: boilerEdit && boilerEdit._id,
+            typeId: boilerEdit && boilerEdit.typeId,
+            maintainceRate: boilerEdit && boilerEdit.maintainceRate,
+            hourMaintainceCost: boilerEdit && boilerEdit.hourMaintainceCost,
+            hourEventualCost: boilerEdit && boilerEdit.hourEventualCost,
+          }}
+          validate={(values) => {
+            const errors = {};
+            if (!values.typeId) {
+              errors.typeId = "Required";
             }
-            <div>
-              <button
-                  title="Cancel"
-                  className={styles.btnStyle}
-                  onClick={this.handleCleanForm}
-              >
-                      <i className="fas fa-ban"></i>
-              </button>
-            </div>
-          </div>
-        </form>
+            if (!values.maintainceRate) {
+              errors.maintainceRate = "Required";
+            }
+
+            if (!values.hourMaintainceCost) {
+              errors.hourMaintainceCost = "Required";
+            }
+
+            if (!values.hourEventualCost) {
+              errors.hourEventualCost = "Required";
+            }
+
+            return errors;
+          }}
+          render={({ handleSubmit }) => (
+            <form onSubmit={handleSubmit}>
+              <Field
+                component="input"
+                type="hidden"
+                name="_id"
+                className={styles.input}
+                placeholder="Type boiler..."
+              />
+              <Field
+                component={TextInput}
+                type="text"
+                name="typeId"
+                className={styles.input}
+                placeholder="Type boiler..."
+              />
+              <Field
+                component={TextInput}
+                type="text"
+                name="maintainceRate"
+                className={styles.input}
+                placeholder="Maintaince rate ..."
+              />
+              <Field
+                component={TextInput}
+                type="text"
+                name="hourMaintainceCost"
+                className={styles.input}
+                placeholder="Hour maintaince cost ..."
+              />
+              <Field
+                component={TextInput}
+                type="text"
+                name="hourEventualCost"
+                className={styles.input}
+                placeholder="Hour maintaince cost ..."
+              />
+              <div className={styles.formsBtn}>
+                {boilerEdit && boilerEdit._id ? (
+                  <button title="Save" className={styles.btnStyle}>
+                    <i className="far fa-save"></i>
+                  </button>
+                ) : (
+                  <button title="Add" className={styles.btnStyle}>
+                    <i className="fas fa-plus"></i>
+                  </button>
+                )}
+                <div>
+                  <button
+                    title="Cancel"
+                    className={styles.btnStyle}
+                    onClick={this.handleCleanForm}
+                  >
+                    <i className="fas fa-ban"></i>
+                  </button>
+                </div>
+              </div>
+            </form>
+          )}
+        />
       </div>
     );
   }
