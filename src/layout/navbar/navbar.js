@@ -1,9 +1,8 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
+import {NavLink} from 'react-router-dom';
 import styles from './navbar.module.css';
 
 function Navbar() {
-    
     return (
             <nav className={styles.navbarContainer}>
                 <div className={styles.logo}>
@@ -12,36 +11,36 @@ function Navbar() {
                     </h3>
                 </div>
                 <ul className={styles.navbarLinks}>
-                    <Link to="/appointments" >
+                    <NavLink to="/appointments" activeClassName={styles.mainNavActive} className={styles.mainNav}>
                         <li>
                             <i className="far fa-calendar-plus"></i> Appointments
                         </li>
-                    </Link>
-                    <Link to="/boilers">
+                    </NavLink>
+                    <NavLink to="/boilers" activeClassName={styles.mainNavActive} className={styles.mainNav}>
                         <li>
                             <i className="fas fa-cog"></i> Boilers
                         </li>
-                    </Link>
-                    <Link to="/boilersTypes">
+                    </NavLink>
+                    <NavLink to="/boilersTypes" activeClassName={styles.mainNavActive} className={styles.mainNav}>
                         <li>
                             <i className="fas fa-cogs"></i> BoilersTypes
                         </li>
-                    </Link>
-                    <Link to="/buildings">
+                    </NavLink>
+                    <NavLink to="/buildings" activeClassName={styles.mainNavActive} className={styles.mainNav}>
                         <li>
                             <i className="far fa-building"></i> Buildings
                         </li>
-                    </Link>
-                    <Link to="/customers">
+                    </NavLink>
+                    <NavLink to="/customers" activeClassName={styles.mainNavActive} className={styles.mainNav}>
                         <li>
                             <i className="fas fa-user-friends"></i> Customers
                         </li>
-                    </Link>
-                    <Link to="/technicians">
+                    </NavLink>
+                    <NavLink to="/technicians" activeClassName={styles.mainNavActive} className={styles.mainNav}>
                         <li>
                             <i className="fas fa-hard-hat"></i> Technicians
                         </li>
-                    </Link>
+                    </NavLink>
                 </ul>
             </nav>
     )
