@@ -3,10 +3,16 @@ import PropTypes from "prop-types";
 import styles from "../../layout/main/main.module.css";
 import { Form, Field } from "react-final-form";
 import TextInput from "../../SharedComponents/TextInput/TextInput";
+import { connect } from "react-redux";
+import { closeModal as closeModalActions } from "../../redux/actions/modalActions";
+
+import {
+  addBoiler as addBoilerActions,
+  editBoiler as updateBoilerActions,
+} from "../../redux/actions/boilersActions";
+
+
 export class AddBoiler extends Component {
-  handleCleanForm = () => {
-    this.props.handleShowForm();
-  };
 
   onSubmit = (values) => {
     if (values._id) {
@@ -25,7 +31,7 @@ export class AddBoiler extends Component {
         values.hourEventualCost
       );
     }
-    this.handleCleanForm();
+    this.props.closeModal();
   };
 
   render() {
@@ -102,11 +108,11 @@ export class AddBoiler extends Component {
               />
               <div className={styles.formsBtn}>
                 {boilerEdit && boilerEdit._id ? (
-                  <button title="Save" className={styles.btnStyle}>
+                  <button type='submit' title="Save" className={styles.btnStyle}>
                     <i className="far fa-save"></i>
                   </button>
                 ) : (
-                  <button title="Add" className={styles.btnStyle}>
+                  <button type='submit' title="Add" className={styles.btnStyle}>
                     <i className="fas fa-plus"></i>
                   </button>
                 )}
@@ -114,7 +120,7 @@ export class AddBoiler extends Component {
                   <button
                     title="Cancel"
                     className={styles.btnStyle}
-                    onClick={this.handleCleanForm}
+                    onClick={this.props.closeModal}
                   >
                     <i className="fas fa-ban"></i>
                   </button>
@@ -130,10 +136,40 @@ export class AddBoiler extends Component {
 
 // PropTypes
 AddBoiler.propTypes = {
-  addBoiler: PropTypes.func.isRequired,
-  updateBoiler: PropTypes.func.isRequired,
-  handleShowForm: PropTypes.func.isRequired,
   boilerEdit: PropTypes.object,
 };
 
-export default AddBoiler;
+const mapDispatchToProps = (dispatch) => ({
+  closeModal: () => dispatch(closeModalActions()),
+  addBoiler: (typeId, maintainceRate, hourMaintainceCost, hourEventualCost) =>
+    dispatch(
+      addBoilerActions(
+        typeId,
+        maintainceRate,
+        hourMaintainceCost,
+        hourEventualCost
+      )
+    ),
+  updateBoiler: (
+    _id,
+    typeId,
+    maintainceRate,
+    hourMaintainceCost,
+    hourEventualCost
+  ) =>
+    dispatch(
+      updateBoilerActions(
+        _id,
+        typeId,
+        maintainceRate,
+        hourMaintainceCost,
+        hourEventualCost
+      )
+    ),
+});
+
+const mapStateToProps = (state) => ({
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(AddBoiler);
+
