@@ -8,16 +8,23 @@ class BoilerTypeList extends Component {
     return (
       <div>
         <h1>BoilerTypes{" "}
-          <input
+          {/* <input
               type="button"
               value="New"
               className={styles.input}
               onClick={() => this.props.handleShowForm()}
-            />
+            /> */}
+            <button
+            title="Add"
+            className={styles.btnStyle}
+            onClick={() => this.props.showAddModal()}
+          >
+            <i className="fas fa-plus"></i>
+          </button>
         </h1>
         <table className={styles.table}>
           <thead>
-            <tr>
+            <tr  className={styles.listHead}>
               <th>Id</th>
               <th>Skills Id</th>
               <th>Type</th>
@@ -27,9 +34,9 @@ class BoilerTypeList extends Component {
             </tr>
           </thead>
           <tbody>
-              {this.props.boilerTypes?.map((boilerType, index) => (
+              {this.props.boilerTypes?.map((boilerType) => (
                 <BoilerTypeItem 
-                  key={index} 
+                  key={boilerType._id} 
                   boilerType={boilerType}
                   deleteBoilerType={this.props.deleteBoilerType}
                   editBoilerType={this.props.editBoilerType}
@@ -49,8 +56,9 @@ BoilerTypeList.propTypes = {
   boilerTypes: PropTypes.array.isRequired,
   deleteBoilerType: PropTypes.func.isRequired,
   editBoilerType: PropTypes.func.isRequired,
-  handleShowForm: PropTypes.func.isRequired,
-  showForm: PropTypes.bool.isRequired,
+  // handleShowForm: PropTypes.func.isRequired,
+  // showForm: PropTypes.bool.isRequired,
+  showAddModal: PropTypes.func.isRequired,
 }
 
 export default BoilerTypeList;
