@@ -7,24 +7,24 @@ class Customers extends Component {
   render() {
     return (
       <div>
-        <h1>
-          Customers{" "}
-          <input
-            type="button"
-            value="New"
-            className={styles.input}
-            onClick={() => this.props.handleShowForm()}
-          />
+        <h1>Customers{" "}
+            <button
+              title="Add"
+              className={styles.btnStyle}
+              onClick={() => this.props.handleShowForm()}
+            >
+              <i className="fas fa-plus"></i>
+            </button>
         </h1>
         <table className={styles.table}>
           <thead>
-            <tr>
-              <th>id</th>
+            <tr className={styles.listHead}>
+              <th>Id</th>
               <th>Type</th>
               <th>Email</th>
               <th>Buildings Ids</th>
               <th>Fiscal address</th>
-              <th>Actions</th>
+              <th>Options</th>
             </tr>
           </thead>
           <tbody>

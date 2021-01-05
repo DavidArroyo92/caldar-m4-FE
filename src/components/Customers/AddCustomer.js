@@ -64,7 +64,7 @@ export class AddCustomer extends Component {
   render() {
     return (
       <div>
-        <h3>{this.state._id ? "Edit customer" : "Add new customer"}</h3>
+        <h1>{this.state._id ? "Edit customer" : "Add new customer"}</h1>
         <form onSubmit={this.onSubmit}>
           <input type="hidden" name="_id" value={this.state._id} />
           <input
@@ -99,14 +99,32 @@ export class AddCustomer extends Component {
             value={this.state.fiscalAddress}
             onChange={this.onChange}
           />
-
-          <input type="submit" value="Submit" className={styles.input} />
-          <input
-            type="button"
-            value="Cancel"
-            className={styles.input}
-            onClick={this.handleCleanForm}
-          />
+          <div  className={styles.formsBtn}>
+            {this.state._id ?
+              <button
+                title="Save"
+                className={styles.btnStyle}
+              >
+                <i className="far fa-save"></i>
+              </button>
+              :
+              <button
+                title="Add"
+                className={styles.btnStyle}
+              >
+                <i className="fas fa-plus"></i>
+              </button>
+            }
+            <div>
+              <button
+                title="Cancel"
+                className={styles.btnStyle}
+                onClick={this.handleCleanForm}
+              >
+                <i className="fas fa-ban"></i>
+              </button>
+            </div>
+          </div>
         </form>
       </div>
     );
