@@ -3,6 +3,7 @@ import MaterialModal from '@material-ui/core/Modal';
 import {makeStyles} from '@material-ui/core/styles';
 import {connect } from 'react-redux';
 import { closeModal as CloseModalAction} from '../../redux/actions/modalActions';
+import { showModal as showModalAction} from '../../redux/actions/modalActions';
 import modalTypes from '../../redux/types/types-modals';
 
 //Import Components

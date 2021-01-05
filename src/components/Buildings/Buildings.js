@@ -9,6 +9,8 @@ import {
     delBuilding as delBuildingActions,
     editBuilding as updateBuildingActions 
 } from '../../redux/actions/buildingsActions';
+import {showModal as showModalAction} 
+from '../../redux/actions/modalActions'
 import { connect} from 'react-redux';
 
 
