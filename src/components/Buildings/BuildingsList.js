@@ -14,7 +14,7 @@ class Buildings extends Component{
             <button
               title="Add"
               className={styles.btnStyle}
-              onClick={() => this.props.handleShowForm()}
+              onClick={() => this.props.showAddModal()}
             >
               <i className="fas fa-plus"></i>
             </button>
@@ -51,10 +51,9 @@ class Buildings extends Component{
 //proptypes
 Buildings.propTypes = {
   buildings: PropTypes.array.isRequired,
-  editBuilding: PropTypes.func.isRequired,
   delBuilding: PropTypes.func.isRequired,
-  handleShowForm: PropTypes.func.isRequired,
-  showForm: PropTypes.bool.isRequired,
+  editBuilding: PropTypes.func.isRequired,
+  showAddModal: PropTypes.func.isRequired,
 };
 
 export default Buildings;

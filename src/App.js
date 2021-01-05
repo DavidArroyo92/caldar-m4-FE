@@ -8,7 +8,7 @@ import BoilersTypes from './components/BoilersTypes/BoilersTypes';
 import Buildings from './components/Buildings/Buildings';
 import Customers from './components/Customers/Customers';
 import Technicians from './components/Technicians/Technicians';
-import Modal from './SharedComponents/TextInput/Modal';
+import Modal from './SharedComponents/Modal/Modal';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
 
 
@@ -18,6 +18,7 @@ function App() {
       <div className="App">
         <div className={styles.wrapper}>
           <Navbar />
+            <Modal/>
           <div className={styles.mainContent}>
             <Header/>
             <Switch>
@@ -28,7 +29,6 @@ function App() {
               <Route path="/customers" component={Customers}/>
               <Route path="/technicians" component={Technicians} />
             </Switch>
-            <Modal/>
           </div>
         </div>
       </div>

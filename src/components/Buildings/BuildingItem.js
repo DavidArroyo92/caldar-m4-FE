@@ -1,8 +1,14 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types';
 import styles from '../../layout/main/main.module.css';
+import modalTypes from '../../redux/types/types-modals';
 
 export class BuildingItem extends Component {
+
+    //ShowDel Modal
+  showDelModal = () =>{
+    this.props.showModal(modalTypes.DEL_BUILDING);
+  };
 
     render() {
         const
@@ -45,7 +51,7 @@ export class BuildingItem extends Component {
                             <button
                                 title="Delete"
                                 className={styles.btnStyle}
-                                onClick={this.props.delBuilding.bind(this, _id)}
+                                onClick={this.props.showDelModal()}
                             >
                                 <i className="far fa-trash-alt"></i>
                             </button>
@@ -60,6 +66,8 @@ BuildingItem.propTypes = {
     building: PropTypes.object.isRequired,
     delBuilding: PropTypes.func.isRequired,
     editBuilding: PropTypes.func.isRequired,
+    showDelModal: PropTypes.func.isRequired,
+
   };
 
 export default BuildingItem;

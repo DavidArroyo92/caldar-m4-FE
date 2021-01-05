@@ -1,17 +1,14 @@
 import React, { Component} from 'react';
-import AddBuilding from './AddBuilding';
 import BuildingsList from './BuildingsList';
-// import { v4 as uuidv4 } from 'uuid';
+import AddBuilding from './AddBuilding';
 import styles from "../../layout/main/main.module.css";
-import {
-    getBuildings as getBuildingActions,
-    addBuilding as addBuildingActions,
-    delBuilding as delBuildingActions,
-    editBuilding as updateBuildingActions 
-} from '../../redux/actions/buildingsActions';
-import {showModal as showModalAction} 
-from '../../redux/actions/modalActions'
 import { connect} from 'react-redux';
+import {
+  getBuildings as getBuildingActions,
+  delBuilding as delBuildingActions, 
+      } from '../../redux/actions/buildingsActions';
+import {showModal as showModalAction} from '../../redux/actions/modalActions'
+import modalTypes from '../../redux/types/types-modals';
 
 
 //Set Building Object
@@ -19,9 +16,8 @@ class Buildings extends Component {
 
 
   state = {
-    // buildings: [],
     buildingEdit: null,
-    showModal,
+    showForm: false,
   };
 
 
@@ -34,35 +30,34 @@ class Buildings extends Component {
   editBuilding = (building) => {
     this.setState({
       buildingEdit: building,
-      showModal: true,
+      showForm: true,
     });
     window.scrollTo(0, 0);
   };
 
-  //Show add Modal
+  //Showadd Modal
   showAddModal = () =>{
-    showModal(modalTypes.ADD_BUILDING);
+    this.props.showModal(modalTypes.ADD_BUILDING);
   };
+
 
   render() { 
       return (
         <div className={styles.info}>
-         
-            <AddBuilding
-              addBuilding={this.props.addBuilding}
-              updateBuilding={this.props.updateBuilding}
+         {this.state.showForm? (
+            <AddBuilding  
               buildingEdit={this.state.buildingEdit}
-              handleShowForm={this.handleShowForm}
             />
-       
+         ):(
             <BuildingsList
               buildings={this.props.buildings}
               delBuilding={this.props.delBuilding}
               editBuilding={this.editBuilding}
-              handleShowForm={this.handleShowForm}
-              showForm={this.state.showForm}
+              showAddModal={this.showAddModal}
+              showDelModal={this.showDelModal}
             />
-          
+         )
+         }
         </div>
         
       );
@@ -70,30 +65,15 @@ class Buildings extends Component {
 }  
 
   const mapDispatchToProps = (dispatch) =>({
+      showModal: (modalType) =>dispatch(showModalAction(modalType)),
       getBuildings: () => dispatch(getBuildingActions()),
-      showModal: () =>dispatch(showModalAction()),
-      delBuilding:(_id) => dispatch(delBuildingActions(_id)),
-      addBuilding: (boilersId, businessName,email,phone,adress) =>
-        dispatch(
-          addBuildingActions(boilersId, businessName,email,phone,adress )
-        ),
-      updateBuilding:(_id, boilersId, businessName,email,phone,adress ) =>
-          dispatch(
-            updateBuildingActions(
-              _id,
-                boilersId,
-              businessName,
-              email,
-              phone,
-              adress
-            )
-          ),
+      delBuilding:(_id) => dispatch(delBuildingActions(_id))
     });
   
-  const mapStateToProps = state =>{
-    return{
-      buildings: state.buildings.list,
-    };
-};
+  const mapStateToProps = (state) =>({
+    buildings: state.buildings.list,
+  });
+
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(Buildings);

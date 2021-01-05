@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { makeStyles } from "@material-ui/core/styles";
 import MaterialModal from '@material-ui/core/Modal';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -12,12 +13,34 @@ import BoilerForm from '../../components/Boilers/BoilerForm';
 import RemoveBoilerMessage from '../../components/Boilers/RemoveBoilerMessage';
 import BoilerTypeForm from '../../components/BoilersTypes/BoilerTypeForm';
 import RemoveBoilerTypeMessage from '../../components/BoilersTypes/RemoveBoilerTypeMessage';
-import BuildingForm from '../../components/Buildings/BuildingForm';
-import RemoveBuildingMessage from '../../components/Buildings/RemoveBuildingMessage';
+import AddBuilding from '../../components/Buildings/AddBuilding';
+import BuildingItem from '../../components/Buildings/BuildingItem';
 import CustomerForm from '../../components/Customers/CustomerForm';
 import RemoveCustomerMessage from '../../components/Customers/RemoveCustomerMessage';
 import TechnicianForm from '../../components/Technicians/TechnicianForm';
 import RemoveTechnicianMessage from '../../components/Technicians/RemoveTechnicianMessage';
+
+function getModalStyle() {
+    const top = 50;
+    const left = 50;
+  
+    return {
+      top: `${top}%`,
+      left: `${left}%`,
+      transform: `translate(-${top}%, -${left}%)`,
+    };
+}
+
+const useStyles = makeStyles((theme) => ({
+    paper: {
+      position: "absolute",
+      width: 600,
+      backgroundColor: theme.palette.background.paper,
+      border: "2px solid #000",
+      boxShadow: theme.shadows[5],
+      padding: theme.spacing(2, 4, 3),
+    },
+  }));
 
 const Modal = ({
     show,
@@ -25,6 +48,8 @@ const Modal = ({
     meta,
     closeModal,
 }) => {
+     const classes = useStyles();
+     const [modalStyle] = React.useState(getModalStyle);
 
     let modalComponent;
     switch(modalType) {
@@ -47,10 +72,10 @@ const Modal = ({
             modalComponent = <RemoveBoilerTypeMessage boilerTypeId={meta.id} />
             break;
         case modalTypes.ADD_BUILDING:
-            modalComponent = <BuildingForm />
+            modalComponent = <AddBuilding/>
             break;
         case modalTypes.DEL_BUILDING:
-            modalComponent = <RemoveBuildingMessage buildingId={meta.id} />
+            modalComponent = <BuildingItem buildingId={meta.id} />
             break;
         case modalTypes.ADD_CUSTOMER:
             modalComponent = <CustomerForm />
@@ -71,16 +96,16 @@ const Modal = ({
 
     return (
         <MaterialModal
-        open={show}
-        onClose={closeModal}
-        aria-labelledby="simple-modal-title"
-        aria-describedby="simple-modal-description"
-    >
-        <div style={} className={classes.paper}>
+            open={show}
+            onClose={closeModal}
+            aria-labelledby="simple-modal-title"
+            aria-describedby="simple-modal-description"
+        >
+        <div style={modalStyle} className={classes.paper}>
             {modalComponent}
         </div>
         </MaterialModal>
-    )
+    );
 };
 
 const mapStateToProps = (state) =>{
@@ -92,9 +117,12 @@ const mapStateToProps = (state) =>{
 }
 
 const mapDispatchToProps = (dispatch) =>{
-    return bindActionCreators ({
-        closeModal: closeModalAction
-    }, dispatch);
+    return bindActionCreators (
+        {
+        closeModal: closeModalAction,
+        },
+        dispatch
+    );
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Modal);  
