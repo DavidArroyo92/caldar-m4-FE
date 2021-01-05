@@ -9,7 +9,7 @@ import reportWebVitals from "./reportWebVitals";
 import rootReducer from "./redux/reducers/rootReducer";
 import "./index.css";
 
-const middleware = [thunk];
+
 
 const middleware = [thunk];
 const configureStore = () => {
