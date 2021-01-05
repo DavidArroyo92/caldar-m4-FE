@@ -2,9 +2,6 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import styles from "../../layout/main/main.module.css";
 import { Field, Form, FieldRenderProps } from 'react-final-form';
-import validation from '../../utils/validations';
-import TextInput from "../../SharedComponents/TextInput/TextInput";
-
 
 
 class AddBoilerType extends Component {
