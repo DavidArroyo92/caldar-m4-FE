@@ -1,8 +1,7 @@
 export const SHOW_MODAL = 'SHOW_MODAL';
 export const CLOSE_MODAL = 'CLOSE_MODAL';
 
-
-export const modalTypes = {
+const modalTypes = {
     ADD_APPOINTMENT: 'ADD_APPOINTMENT',
     DEL_APPOINTMENT: 'DEL_APPOINTMENT',
     ADD_BOILER: 'ADD_BOILER',

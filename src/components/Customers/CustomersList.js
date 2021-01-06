@@ -11,8 +11,8 @@ class Customers extends Component {
             <button
               title="Add"
               className={styles.btnStyle}
-              onClick={() => this.props.handleShowForm()}
-            >
+              onClick={() => this.props.showAddModal()}
+              >
               <i className="fas fa-plus"></i>
             </button>
         </h1>
@@ -32,8 +32,8 @@ class Customers extends Component {
               <CustomerItem
                 key={index}
                 customer={customer}
-                delCustomer={this.props.delCustomer}
                 editCustomer={this.props.editCustomer}
+                showAddModal={this.props.showAddModal}
               />
             ))}
           </tbody>
@@ -46,10 +46,8 @@ class Customers extends Component {
 // PropTypes
 Customers.propTypes = {
   customers: PropTypes.array.isRequired,
-  delCustomer: PropTypes.func.isRequired,
   editCustomer: PropTypes.func.isRequired,
-  handleShowForm: PropTypes.func.isRequired,
-  showForm: PropTypes.bool.isRequired,
+  showAddModal: PropTypes.func.isRequired,
 };
 
 export default Customers;
