@@ -5,7 +5,6 @@ import styles from "../../layout/main/main.module.css";
 import { connect } from "react-redux";
 import {
   getBoilers as getBoilersActions,
-  delBoiler as delBoilerActions,
 } from "../../redux/actions/boilersActions";
 
 import { showModal as showModalActions } from "../../redux/actions/modalActions";
@@ -43,7 +42,6 @@ class Boilers extends Component {
         ) : (
           <BoilersList
             boilers={this.props.boilers}
-            delBoiler={this.props.delBoiler}
             editBoiler={this.editBoiler}
             showAddModal={this.showAddModal}
           />
@@ -56,7 +54,6 @@ class Boilers extends Component {
 const mapDispatchToProps = (dispatch) => ({
   showModal: (modalType) => dispatch(showModalActions(modalType)),
   getBoilers: () => dispatch(getBoilersActions()),
-  delBoiler: (_id) => dispatch(delBoilerActions(_id)),
 });
 
 const mapStateToProps = (state) => ({

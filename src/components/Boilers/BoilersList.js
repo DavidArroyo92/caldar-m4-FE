@@ -33,7 +33,6 @@ class BoilersList extends Component {
                 key={boiler._id}
                 boiler={boiler}
                 editBoiler={this.props.editBoiler}
-                delBoiler={this.props.delBoiler}
               />
             ))}
           </tbody>
@@ -46,7 +45,6 @@ class BoilersList extends Component {
 // PropTypes
 BoilersList.propTypes = {
   boilers: PropTypes.array.isRequired,
-  delBoiler: PropTypes.func.isRequired,
   editBoiler: PropTypes.func.isRequired,
   showAddModal: PropTypes.func.isRequired,
 };
