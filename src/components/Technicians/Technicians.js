@@ -52,6 +52,7 @@ class Technicians extends Component {
             delTechnician={this.props.delTechnicians}
             editTechnician={this.editTechnician}
             showAddModal={this.showAddModal}
+            showDelModal={this.showDelModal} 
           />
         )}
       </div>
@@ -60,48 +61,12 @@ class Technicians extends Component {
 }
 
 const mapDispatchToProps = (dispatch) => ({
+  showModal: (modalType) => dispatch(showModalAction(modalType)),
   getTechnicians: () => dispatch(getTechniciansActions()),
   delTechnicians: (_id) => dispatch(delTechniciansActions(_id)),
-  addTechnicians: (firstName, lastName, email, typeIds, skillsId, hour_rate, daily_capacity) =>
-    dispatch(
-      addTechniciansActions(
-        firstName,
-        lastName,
-        email,
-        typeIds,
-        skillsId,
-        hour_rate,
-        daily_capacity,
-      )
-    ),
-  updateTechnicians: (
-    _id,
-    firstName,
-    lastName,
-    email,
-    typeIds,
-    skillsId,
-    hour_rate,
-    daily_capacity,
-  ) =>
-    dispatch(
-      updateTechniciansActions(
-        _id,
-        firstName,
-        lastName,
-        email,
-        typeIds,
-        skillsId,
-        hour_rate,
-        daily_capacity,
-      )
-    ),
-    showModal: (modalType) => dispatch(showModalAction(modalType))
 });
 
 const mapStateToProps = (state) => ({
-  isLoading: state.technicians.isLoading,
-  error: state.technicians.error,
   technicians: state.technicians.list,
 });
 

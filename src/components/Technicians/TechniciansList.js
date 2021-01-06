@@ -31,9 +31,9 @@ class TechniciansList extends Component {
             </tr>
           </thead>
           <tbody>
-            {this.props.technicians.map((technician, index) => (
+            {this.props.technicians?.map((technician) => (
               <TechnicianItem
-                key={index}
+                key={technician._id}
                 technician={technician}
                 editTechnician={this.props.editTechnician}
                 delTechnician={this.props.delTechnician}
