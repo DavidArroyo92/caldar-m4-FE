@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 import React from 'react';
 import { makeStyles } from "@material-ui/core/styles";
+=======
+import React, { useState } from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+>>>>>>> 67b5828bdf0754c6af1f7283b302b239b2c0db9c
 import MaterialModal from '@material-ui/core/Modal';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -20,6 +25,10 @@ import RemoveCustomerMessage from '../../components/Customers/RemoveCustomerMess
 import TechnicianForm from '../../components/Technicians/TechnicianForm';
 import RemoveTechnicianMessage from '../../components/Technicians/RemoveTechnicianMessage';
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 67b5828bdf0754c6af1f7283b302b239b2c0db9c
 function getModalStyle() {
     const top = 50;
     const left = 50;
@@ -40,7 +49,12 @@ const useStyles = makeStyles((theme) => ({
       boxShadow: theme.shadows[5],
       padding: theme.spacing(2, 4, 3),
     },
+<<<<<<< HEAD
   }));
+=======
+}));
+
+>>>>>>> 67b5828bdf0754c6af1f7283b302b239b2c0db9c
 
 const Modal = ({
     show,
@@ -50,6 +64,10 @@ const Modal = ({
 }) => {
      const classes = useStyles();
      const [modalStyle] = React.useState(getModalStyle);
+
+    const classes = useStyles();
+    // getModalStyle is not a pure function, we roll the style only on the first render
+    const [modalStyle] = useState(getModalStyle);
 
     let modalComponent;
     switch(modalType) {
@@ -96,11 +114,11 @@ const Modal = ({
 
     return (
         <MaterialModal
-            open={show}
-            onClose={closeModal}
-            aria-labelledby="simple-modal-title"
-            aria-describedby="simple-modal-description"
-        >
+        open={show}
+        onClose={closeModal}
+        aria-labelledby="simple-modal-title"
+        aria-describedby="simple-modal-description"
+    >
         <div style={modalStyle} className={classes.paper}>
             {modalComponent}
         </div>
