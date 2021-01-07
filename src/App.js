@@ -11,8 +11,51 @@ import Technicians from './components/Technicians/Technicians';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import Modal from './SharedComponents/Modal/Modal';
 
+import { bindActionCreators } from "redux";
+import Login from "./components/Login/Login";
+import { setAuthentification } from "./redux/actions/authActions";
+import { tokenListener } from "./firebase";
+import { conect } from "react-redux";
 
-function App() {
+
+const App = ({
+  authenticated,
+  setAuthentification
+}) => {
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token){
+      setAuthentification();
+    }
+  }, [setAuthentification])
+
+  useEffect(() => {
+    tokenListener();
+  }, []);
+
+  if(authenticated){
+    return (
+      <Router>
+        <div className="App">
+          <div className={styles.wrapper}>
+            <Navbar />
+            <Modal />
+            <div className={styles.mainContent}>
+              <Header/>
+              <Switch>
+                <Route path="/appointments" component={Appointments}/>
+                <Route path="/boilers" component={Boilers}/>
+                <Route path="/boilersTypes" component={BoilersTypes}/>
+                <Route path="/buildings" component={Buildings}/>
+                <Route path="/customers" component={Customers}/>
+                <Route path="/technicians" component={Technicians} />
+              </Switch>
+            </div>
+          </div>
+        </div>
+      </Router>
+    );
+  }
   return (
     <Router>
       <div className="App">
@@ -22,12 +65,7 @@ function App() {
           <div className={styles.mainContent}>
             <Header/>
             <Switch>
-              <Route path="/appointments" component={Appointments}/>
-              <Route path="/boilers" component={Boilers}/>
-              <Route path="/boilersTypes" component={BoilersTypes}/>
-              <Route path="/buildings" component={Buildings}/>
-              <Route path="/customers" component={Customers}/>
-              <Route path="/technicians" component={Technicians} />
+              <Route path="/login" component={Login}/>
             </Switch>
           </div>
         </div>
@@ -36,4 +74,16 @@ function App() {
   );
 }
 
-export default App;
+const mapStateToProps = state => {
+  return {
+      authenticated: state.auth.authenticated
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators({
+      setAuthentification,
+  }, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
