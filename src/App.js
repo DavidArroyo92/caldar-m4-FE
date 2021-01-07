@@ -15,7 +15,7 @@ import { bindActionCreators } from "redux";
 import Login from "./components/Login/Login";
 import { setAuthentification } from "./redux/actions/authActions";
 import { tokenListener } from "./firebase";
-import { conect } from "react-redux";
+import { connect } from "react-redux";
 
 
 const App = ({

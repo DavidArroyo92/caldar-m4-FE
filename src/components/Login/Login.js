@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import TextInput from "../../SharedComponents/TextInput/TextInput"
 import { loginWithFirebase } from "../../redux/actions/authActions";
+import { Button } from '@material-ui/core';
 
 const Login = ({ login }) => {
     const onSubmitLogin = ( values ) => {
