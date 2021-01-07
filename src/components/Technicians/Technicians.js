@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import TechniciansList from "./TechniciansList";
-import AddTechnician from "./AddTechnician";
-import TechnicianForm from '../Technicians/TechnicianForm';
+//import AddTechnician from "./AddTechnician";
+import TechnicianForm from './TechnicianForm';
 import styles from "../../layout/main/main.module.css";
 import { connect } from "react-redux";
 import {
@@ -49,10 +49,10 @@ class Technicians extends Component {
           ) : (
           <TechniciansList
             technicians={this.props.technicians}
-            delTechnician={this.props.delTechnicians}
+            //delTechnician={this.props.delTechnicians}
             editTechnician={this.editTechnician}
             showAddModal={this.showAddModal}
-            showDelModal={this.showDelModal} 
+            //showDelModal={this.showDelModal} 
           />
         )}
       </div>
@@ -63,7 +63,7 @@ class Technicians extends Component {
 const mapDispatchToProps = (dispatch) => ({
   showModal: (modalType) => dispatch(showModalAction(modalType)),
   getTechnicians: () => dispatch(getTechniciansActions()),
-  delTechnicians: (_id) => dispatch(delTechniciansActions(_id)),
+  //delTechnicians: (_id) => dispatch(delTechniciansActions(_id)),
 });
 
 const mapStateToProps = (state) => ({

@@ -5,12 +5,11 @@ import styles from "../../layout/main/main.module.css";
 import modalTypes from "../../redux/types/types-modals.js";
 import { showModal as showModalActions } from "../../redux/actions/modalActions";
 
+export class TechnicianItem extends Component {
 
-export class Technicianitem extends Component {
-
-    //ShowDel Modal
-    showDelModal = () =>{
-        this.props.showModal(modalTypes.DEL_TECHNICIAN);
+    //Show del Modal
+    showDeleteModal = (_id) => {
+        this.props.showModal(modalTypes.DEL_TECHNICIAN, {id: _id});
       };
 
     render() {
@@ -35,7 +34,7 @@ export class Technicianitem extends Component {
                     <button
                         title="Delete"
                         className={styles.btnStyle}
-                        onClick={this.showDelModal()}
+                        onClick={() => this.showDeleteModal(_id)}
                     >
                         <i className="far fa-trash-alt"></i>
                     </button>
@@ -44,17 +43,15 @@ export class Technicianitem extends Component {
     }
 }
 
-// Prop types
-Technicianitem.propTypes = {
+// PropTypes
+TechnicianItem.propTypes = {
     technician: PropTypes.object.isRequired,
-    delTechnician: PropTypes.func.isRequired,
-    editTechnician: PropTypes.func.isRequired,
-}
-const mapDispatchToProps = (dispatch) => ({
-    showModal: (modalType) => dispatch(showModalActions(modalType)),
+  };
+  
+  const mapDispatchToProps = (dispatch) => ({
+    showModal: (modalType, meta) => dispatch(showModalActions(modalType, meta)),
   });
   
-  const mapStateToProps = (state) => ({
-  });
-  
-  export default connect(mapStateToProps, mapDispatchToProps)(Technicianitem);
+  const mapStateToProps = (state) => ({});
+
+  export default connect(mapStateToProps, mapDispatchToProps)(TechnicianItem);

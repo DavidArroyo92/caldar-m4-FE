@@ -36,7 +36,7 @@ class TechniciansList extends Component {
                 key={technician._id}
                 technician={technician}
                 editTechnician={this.props.editTechnician}
-                delTechnician={this.props.delTechnician}
+                //delTechnician={this.props.delTechnician}
               />
             ))}
           </tbody>
@@ -49,7 +49,7 @@ class TechniciansList extends Component {
 // Prop types
 TechniciansList.propTypes = {
     technicians: PropTypes.array.isRequired,
-    delTechnician: PropTypes.func.isRequired,
+    //delTechnician: PropTypes.func.isRequired,
     editTechnician: PropTypes.func.isRequired,
     showAddModal: PropTypes.func.isRequired,
 }

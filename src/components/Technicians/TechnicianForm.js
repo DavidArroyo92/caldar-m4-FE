@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import styles from "../../layout/main/main.module.css";
-import { bindActionCreators } from 'redux';
+//import { bindActionCreators } from 'redux';
 import {
     addTechnicians as addTechniciansActions,
     editTechnicians as updateTechniciansActions,
@@ -14,9 +14,10 @@ import { required, email, composeValidations } from '../../utils/validations';
 import { Form, Field } from 'react-final-form';
 import TextInput from '../../SharedComponents/TextInput/TextInput';
 
+
 export class TechnicianForm extends Component {
 
-    onSubmitTechnician = (values) => {
+    onSubmit = (values) => {
         if (values._id) {
             this.props.updateTechnician(
                 values._id,
@@ -49,7 +50,7 @@ export class TechnicianForm extends Component {
                 <h1>
                 {technicianEdit && technicianEdit._id ? "Edit technician" : "Add new Technician"}</h1>
                 <Form
-                    onSubmit={this.onSubmitTechnician}
+                    onSubmit={this.onSubmit}
                     render={({ handleSubmit, form, submitting, pristine, values}) => (
                         <form onSubmit={handleSubmit}>
                             <div>                    

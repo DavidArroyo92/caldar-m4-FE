@@ -1,41 +1,56 @@
 import React, { Component }from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import {
-    delTechnicians as delTechniciansAction
+    delTechnicians as delTechnicianActions
 } from '../../redux/actions/techniciansActions';
 import {
-    closeModal as closeModalAction
+    closeModal as closeModalActions
 } from '../../redux/actions/modalActions';
-import { Button } from '@material-ui/core';
+import styles from "../../layout/main/main.module.css";
+import PropTypes from "prop-types";
 
-const RemoveTechnicianMessage = ({
-    closeModal,
-    delTechnicians,
-    technicianId
-}) => {
-    const onDeleteTechnician = () => {
-        delTechnicians(technicianId);
-        closeModal();
-    }
+class RemoveTechnicianMessage extends Component {
+    render() {
+		const handleDelete = () => {
+			this.props.delTechnicians(this.props.technicianId);
+			this.props.closeModal();
+		}
 
-    return (
-        <div>
-            Are you sure you want to delete this technician?
+        return (
             <div>
-                <button type='button' btnLabel='Cancel' onClick={() => closeModal()} />
-                <button type='button' btnLabel='Confirm' primary onClick={() => onDeleteTechnician()} />
+                <h1>
+            |    Are you sure you want to delete this technician?
+                </h1>
+                <button
+                    type="submit"
+                    title="Add"
+                    className={styles.btnStyle}
+                    onClick={handleDelete}
+                    >
+                    <i className="fas fa-check"></i>
+                </button>
+                <button
+                    title="Cancel"
+                    className={styles.btnStyle}
+                    onClick={this.props.closeModal}
+                    >
+                    <i className="fas fa-ban"></i>
+                </button>
             </div>
-        </div>
-    )
+        )
+    }
 }
 
-const mapDispatchToProps = (dispatch) => {
-    return bindActionCreators ({
-        closeModal: closeModalAction,
-        delTechnicians: delTechniciansAction,
-    }, dispatch);
-}
-
-export default connect(null, mapDispatchToProps)(RemoveTechnicianMessage);
-
+// PropTypes
+RemoveTechnicianMessage.propTypes = {
+    technicianId: PropTypes.string,
+  };
+  
+  const mapDispatchToProps = (dispatch) => ({
+    delTechnicians: (_id) => dispatch(delTechnicianActions(_id)),
+    closeModal: () => dispatch(closeModalActions()),
+  });
+  
+  const mapStateToProps = (state) => ({});
+  
+  export default connect(mapStateToProps, mapDispatchToProps)(RemoveTechnicianMessage);
