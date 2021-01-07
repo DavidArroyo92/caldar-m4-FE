@@ -1,59 +1,66 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import styles from '../../layout/main/main.module.css';
-import { makeStyles } from '@material-ui/core/styles';
-import Modal from '@material-ui/core/Modal';
-import { connect} from 'react-redux';
-import {closeModal as closeModalActions,} from '../../redux/actions/modalActions'
+import { Dialog, DialogTitle, DialogContent, DialogActions, Typography, makeStyles, IconButton } from '@material-ui/core';
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    height: 300,
-    flexGrow: 1,
-    minWidth: 300,
-    transform: 'translateZ(0)',
-    // The position fixed scoping doesn't work in IE 11.
-    // Disable this demo to preserve the others.
-    '@media all and (-ms-high-contrast: none)': {
-      display: 'none',
+
+
+const useStyles = makeStyles(theme => ({
+    dialog: {
+        padding: theme.spacing(2),
+        position: 'absolute',
+        top: theme.spacing(5)
     },
-  },
-  modal: {
-    display: 'flex',
-    padding: theme.spacing(1),
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  paper: {
-    width: 400,
-    backgroundColor: theme.palette.background.paper,
-    border: '2px solid #000',
-    boxShadow: theme.shadows[5],
-    padding: theme.spacing(2, 4, 3),
-  },
-}));
+    dialogTitle: {
+        textAlign: 'center'
+    },
+    dialogContent: {
+        textAlign: 'center'
+    },
+    dialogAction: {
+        justifyContent: 'center'
+    },
+    titleIcon: {
+        backgroundColor: theme.palette.secondary.light,
+        color: theme.palette.secondary.main,
+        '&:hover': {
+            backgroundColor: theme.palette.secondary.light,
+            cursor: 'default'
+        },
+        '& .MuiSvgIcon-root': {
+            fontSize: '8rem',
+        }
+    }
+}))
 
-export default function ServerModal() {
-  const classes = useStyles();
-  const rootRef = React.useRef(null);
+export default function ConfirmDialog(props) {
 
-  return (
-    <div className={classes.root} ref={rootRef}>
-      <Modal
-        disablePortal
-        disableEnforceFocus
-        disableAutoFocus
-        open
-        aria-labelledby="server-modal-title"
-        aria-describedby="server-modal-description"
-        className={classes.modal}
-        container={() => rootRef.current}
-      >
-        <div className={classes.paper}>
-          <h2 id="server-modal-title">Server-side modal</h2>
-          <p id="server-modal-description">If you disable JavaScript, you will still see me.</p>
-        </div>
-      </Modal>
-    </div>
-  );
+    const { confirmDialog, setConfirmDialog } = props;
+    const classes = useStyles()
+
+    return (
+        <Dialog open={confirmDialog.isOpen} classes={{ paper: classes.dialog }}>
+            <DialogTitle className={classes.dialogTitle}>
+                <IconButton disableRipple className={classes.titleIcon}>
+                    <NotListedLocationIcon />
+                </IconButton>
+            </DialogTitle>
+            <DialogContent className={classes.dialogContent}>
+                <Typography variant="h6">
+                    {confirmDialog.title}
+                </Typography>
+                <Typography variant="subtitle2">
+                    {confirmDialog.subTitle}
+                </Typography>
+            </DialogContent>
+            <DialogActions className={classes.dialogAction}>
+                <Button
+                    text="No"
+                    color="default"
+                    onClick={() => setConfirmDialog({ ...confirmDialog, isOpen: false })} />
+                <Button
+                    text="Yes"
+                    color="secondary"
+                    onClick={confirmDialog.onConfirm} />
+            </DialogActions>
+        </Dialog>
+    )
 }
