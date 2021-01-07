@@ -11,7 +11,7 @@ import AppointmentForm from "../../components/Appointments/AppointmentForm";
 import RemoveAppointmentMessage from "../../components/Appointments/RemoveAppointmentMessage";
 import AddBoiler from "../../components/Boilers/AddBoiler";
 import RemoveBoilerMessage from "../../components/Boilers/RemoveBoilerMessage";
-import BoilerTypeForm from "../../components/BoilersTypes/BoilerTypeForm";
+import AddBoilerType from "../../components/BoilersTypes/AddBoilerType";
 import RemoveBoilerTypeMessage from "../../components/BoilersTypes/RemoveBoilerTypeMessage";
 import BuildingForm from "../../components/Buildings/BuildingForm";
 import RemoveBuildingMessage from "../../components/Buildings/RemoveBuildingMessage";
@@ -61,7 +61,7 @@ const Modal = ({ show, modalType, meta, closeModal }) => {
       modalComponent = <RemoveBoilerMessage boilerId={meta.id} />;
       break;
     case modalTypes.ADD_BOILERTYPE:
-      modalComponent = <BoilerTypeForm />;
+      modalComponent = <AddBoilerType />;
       break;
     case modalTypes.DEL_BOILERTYPE:
       modalComponent = <RemoveBoilerTypeMessage boilerTypeId={meta.id} />;

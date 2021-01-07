@@ -1,9 +1,17 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import styles from "../../layout/main/main.module.css";
+import { connect } from "react-redux";
+import modalTypes from "../../redux/types/types-modals.js";
+import { showModal as showModalActions } from "../../redux/actions/modalActions";
 
 export class BoilerItem extends Component {
 
+    //Show add Modal
+    showDeleteModal = (_id) => {
+      this.props.showModal(modalTypes.DEL_BOILER, {id: _id});
+    };
+  
   render() {
     const {
       _id,
@@ -13,7 +21,7 @@ export class BoilerItem extends Component {
       hourEventualCost,
     } = this.props.boiler;
     return (
-      <tr>
+      <tr className={styles.table}>
         <td>{_id}</td>
         <td>{typeId}</td>
         <td>{maintainceRate}</td>
@@ -21,16 +29,18 @@ export class BoilerItem extends Component {
         <td>{hourEventualCost}</td>
         <td>
           <button
-            onClick={this.props.delBoiler.bind(this, _id)}
-            className={styles.btnStyle}
-          >
-            delete
-          </button>
-          <button
+            title="Edit"
             onClick={this.props.editBoiler.bind(this, this.props.boiler)}
             className={styles.btnStyle}
           >
-            edit
+            <i className="far fa-edit"></i>
+          </button>
+          <button
+            title="Delete"
+            className={styles.btnStyle}
+            onClick={() => this.showDeleteModal(_id)}
+          >
+            <i className="far fa-trash-alt"></i>
           </button>
         </td>
       </tr>
@@ -41,7 +51,14 @@ export class BoilerItem extends Component {
 // PropTypes
 BoilerItem.propTypes = {
   boiler: PropTypes.object.isRequired,
-  delBoiler: PropTypes.func.isRequired,
 };
 
-export default BoilerItem;
+const mapDispatchToProps = (dispatch) => ({
+  showModal: (modalType, meta) => dispatch(showModalActions(modalType, meta)),
+});
+
+const mapStateToProps = (state) => ({});
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(BoilerItem);

@@ -29,7 +29,6 @@ import styles from '../../layout/main/main.module.css'
         });
         this.props.handleShowForm();
       };
-    
       handleEdit = (buildingEdit) => {
         this.setState({
         _id: buildingEdit._id,
@@ -40,7 +39,6 @@ import styles from '../../layout/main/main.module.css'
         adress: buildingEdit.adress,
         });
       };
-
      onSubmit = (e) => {
          e.preventDefault();
          if (this.state._id) {
@@ -61,25 +59,14 @@ import styles from '../../layout/main/main.module.css'
             this.state.adress
         );
       }
-        //  this.setState({
-        //     id: "",
-        //      boilerId:"",
-        //      businessName:"",
-        //      email:"",
-        //      phone:"",
-        //      adress:"",
-        //     });
       this.handleCleanForm();
     };
-
-     onChange = (e) => this.setState({ [e.target.name]: e.target.value});
-
+    onChange = (e) => this.setState({ [e.target.name]: e.target.value});
     render(){
         return(
             <div>
-                <h3>
-                {this.state._id ? "Edit building" : "Add new Building"}
-                </h3>
+                <h1>
+                {this.state._id ? "Edit building" : "Add new Building"}</h1>
                 <form onSubmit ={this.onSubmit} >
                     <input type="hidden" name="_id" value={this.state._id} />
                     <input
@@ -122,18 +109,32 @@ import styles from '../../layout/main/main.module.css'
                     value={this.state.phone}
                     onChange={this.onChange}
                     />
-
-                    <input 
-                    type="button"
-                    value= "Cancel"
-                    className={styles.input}
-                    onClick={this.handleCleanForm}
-                    />
-                    <input
-                    type="submit"
-                    value="submit"
-                    className={styles.input}
-                    />
+                    <div  className={styles.formsBtn}>
+                      {this.state._id ?
+                        <button
+                          title="Save"
+                          className={styles.btnStyle}
+                        >
+                          <i className="far fa-save"></i>
+                        </button>
+                        :
+                        <button
+                          title="Add"
+                          className={styles.btnStyle}
+                        >
+                          <i className="fas fa-plus"></i>
+                        </button>
+                      }
+                      <div>
+                        <button
+                          title="Cancel"
+                          className={styles.btnStyle}
+                          onClick={this.handleCleanForm}
+                        >
+                          <i className="fas fa-ban"></i>
+                        </button>
+                      </div>
+                    </div>
                 </form>
             </div>
         );

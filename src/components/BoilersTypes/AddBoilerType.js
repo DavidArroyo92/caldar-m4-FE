@@ -1,131 +1,146 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import styles from "../../layout/main/main.module.css";
-import { Field, Form, FieldRenderProps } from 'react-final-form';
+import { Form, Field } from "react-final-form";
+import TextInput from "../../SharedComponents/TextInput/TextInput";
+import { connect } from "react-redux";
+import { closeModal as closeModalActions } from "../../redux/actions/modalActions";
+
+import {
+  addBoilerType as addBoilerTypeActions,
+  editBoilerType as updateBoilerTypeActions,
+} from "../../redux/actions/boilerTypesActions";
 
 
-class AddBoilerType extends Component {
-  state = {
-    _id: "",
-    skillsId: "",
-    type: "",
-    stock: "",
-    description: "",
-  };
+export class AddBoilerType extends Component {
 
-  componentDidMount() {
-    if (this.props.boilerTypeEdit) {
-      this.handleEdit(this.props.boilerTypeEdit);
-    }
-  }
-
-  handleCleanForm = () => {
-    this.setState({
-      _id: "",
-      skillsId: "",
-      type: "",
-      stock: "",
-      description: "",
-    });
-    this.props.handleShowForm();
-  };
-
-  handleEdit = (boilerTypeEdit) => {
-    this.setState({
-      _id: boilerTypeEdit._id,
-      skillsId: boilerTypeEdit.skillsId,
-      type: boilerTypeEdit.type,
-      stock: boilerTypeEdit.stock,
-      description: boilerTypeEdit.description,
-    });
-  };
-
-  onSubmit = (e) => {
-    e.preventDefault();
-    if (this.state._id){
+  onSubmit = (values) => {
+    if (values._id) {
       this.props.updateBoilerType(
-        this.state._id,
-        this.state.skillsId,
-        this.state.type,
-        this.state.stock,
-        this.state.description
+        values._id,
+        values.skillsId,
+        values.type,
+        values.stock,
+        values.description
       );
-    }else {
+    } else {
       this.props.addBoilerType(
-        this.state.skillsId,
-        this.state.type,
-        this.state.stock,
-        this.state.description
+        values.skillsId,
+        values.type,
+        values.stock,
+        values.description
       );
     }
-    this.handleCleanForm();
+    this.props.closeModal();
   };
-
-  onChange = (e) => this.setState({ [e.target.name]: e.target.value });
 
   render() {
+    const boilerTypeEdit = this.props.boilerTypeEdit;
+
+    const required = value => (value ? undefined : 'Required');
+
+    const validateSkillsId = value => /^(?=[a-f\d]{24}$)(\d+[a-f]|[a-f]+\d)/i.test(value) ? undefined: ' Invalid Skill Id';
+
+    const validateType = value => /^([1-4])/i.test(value) ? undefined: ' Invalid Type';
+
+    const validateStock = value => /^([1-9]{1,2}|100)$/i.test(value) ? undefined: ' Invalid Stock';
     
+    const composeValidator =  (...validators) => value => validators.reduce((error, validator) => error  || validator(value), undefined);
 
-  interface InputRowProps extends FieldRenderProps<String, HTMLElement> {
-    label: string
-  }
-  const InputRow = ({input, meta, label}: InputRowProps) => (
-    <div className={styles.input} >
-      <label>{label} </label>
-      <input {...input} placeholder={label}/>
-      {meta.touched && meta.error &&<span>{meta.error}</span>}
-    </div>
-  )
-  
-  const required = value => (value ? undefined : 'Required');
-
-  const validateSkillsId = value => /^(?=[a-f\d]{24}$)(\d+[a-f]|[a-f]+\d)/i.test(value) ? undefined: ' Invalid Skill Id';
-
-  const validateType = value => /^([1-4])/i.test(value) ? undefined: ' Invalid Type';
-
-  const validateStock = value => /^([1-9]{1,2}|100)$/i.test(value) ? undefined: ' Invalid Stock';
-  
-  const composeValidator =  (...validators) => value => validators.reduce((error, validator) => error  || validator(value), undefined);
-    
     return (
       <div>
-        <h3>{this.state._id ? "Edit boiler type" : "Add new boiler type"}</h3>
-        <Form 
-          onSubmit={(onSubmit) => {
-            console.log(onSubmit);
+        <h1>
+          {boilerTypeEdit && boilerTypeEdit._id ? "Edit boiler type" : "Add new boiler type"}
+        </h1>
+        <Form
+          onSubmit={this.onSubmit}
+          initialValues={{
+            _id: boilerTypeEdit && boilerTypeEdit._id,
+            skillsId: boilerTypeEdit && boilerTypeEdit.skillsId,
+            type: boilerTypeEdit && boilerTypeEdit.type,
+            stock: boilerTypeEdit && boilerTypeEdit.stock,
+            description: boilerTypeEdit && boilerTypeEdit.description,
           }}
-          
-          render ={({ handleSubmit, form, values }) => (
+          // validate={(values) => {
+          //   const errors = {};
+          //   if (!values.skillsId) {
+          //     errors.skillsId = "Required";
+          //   }
+          //   if (!values.type) {
+          //     errors.type = "Required";
+          //   }
+
+          //   if (!values.stock) {
+          //     errors.stock = "Required";
+          //   }
+
+          //   if (!values.description) {
+          //     errors.description = "Required";
+          //   }
+
+          //   return errors;
+          // }}
+          render={({ handleSubmit }) => (
             <form onSubmit={handleSubmit}>
-              <input type="hidden" name="_id" value={this.state._id} />
-              
-              <Field name="skillsId" render={InputRow} label="Skills Id" validate={composeValidator(required, validateSkillsId)}/>
-              
-              <Field name="type" render={InputRow} label="Type" validate={composeValidator(required,validateType)}/>
-              
-              <Field name="stock" render={InputRow} label="Stock" validate={composeValidator(required,validateStock)}/>
-             
-              <Field name="description" render={InputRow} label="Description" validate={required}/>
-              
-              
-              {this.state._id ?
-              <input
-                type="submit"
-                value="Save"
+              <Field
+                component="input"
+                type="hidden"
+                name="_id"
                 className={styles.input}
+                placeholder="Id boiler type..."
               />
-              :
-              <input
-                type="submit"
-                value="Add"
+              <Field
+                component={TextInput}
+                type="text"
+                name="skillsId"
                 className={styles.input}
-              />}
-              <input
-                type="button"
-                value="Cancel"
-                className={styles.input}
-                onClick={this.handleCleanForm}
+                placeholder="Skill Id..."
+                validate={composeValidator(required, validateSkillsId)}
               />
+              <Field
+                component={TextInput}
+                type="text"
+                name="type"
+                className={styles.input}
+                placeholder="Type..."
+                validate={composeValidator(required,validateType)}
+              />
+              <Field
+                component={TextInput}
+                type="text"
+                name="stock"
+                className={styles.input}
+                placeholder="Stock..."
+                validate={composeValidator(required,validateStock)}
+              />
+              <Field
+                component={TextInput}
+                type="text"
+                name="description"
+                className={styles.input}
+                placeholder="Description..."
+                validate={required}
+              />
+              <div className={styles.formsBtn}>
+                {boilerTypeEdit && boilerTypeEdit._id ? (
+                  <button type='submit' title="Save" className={styles.btnStyle}>
+                    <i className="far fa-save"></i>
+                  </button>
+                ) : (
+                  <button type='submit' title="Add" className={styles.btnStyle}>
+                    <i className="fas fa-plus"></i>
+                  </button>
+                )}
+                <div>
+                  <button
+                    title="Cancel"
+                    className={styles.btnStyle}
+                    onClick={this.props.closeModal}
+                  >
+                    <i className="fas fa-ban"></i>
+                  </button>
+                </div>
+              </div>
             </form>
           )}
         />
@@ -136,11 +151,39 @@ class AddBoilerType extends Component {
 
 // PropTypes
 AddBoilerType.propTypes = {
-  addBoilerType: PropTypes.func.isRequired,
-  updateBoilerType: PropTypes.func.isRequired,
-  handleShowForm: PropTypes.func.isRequired,
   boilerTypeEdit: PropTypes.object,
 };
 
+const mapDispatchToProps = (dispatch) => ({
+  closeModal: () => dispatch(closeModalActions()),
+  addBoilerType: (skillsId, type, stock, description) =>
+    dispatch(
+      addBoilerTypeActions(
+        skillsId,
+        type,
+        stock,
+        description
+      )
+    ),
+  updateBoilerType: (
+    _id,
+    skillsId,
+    type,
+    stock,
+    description
+  ) =>
+    dispatch(
+      updateBoilerTypeActions(
+        _id,
+        skillsId,
+        type,
+        stock,
+        description
+      )
+    ),
+});
 
-export default AddBoilerType;
+const mapStateToProps = (state) => ({
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(AddBoilerType);
