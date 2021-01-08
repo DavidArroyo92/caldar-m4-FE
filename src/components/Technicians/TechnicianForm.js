@@ -4,13 +4,16 @@ import { connect } from 'react-redux';
 import styles from "../../layout/main/main.module.css";
 //import { bindActionCreators } from 'redux';
 import {
-    addTechnicians as addTechniciansActions,
-    editTechnicians as updateTechniciansActions,
+    addTechnician as addTechnicianActions,
+    editTechnician as updateTechnicianActions,
 } from '../../redux/actions/techniciansActions';
 import {
     closeModal as closeModalActions
 } from '../../redux/actions/modalActions';
-import { required, email, composeValidations } from '../../utils/validations';
+import { 
+    required, 
+    //email, composeValidations 
+} from '../../utils/validations';
 import { Form, Field } from 'react-final-form';
 import TextInput from '../../SharedComponents/TextInput/TextInput';
 
@@ -30,7 +33,7 @@ export class TechnicianForm extends Component {
                 values.daily_capacity,
             );
         } else {
-            this.props.addTechnicians(
+            this.props.addTechnician(
                 values.firstName,
                 values.lastName,
                 values.email,
@@ -167,9 +170,9 @@ TechnicianForm.propTypes = {
 
 const mapDispatchToProps = (dispatch) => ({
     closeModal: () => dispatch(closeModalActions()),
-    addTechnicians: (firstName, lastName, email, typeIds, skillsId, hour_rate, daily_capacity) =>
+    addTechnician: (firstName, lastName, email, typeIds, skillsId, hour_rate, daily_capacity) =>
       dispatch(
-        addTechniciansActions(
+        addTechnicianActions(
           firstName,
           lastName,
           email,
@@ -179,7 +182,7 @@ const mapDispatchToProps = (dispatch) => ({
           daily_capacity,
         )
       ),
-    editTechnicians: (
+    editTechnician: (
       _id,
       firstName,
       lastName,
@@ -190,7 +193,7 @@ const mapDispatchToProps = (dispatch) => ({
       daily_capacity,
     ) =>
       dispatch(
-        updateTechniciansActions(
+        updateTechnicianActions(
           _id,
           firstName,
           lastName,
@@ -206,5 +209,5 @@ const mapDispatchToProps = (dispatch) => ({
   const mapStateToProps = (state) => ({
   });
 
-export default connect(null, mapDispatchToProps)(TechnicianForm);
+export default connect(mapStateToProps, mapDispatchToProps)(TechnicianForm);
 

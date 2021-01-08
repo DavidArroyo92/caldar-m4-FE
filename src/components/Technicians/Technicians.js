@@ -5,10 +5,10 @@ import TechnicianForm from './TechnicianForm';
 import styles from "../../layout/main/main.module.css";
 import { connect } from "react-redux";
 import {
-  getTechnicians as getTechniciansActions,
-  delTechnicians as delTechniciansActions,
-  addTechnicians as addTechniciansActions,
-  editTechnicians as updateTechniciansActions,
+  getTechnicians as getTechnicianActions,
+  //delTechnicians as delTechniciansActions,
+  //addTechnicians as addTechniciansActions,
+  //editTechnicians as updateTechniciansActions,
 } from "../../redux/actions/techniciansActions";
 import {
   showModal as showModalAction
@@ -62,7 +62,7 @@ class Technicians extends Component {
 
 const mapDispatchToProps = (dispatch) => ({
   showModal: (modalType) => dispatch(showModalAction(modalType)),
-  getTechnicians: () => dispatch(getTechniciansActions()),
+  getTechnicians: () => dispatch(getTechnicianActions()),
   //delTechnicians: (_id) => dispatch(delTechniciansActions(_id)),
 });
 

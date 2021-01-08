@@ -1,7 +1,7 @@
 import React, { Component }from 'react';
 import { connect } from 'react-redux';
 import {
-    delTechnicians as delTechnicianActions
+    delTechnician as delTechnicianActions
 } from '../../redux/actions/techniciansActions';
 import {
     closeModal as closeModalActions
@@ -12,7 +12,7 @@ import PropTypes from "prop-types";
 class RemoveTechnicianMessage extends Component {
     render() {
 		const handleDelete = () => {
-			this.props.delTechnicians(this.props.technicianId);
+			this.props.delTechnician(this.props.technicianId);
 			this.props.closeModal();
 		}
 
@@ -47,7 +47,7 @@ RemoveTechnicianMessage.propTypes = {
   };
   
   const mapDispatchToProps = (dispatch) => ({
-    delTechnicians: (_id) => dispatch(delTechnicianActions(_id)),
+    delTechnician: (_id) => dispatch(delTechnicianActions(_id)),
     closeModal: () => dispatch(closeModalActions()),
   });
   
