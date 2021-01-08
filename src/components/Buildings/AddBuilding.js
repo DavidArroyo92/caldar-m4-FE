@@ -77,7 +77,7 @@ export class AddBuilding extends Component {
                     }
                     if(!values.phone){
                       errors.phone="Required";
-                    } else if (!/^[+0-9]+[^-_()\\s]$/.test(values.phone) || (values.phone.length <7) || (values.adress.indexOf(" ") !== -1) ){
+                    } else if (!/^[+0-9]+[^-_()\\s]$/.test(values.phone) || (values.phone.length <7) || (values.phone.indexOf(" ") !== -1) ){
                       errors.phone = "Number of at least 7 digits, do not accept spaces, hyphens or parentheses."
                     }
 
