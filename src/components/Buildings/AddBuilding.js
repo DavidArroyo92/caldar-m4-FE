@@ -57,23 +57,32 @@ export class AddBuilding extends Component {
                     const errors = {};
 
                     if(!values.boilersId){
-                      errors.typeId="Required";
+                      errors.boilersId="Required";
+                    } else if ((values.boilersId.length <24)){
+                        errors.boilersId = 'At least 24 characters, only numbers and letter. Example 5fef8b6c46090d0017049421'
                     }
                     if(!values.businessName){
-                      errors.typeId="Required";
+                      errors.businessName="Required";
                     }
                     if(!values.email){
-                      errors.typeId="Required";
+                      errors.email="Required";
+                    } else if (!/^[^@]+@[^@]+\.[A-Z]{2,4}$/i.test(values.email)){
+                      errors.email = "invalid e-mail the E-mail must contain @ and .com"
                     }
+
                     if(!values.adress){
-                      errors.typeId="Required";
+                      errors.adress="Required";
+                    } else if (!/[a-z]/i.test(values.adress) || !/\d/g.test(values.adress) || (values.adress.length <5) || (values.adress.indexOf(" ") === -1)){
+                      errors.adress = "At least 5 characters, with letters, numbers and a space"
                     }
                     if(!values.phone){
-                      errors.typeId="Required";
+                      errors.phone="Required";
+                    } else if (!/^[+0-9]+[^-_()\\s]$/.test(values.phone) || (values.phone.length <7) || (values.adress.indexOf(" ") !== -1) ){
+                      errors.phone = "Number of at least 7 digits, do not accept spaces, hyphens or parentheses."
                     }
 
                     return errors;
-                  }}
+    }}
                   render={({handleSubmit}) => (
                         <form onSubmit={handleSubmit}>
                           <Field 
@@ -165,17 +174,18 @@ AddBuilding.propTypes = {
         boilersId, 
         businessName,
         email,
-        phone,
-        adress
+        adress,
+        phone
          )
     ),
+
     editBuilding: (
       _id,
       boilersId, 
         businessName,
         email,
-        phone,
-        adress
+        adress,
+        phone
     ) =>
     dispatch (
       updateBuildingActions(
@@ -183,8 +193,8 @@ AddBuilding.propTypes = {
         boilersId, 
         businessName,
         email,
-        phone,
-        adress
+        adress,
+        phone
       )
     ),
 });

@@ -1,4 +1,4 @@
-import React from 'react';
+import React , {useEffect} from 'react';
 import styles from './App.module.css';
 import Navbar from './layout/navbar/navbar';
 import Header from './layout/header/header';
@@ -15,7 +15,7 @@ import { bindActionCreators } from "redux";
 import Login from "./components/Login/Login";
 import { setAuthentification } from "./redux/actions/authActions";
 import { tokenListener } from "./firebase";
-import { conect } from "react-redux";
+import { connect } from "react-redux";
 
 
 const App = ({

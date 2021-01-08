@@ -6,6 +6,7 @@ import customersReducer from './customersReducer';
 import techniciansReducer from './techniciansReducer';
 import modalReducer from './modalReducer';
 import authReducer from './authReducer';
+import {combineReducers} from 'redux';
 
 const rootReducer = combineReducers({
     appointments: appointmentsReducer,

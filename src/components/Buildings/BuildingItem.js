@@ -1,14 +1,15 @@
-import React, { Component, useState } from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types';
 import styles from '../../layout/main/main.module.css';
-import confirmDialog from "../../components/Buildings/RemoveBuildingMessage";
+import { showModal as showModalActions } from "../../redux/actions/modalActions";
+import modalTypes from "../../redux/types/types-modals.js";
+import { connect } from "react-redux";
 
 export class BuildingItem extends Component {
 
-//     ShowDel Modal
-//   showDelModal = () =>{
-//     this.props.showModal(modalTypes.DEL_BUILDING);
-//   };
+    showDeleteModal = (_id) => {
+        this.props.showModal(modalTypes.DEL_BUILDING, {id: _id});
+      };
 
     render() {
         const
@@ -20,14 +21,6 @@ export class BuildingItem extends Component {
                 phone,
                 adress,
             } = this.props.building;
-
-            const [confirmDialog, setConfirmDialog] = useState({ isOpen: false, title: '', subTitle: '' })
-const onDelete = id => {
-    setConfirmDialog({
-        ...confirmDialog,
-        isOpen: false
-    })
-}
         return (
             <tr className={styles.table}>
                        <td>
@@ -59,27 +52,15 @@ const onDelete = id => {
                             <button
                                 title="Delete"
                                 className={styles.btnStyle}
-                                onClick= {() => {
-                                    setConfirmDialog({
-                                        isOpen: true,
-                                        title: 'Are you sure to delete this record?',
-                                        subTitle: "You can't undo this operation",
-                                        onConfirm: () => { onDelete(item.id) }
-                                    })
-                                }}>
+                                onClick={this.showDeleteModal(_id)}
+                            >
                                 <i className="far fa-trash-alt"></i>
                             </button>
-                            <ConfirmDialog
-                                confirmDialog={confirmDialog}
-                                setConfirmDialog={setConfirmDialog}
-            />
                         </td>
-                   </tr>   
-                   
+                   </tr>
         )
-
     }
-};
+}
 
 //proptypes
 BuildingItem.propTypes = {
@@ -88,4 +69,10 @@ BuildingItem.propTypes = {
     editBuilding: PropTypes.func.isRequired,
   };
 
-export default BuildingItem;
+  const mapDispatchToProps = (dispatch) => ({
+    showModal: (modalType, meta) => dispatch(showModalActions(modalType, meta)),
+  });
+  
+  const mapStateToProps = (state) => ({});
+  
+  export default connect( mapStateToProps, mapDispatchToProps)(BuildingItem);

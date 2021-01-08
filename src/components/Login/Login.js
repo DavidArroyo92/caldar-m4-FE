@@ -37,7 +37,7 @@ const Login = ({ login }) => {
                                 />
                             </div>
                             <div>
-                                <Button
+                                <button
                                     disabled = {submitting || pristine}
                                     primary btnLabel = "Login"
                                     type = "submit"

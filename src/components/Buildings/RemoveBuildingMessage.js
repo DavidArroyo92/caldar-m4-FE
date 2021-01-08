@@ -1,66 +1,52 @@
-import React from 'react';
-import { Dialog, DialogTitle, DialogContent, DialogActions, Typography, makeStyles, IconButton } from '@material-ui/core';
+import React, { Component } from "react";
+import { delBoiler as delBoilerActions } from "../../redux/actions/boilersActions";
+import styles from "../../layout/main/main.module.css";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import { closeModal as closeModalActions } from "../../redux/actions/modalActions";
 
-
-
-const useStyles = makeStyles(theme => ({
-    dialog: {
-        padding: theme.spacing(2),
-        position: 'absolute',
-        top: theme.spacing(5)
-    },
-    dialogTitle: {
-        textAlign: 'center'
-    },
-    dialogContent: {
-        textAlign: 'center'
-    },
-    dialogAction: {
-        justifyContent: 'center'
-    },
-    titleIcon: {
-        backgroundColor: theme.palette.secondary.light,
-        color: theme.palette.secondary.main,
-        '&:hover': {
-            backgroundColor: theme.palette.secondary.light,
-            cursor: 'default'
-        },
-        '& .MuiSvgIcon-root': {
-            fontSize: '8rem',
-        }
-    }
-}))
-
-export default function ConfirmDialog(props) {
-
-    const { confirmDialog, setConfirmDialog } = props;
-    const classes = useStyles()
-
+class RemoveBoilerMessage extends Component {
+  render() {
+		const handleDelete = () => {
+			this.props.delBoiler(this.props.boilerId);
+			this.props.closeModal();
+		}
     return (
-        <Dialog open={confirmDialog.isOpen} classes={{ paper: classes.dialog }}>
-            <DialogTitle className={classes.dialogTitle}>
-                <IconButton disableRipple className={classes.titleIcon}>
-                    <NotListedLocationIcon />
-                </IconButton>
-            </DialogTitle>
-            <DialogContent className={classes.dialogContent}>
-                <Typography variant="h6">
-                    {confirmDialog.title}
-                </Typography>
-                <Typography variant="subtitle2">
-                    {confirmDialog.subTitle}
-                </Typography>
-            </DialogContent>
-            <DialogActions className={classes.dialogAction}>
-                <Button
-                    text="No"
-                    color="default"
-                    onClick={() => setConfirmDialog({ ...confirmDialog, isOpen: false })} />
-                <Button
-                    text="Yes"
-                    color="secondary"
-                    onClick={confirmDialog.onConfirm} />
-            </DialogActions>
-        </Dialog>
-    )
+      <div>
+        <h1>Desea borrar el registro?</h1>
+        <button
+          type="submit"
+          title="Add"
+          className={styles.btnStyle}
+          onClick={handleDelete}
+        >
+          <i className="fas fa-check"></i>
+        </button>
+        <button
+          title="Cancel"
+          className={styles.btnStyle}
+          onClick={this.props.closeModal}
+        >
+          <i className="fas fa-ban"></i>
+        </button>
+      </div>
+    );
+  }
 }
+
+// PropTypes
+RemoveBoilerMessage.propTypes = {
+  boilerId: PropTypes.string,
+};
+
+const mapDispatchToProps = (dispatch) => ({
+  delBoiler: (_id) => dispatch(delBoilerActions(_id)),
+  closeModal: () => dispatch(closeModalActions()),
+});
+
+const mapStateToProps = (state) => ({});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(RemoveBoilerMessage);
