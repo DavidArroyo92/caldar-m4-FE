@@ -36,12 +36,20 @@ class Buildings extends Component{
           <BuildingItem
             key={index}
             building={building}
-            delBuilding={this.props.delBuilding}
-            editBuilding={this.props.editBuilding}
           />
-        ))}
+        )
+      )
+    }
         </tbody>
-        </table>
+       </table>
+
+       <button
+            title="See report"
+            className={styles.btnStyle}
+            onClick={() => this.props.handleShowGraph()}
+          >
+            <i class="fas fa-chart-pie"></i>
+          </button>
       </div>
     );
   }
@@ -51,7 +59,6 @@ class Buildings extends Component{
 //proptypes
 Buildings.propTypes = {
   buildings: PropTypes.array.isRequired,
-  delBuilding: PropTypes.func.isRequired,
   editBuilding: PropTypes.func.isRequired,
   showAddModal: PropTypes.func.isRequired,
 };

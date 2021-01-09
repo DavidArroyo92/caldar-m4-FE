@@ -11,6 +11,10 @@ export class BuildingItem extends Component {
         this.props.showModal(modalTypes.DEL_BUILDING, {id: _id});
       };
 
+      showEditModal = (_id) => {
+        this.props.showModal(modalTypes.EDIT_BUILDING, {id: _id});
+      };
+
     render() {
         const
             {
@@ -44,7 +48,7 @@ export class BuildingItem extends Component {
                         <td>
                             <button
                                 title="Edit"
-                                onClick={this.props.editBuilding.bind(this, this.props.building)}
+                                onClick={() =>this.showEditModal(_id)}
                                 className={styles.btnStyle}
                             >
                                 <i className="far fa-edit"></i>
@@ -62,11 +66,9 @@ export class BuildingItem extends Component {
     }
 }
 
-//proptypes
+// proptypes 
 BuildingItem.propTypes = {
     building: PropTypes.object.isRequired,
-    delBuilding: PropTypes.func.isRequired,
-    editBuilding: PropTypes.func.isRequired,
   };
 
   const mapDispatchToProps = (dispatch) => ({

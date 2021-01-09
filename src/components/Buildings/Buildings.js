@@ -3,6 +3,7 @@ import BuildingsList from './BuildingsList';
 import AddBuilding from './AddBuilding';
 import styles from "../../layout/main/main.module.css";
 import { connect} from 'react-redux';
+import Chart from './Chart'
 import {
   getBuildings as getBuildingActions,
   delBuilding as delBuildingActions, 
@@ -18,7 +19,36 @@ class Buildings extends Component {
   state = {
     buildingEdit: null,
     showForm: false,
+    showGraph: false,
+    chartData:{},
   };
+
+  componentWillMount(){
+    // this.getchartData(); // this should be this.getChartData();
+     this.getChartData();
+   }
+
+   getChartData(){
+    // Ajax calls here
+    this.setState({
+      chartData:{
+        labels: ['Actives', 'No - Actives'],
+        datasets:[
+          {
+            label:'Actives',
+            data:[
+              11,
+              0
+            ],
+            backgroundColor:[
+              'rgba(255, 99, 132, 0.6)',
+              'rgba(54, 162, 235, 0.6)'
+            ]
+          }
+        ]
+      }
+    });
+  }
 
 
   //Get data from API
@@ -40,6 +70,14 @@ class Buildings extends Component {
     this.props.showModal(modalTypes.ADD_BUILDING);
   };
 
+  // Show Graph
+handleShowGraph = () => {
+  this.setState({
+    showGraph: !this.state.showGraph,
+  });
+  window.scrollTo(0, 0);
+};
+
 
   render() { 
       return (
@@ -51,13 +89,23 @@ class Buildings extends Component {
          ):(
             <BuildingsList
               buildings={this.props.buildings}
-              delBuilding={this.props.delBuilding}
               editBuilding={this.editBuilding}
               showAddModal={this.showAddModal}
               showDelModal={this.showDelModal}
+              handleShowGraph={this.handleShowGraph}
+              showGraph={this.state.showGraph}
             />
          )
          }
+         { this.state.showGraph ? (
+      <Chart
+      handleShowGraph={this.handleShowGraph}
+      showGraph={this.state.showGraph}
+      chartData={this.state.chartData}
+       legendPosition="bottom"
+      />
+      ) : ('')
+        }
         </div>
         
       );

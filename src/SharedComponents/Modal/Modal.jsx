@@ -9,12 +9,13 @@ import modalTypes from '../../redux/types/types-modals';
 // Components
 import AppointmentForm from '../../components/Appointments/AppointmentForm';
 import RemoveAppointmentMessage from '../../components/Appointments/RemoveAppointmentMessage';
-import BoilerForm from '../../components/Boilers/BoilerForm';
+import AddBoiler from '../../components/Boilers/AddBoiler';
 import RemoveBoilerMessage from '../../components/Boilers/RemoveBoilerMessage';
 import BoilerTypeForm from '../../components/BoilersTypes/BoilerTypeForm';
 import RemoveBoilerTypeMessage from '../../components/BoilersTypes/RemoveBoilerTypeMessage';
 import AddBuilding from '../../components/Buildings/AddBuilding';
-import BuildingItem from '../../components/Buildings/BuildingItem';
+import RemoveBuildingMessage from "../../components/Buildings/RemoveBuildingMessage";
+import EditBuildingMessage from "../../components/Buildings/EditBuildingMesagge";
 import CustomerForm from '../../components/Customers/CustomerForm';
 import RemoveCustomerMessage from '../../components/Customers/RemoveCustomerMessage';
 import TechnicianForm from '../../components/Technicians/TechnicianForm';
@@ -62,7 +63,7 @@ const Modal = ({
             modalComponent = <RemoveAppointmentMessage appointmentId={meta.id} />
             break;
         case modalTypes.ADD_BOILER:
-            modalComponent = <BoilerForm />
+            modalComponent = <AddBoiler />
             break;
         case modalTypes.DEL_BOILER:
             modalComponent = <RemoveBoilerMessage boilerId={meta.id} />
@@ -77,7 +78,10 @@ const Modal = ({
             modalComponent = <AddBuilding/>
             break;
         case modalTypes.DEL_BUILDING:
-            modalComponent = <BuildingItem buildingId={meta.id} />
+            modalComponent = <RemoveBuildingMessage buildingId={meta.id} />
+            break;
+        case modalTypes.EDIT_BUILDING:
+            modalComponent = <EditBuildingMessage buildingId={meta.id} />
             break;
         case modalTypes.ADD_CUSTOMER:
             modalComponent = <CustomerForm />
@@ -128,6 +132,5 @@ const mapDispatchToProps = (dispatch) =>{
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Modal);  
-
 
 

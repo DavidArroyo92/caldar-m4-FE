@@ -1,14 +1,14 @@
 import React, { Component } from "react";
-import { delBoiler as delBoilerActions } from "../../redux/actions/boilersActions";
-import styles from "../../layout/main/main.module.css";
+import { delBuilding as delBuildingActions } from "../../redux/actions/buildingsActions"
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { closeModal as closeModalActions } from "../../redux/actions/modalActions";
+import styles from "../../layout/main/main.module.css";
 
-class RemoveBoilerMessage extends Component {
+class RemoveBuildingMessage extends Component {
   render() {
 		const handleDelete = () => {
-			this.props.delBoiler(this.props.boilerId);
+			this.props.delBuilding(this.props.buildingId);
 			this.props.closeModal();
 		}
     return (
@@ -35,12 +35,12 @@ class RemoveBoilerMessage extends Component {
 }
 
 // PropTypes
-RemoveBoilerMessage.propTypes = {
-  boilerId: PropTypes.string,
+RemoveBuildingMessage.propTypes = {
+  buildingId: PropTypes.string,
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  delBoiler: (_id) => dispatch(delBoilerActions(_id)),
+  delBuilding: (_id) => dispatch(delBuildingActions(_id)),
   closeModal: () => dispatch(closeModalActions()),
 });
 
@@ -49,4 +49,4 @@ const mapStateToProps = (state) => ({});
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(RemoveBoilerMessage);
+)(RemoveBuildingMessage);
