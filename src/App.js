@@ -65,7 +65,7 @@ const App = ({
           <div className={styles.mainContent}>
             <Header/>
             <Switch>
-              <Route path="/login" component={Login}/>
+              <Route exact path="/" component={Login}/>
             </Switch>
           </div>
         </div>
