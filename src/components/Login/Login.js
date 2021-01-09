@@ -13,22 +13,41 @@ const Login = ({ login }) => {
 
   return (
     <div>
-      <h1>Log in</h1>
-      <form onSubmit={onSubmitLogin}>
-        <div>
-          <label>
-            Email
-            <input name="email" type="email" placeholder="Email" />
-          </label>
-        </div>
-        <label>
-          Password
-          <input name="password" type="password" placeholder="Password" />
-        </label>
-        <div>
-          <button type="submit">Log in</button>
-        </div>
-      </form>
+      <div>
+        <h1>Login</h1>
+        <Form
+          onSubmit={onSubmitLogin}
+          render={({ handleSubmit, form, submitting, pristine, values }) => {
+            <form onSubmit={handleSubmit}>
+              <div>
+                <Field
+                  name="email"
+                  component={TextInput}
+                  type="text"
+                  placeholder="Email..."
+                  label="Email"
+                />
+              </div>
+              <div>
+                <Field
+                  name="password"
+                  component={TextInput}
+                  type="password"
+                  placeholder="Password..."
+                  label="Password"
+                />
+              </div>
+              <div>
+                <Button
+                  disabled={submitting || pristine}
+                  primary
+                  type="submit"
+                />
+              </div>
+            </form>;
+          }}
+        />
+      </div>
     </div>
   );
 };
