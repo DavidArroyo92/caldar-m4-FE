@@ -44,11 +44,7 @@ const App = ({
               <Header/>
               <Switch>
                 <Route path="/appointments" component={Appointments}/>
-                <Route path="/boilers" component={Boilers}/>
-                <Route path="/boilersTypes" component={BoilersTypes}/>
-                <Route path="/buildings" component={Buildings}/>
-                <Route path="/customers" component={Customers}/>
-                <Route path="/technicians" component={Technicians} />
+
               </Switch>
             </div>
           </div>
@@ -66,6 +62,11 @@ const App = ({
             <Header/>
             <Switch>
               <Route exact path="/" component={Login}/>
+              <Route path="/boilers" component={Boilers}/>
+                <Route path="/boilersTypes" component={BoilersTypes}/>
+                <Route path="/buildings" component={Buildings}/>
+                <Route path="/customers" component={Customers}/>
+                <Route path="/technicians" component={Technicians} />
             </Switch>
           </div>
         </div>
