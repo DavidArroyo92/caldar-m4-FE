@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styles from './App.module.css';
 import Navbar from './layout/navbar/navbar';
 import Header from './layout/header/header';

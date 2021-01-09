@@ -1,6 +1,6 @@
 import firebase from "firebase/app";
 import "firebase/auth"
-import { store } from "../index"
+import { store } from "../redux/store"
 
 
 const firebaseConfig = {
