@@ -3,6 +3,7 @@ import { Form, Field } from "react-final-form";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import TextInput from "../../SharedComponents/TextInput/TextInput";
+import PassInput from "../../SharedComponents/PassInput/PassInput";
 import { loginWithFirebase } from "../../redux/actions/authActions";
 import { Button } from "@material-ui/core";
 
@@ -15,15 +16,13 @@ const Login = ({ login }) => {
     <div>
       <div>
         <h1>Login</h1>
-        <Form
-          onSubmit={onSubmitLogin}
-          render={({ handleSubmit, form, submitting, pristine, values }) => {
+        <Form onSubmit={onSubmitLogin}>
+          {({ handleSubmit }) => (
             <form onSubmit={handleSubmit}>
               <div>
                 <Field
                   name="email"
                   component={TextInput}
-                  type="text"
                   placeholder="Email..."
                   label="Email"
                 />
@@ -31,22 +30,17 @@ const Login = ({ login }) => {
               <div>
                 <Field
                   name="password"
-                  component={TextInput}
-                  type="password"
+                  component={PassInput}
                   placeholder="Password..."
                   label="Password"
                 />
               </div>
               <div>
-                <Button
-                  disabled={submitting || pristine}
-                  primary
-                  type="submit"
-                />
+                <Button type="submit" > LOGIN </Button>
               </div>
-            </form>;
-          }}
-        />
+            </form>
+          )}
+        </Form>
       </div>
     </div>
   );

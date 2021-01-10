@@ -13,21 +13,21 @@ import Modal from './SharedComponents/Modal/Modal';
 
 import { bindActionCreators } from "redux";
 import Login from "./components/Login/Login";
-import { setAuthentification } from "./redux/actions/authActions";
+import { setAuthentication } from "./redux/actions/authActions";
 import { tokenListener } from "./firebase";
 import { connect } from "react-redux";
 
 
 const App = ({
   authenticated,
-  setAuthentification
+  setAuthentication
 }) => {
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token){
-      setAuthentification();
+      setAuthentication();
     }
-  }, [setAuthentification])
+  }, [setAuthentication])
 
   useEffect(() => {
     tokenListener();
@@ -44,7 +44,11 @@ const App = ({
               <Header/>
               <Switch>
                 <Route path="/appointments" component={Appointments}/>
-
+                <Route path="/boilers" component={Boilers}/>
+                <Route path="/boilersTypes" component={BoilersTypes}/>
+                <Route path="/buildings" component={Buildings}/>
+                <Route path="/customers" component={Customers}/>
+                <Route path="/technicians" component={Technicians}/>
               </Switch>
             </div>
           </div>
@@ -62,11 +66,6 @@ const App = ({
             <Header/>
             <Switch>
               <Route exact path="/" component={Login}/>
-              <Route path="/boilers" component={Boilers}/>
-                <Route path="/boilersTypes" component={BoilersTypes}/>
-                <Route path="/buildings" component={Buildings}/>
-                <Route path="/customers" component={Customers}/>
-                <Route path="/technicians" component={Technicians} />
             </Switch>
           </div>
         </div>
@@ -83,7 +82,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({
-      setAuthentification,
+      setAuthentication,
   }, dispatch);
 }
 
