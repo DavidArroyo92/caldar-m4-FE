@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import  {Pie} from 'react-chartjs-2';
+import styles from "../../layout/main/main.module.css";
 
 class Chart extends Component{
   constructor(props){
@@ -13,12 +14,11 @@ class Chart extends Component{
     displayTitle:true,
     displayLegend: true,
     legendPosition:'right',
-    BuildingAmount: {}
   }
 
   render(){
     return (
-      <div className="chart">
+      <div className={styles.Chart}>
         {/* <Bar
           data={this.state.chartData}
           options={{
@@ -63,6 +63,13 @@ class Chart extends Component{
             }
           }}
         />
+        <button
+          title="Back"
+          className={styles.btnBackStyle}
+          onClick={() => this.props.handleShowGraph()}
+        >
+          <i class="fas fa-chevron-circle-left"></i>
+        </button>
       </div>
     )
   }
