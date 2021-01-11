@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styles from './App.module.css';
 import Navbar from './layout/navbar/navbar';
 import Header from './layout/header/header';
@@ -8,7 +8,7 @@ import BoilersTypes from './components/BoilersTypes/BoilersTypes';
 import Buildings from './components/Buildings/Buildings';
 import Customers from './components/Customers/Customers';
 import Technicians from './components/Technicians/Technicians';
-import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
+import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import Modal from './SharedComponents/Modal/Modal';
 
 import { bindActionCreators } from "redux";

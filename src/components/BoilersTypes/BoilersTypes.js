@@ -26,7 +26,7 @@ class BoilerTypes extends Component {
   getChartData(){
    this.setState({
      chartData:{
-       labels: ['Business', 'Particular'],
+       labels: ['Types', 'Stock'],
        datasets:[
          {
            label:'Boiler types',
