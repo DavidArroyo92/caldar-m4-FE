@@ -3,6 +3,7 @@ import BuildingItem from './BuildingItem';
 import styles from "../../layout/main/main.module.css";
 import PropTypes from 'prop-types';
 
+
 class Buildings extends Component{
 
 
@@ -13,7 +14,7 @@ class Buildings extends Component{
             <button
               title="Add"
               className={styles.btnStyle}
-              onClick={() => this.props.handleShowForm()}
+              onClick={() => this.props.showAddModal()}
             >
               <i className="fas fa-plus"></i>
             </button>
@@ -35,12 +36,20 @@ class Buildings extends Component{
           <BuildingItem
             key={index}
             building={building}
-            delBuilding={this.props.delBuilding}
-            editBuilding={this.props.editBuilding}
           />
-        ))}
+        )
+      )
+    }
         </tbody>
-        </table>
+       </table>
+
+       <button
+            title="See report"
+            className={styles.btnStyle}
+            onClick={() => this.props.handleShowGraph()}
+          >
+            <i class="fas fa-chart-pie"></i>
+          </button>
       </div>
     );
   }
@@ -51,9 +60,7 @@ class Buildings extends Component{
 Buildings.propTypes = {
   buildings: PropTypes.array.isRequired,
   editBuilding: PropTypes.func.isRequired,
-  delBuilding: PropTypes.func.isRequired,
-  handleShowForm: PropTypes.func.isRequired,
-  showForm: PropTypes.bool.isRequired,
+  showAddModal: PropTypes.func.isRequired,
 };
 
 export default Buildings;
