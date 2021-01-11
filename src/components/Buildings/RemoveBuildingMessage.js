@@ -13,7 +13,7 @@ class RemoveBuildingMessage extends Component {
 		}
     return (
       <div>
-        <h1>Desea borrar el registro?</h1>
+        <h1>Are you sure to delete this item?</h1>
         <button
           type="submit"
           title="Add"
