@@ -1,158 +1,115 @@
-import React, { Component } from 'react';
-import AddBuilding from './AddBuilding';
+import React, { Component} from 'react';
 import BuildingsList from './BuildingsList';
-// import { v4 as uuidv4 } from 'uuid';
+import Chart from './Chart'
 import styles from "../../layout/main/main.module.css";
-import {
-    getBuildings as getBuildingActions,
-    addBuilding as addBuildingActions,
-    delBuilding as delBuildingActions,
-    editBuilding as updateBuildingActions 
-} from '../../redux/actions/buildingsActions';
 import { connect} from 'react-redux';
-// import {bindActionCreators} from 'redux'
+import {
+  getBuildings as getBuildingActions,
+      } from '../../redux/actions/buildingsActions';
+import {showModal as showModalAction} from '../../redux/actions/modalActions'
+import modalTypes from '../../redux/types/types-modals';
 
 
 //Set Building Object
 class Buildings extends Component {
+
+
   state = {
-    // buildings: [],
     buildingEdit: null,
     showForm: false,
+    showGraph: false,
+    chartData:{},
   };
 
+  componentWillMount(){
+     this.getChartData();
+   }
 
-//Get Data from JSON.Files
-// componentDidMount(){
-//   const getBuilding = require("../../data/buildingData.json");
-//   this.setState({buildings: getBuilding});
-// }
-
-//Get data from API
-componentDidMount() {
-  this.props.getBuildings();
-}
-
-
-// Show form
-handleShowForm = () => {
+   getChartData(){
     this.setState({
-      showForm: !this.state.showForm,
-      buildingEdit: null,
+      chartData:{
+        labels: ['Business', 'Particular'],
+        datasets:[
+          {
+            label:'Boilers',
+            data:[
+              1,
+              7
+            ],
+            backgroundColor:[
+              'rgba(255, 99, 132, 0.6)',
+              'rgba(54, 162, 235, 0.6)'
+            ]
+          }
+        ]
+      }
+    });
+  }
+
+  //Get data from API
+  componentDidMount() {
+    this.props.getBuildings();
+  }
+
+  // Edit Building
+  editBuilding = (building) => {
+    this.setState({
+      buildingEdit: building,
+      showForm: true,
     });
     window.scrollTo(0, 0);
   };
 
-// Edit Building
-editBuilding = (building) => {
+  //Showadd Modal
+  showAddModal = () =>{
+    this.props.showModal(modalTypes.ADD_BUILDING);
+  };
+
+// Show GRAPH
+handleShowGraph = () => {
   this.setState({
-    buildingEdit: building,
-    showForm: true,
+    showGraph: !this.state.showGraph,
   });
   window.scrollTo(0, 0);
 };
 
-// // Update Customer
-// updateBuilding = (
-//   id,
-//   boilerId,
-//   businessName,
-//   email,
-//   phone,
-//   adress
-// ) => {
+  render() { 
+      return (
+        <div className={styles.info}>
+         {this.state.showGraph? (
+            <Chart
+            handleShowGraph={this.handleShowGraph}
+            showGraph={this.state.showGraph}
+            chartData={this.state.chartData}
+             legendPosition="bottom"
+             buildings={this.props.buildings}
+
+            />
+         ):(
+            <BuildingsList
+              buildings={this.props.buildings}
+              editBuilding={this.editBuilding}
+              showAddModal={this.showAddModal}
+              handleShowGraph={this.handleShowGraph}
+              showGraph={this.state.showGraph}
+            />
+         )
+         }
+        </div>
+      );
+    }
+  }  
   
-//   this.setState({
-//     buildings: this.state.buildings.map((building) => {
-//       if (building.id === id) {
-//         building.boilerId = boilerId;
-//         building.email = email;
-//         building.businessName = businessName;
-//         building.adress = adress;
-//         building.phone = phone;
-//       }
-//       return building;
-//     }),
-//     showForm: false,
-//   });
-// };
+  const mapDispatchToProps = (dispatch) =>({
+    showModal: (modalType) =>dispatch(showModalAction(modalType)),
+      getBuildings: () => dispatch(getBuildingActions()),
+    });
+    
+    const mapStateToProps = (state) =>({
+      buildings: state.buildings.list,
+    });
+    
 
-//Delete building
+    
+    export default connect(mapStateToProps, mapDispatchToProps)(Buildings);
 
-// delBuilding = (id) =>{
-//   this.setState({ 
-//       buildings: [
-//           ...this.state.buildings.filter((building) => building.id !==id),
-//             ],
-//         showForm: false,
-//     });
-// };
-
-// //Add Building
-
-// AddBuilding = (boilerId, businessName,email,phone,adress) =>{
-//   const newBuilding ={
-//     id: uuidv4(),
-//     boilerId,
-//     businessName,
-//     email,
-//     phone,
-//     adress
-//   };
-//   this.setState({ 
-//       buildings: [...this.state.buildings, newBuilding],
-//     showForm: false,
-//     });
-// };
-
-render() {
-    return (
-      <div className={styles.info}>
-        {this.state.showForm ? (
-          <AddBuilding
-            addBuilding={this.props.addBuilding}
-            updateBuilding={this.props.updateBuilding}
-            buildingEdit={this.state.buildingEdit}
-            handleShowForm={this.handleShowForm}
-          />
-        ) : (
-          <BuildingsList
-            buildings={this.props.buildings}
-            delBuilding={this.props.delBuilding}
-            editBuilding={this.editBuilding}
-            handleShowForm={this.handleShowForm}
-            showForm={this.state.showForm}
-          />
-        )}
-      </div>
-    );
-  }
-}  
-
-const mapDispatchToProps = (dispatch) =>({
-    getBuildings: () => dispatch(getBuildingActions()),
-    delBuilding:(_id) => dispatch(delBuildingActions(_id)),
-    addBuilding: (boilersId, businessName,email,phone,adress) =>
-      dispatch(
-        addBuildingActions(boilersId, businessName,email,phone,adress )
-      ),
-    updateBuilding:(_id, boilersId, businessName,email,phone,adress ) =>
-        dispatch(
-          updateBuildingActions(
-            _id,
-              boilersId,
-             businessName,
-             email,
-             phone,
-             adress
-          )
-        ),
-  });
- 
-const mapStateToProps = state =>{
-  return{
-    buildings: state.buildings.list,
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Buildings);
