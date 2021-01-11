@@ -1,3 +1,4 @@
+import { requestGet,requestPost,requestPut,requestDelete } from '../../utils/request';
 import {
   GET_BOILER_FETCHING,
   GET_BOILER_FULFILLED,
@@ -33,7 +34,7 @@ const getBoilerRejected = () => ({
 
 export const getBoilers = () => (dispatch) => {
   dispatch(getBoilerFetching());
-  return fetch(URL)
+  return requestGet(URL)
     .then((data) => data.json())
     .then((response) => {
       dispatch(getBoilerFulfilled(response));
@@ -76,7 +77,7 @@ export const addBoiler = (
     body: JSON.stringify(dataSend),
   };
 
-  return fetch(URL, requestOptions)
+  return requestPost(URL, requestOptions)
     .then((data) => data.json())
     .then((response) => {
       dispatch(addBoilerFulfilled(response));
@@ -111,7 +112,7 @@ export const delBoiler = (_id) => (dispatch) => {
     body: JSON.stringify(dataSend),
   };
 
-  return fetch(`${URL}/${_id}`, requestOptions)
+  return requestDelete(`${URL}/${_id}`, requestOptions)
     .then((data) => data.json())
     .then((response) => {
       dispatch(delBoilerFulfilled(_id));
@@ -159,7 +160,7 @@ export const editBoiler = (
     body: JSON.stringify(dataSend),
   };
 
-  return fetch(`${URL}/${_id}`, requestOptions)
+  return requestPut(`${URL}/${_id}`, requestOptions)
     .then((data) => data.json())
     .then((response) => {
       dispatch(editBoilerFulfilled(response));

@@ -1,3 +1,4 @@
+import { requestGet,requestPost,requestPut,requestDelete } from '../../utils/request';
 import {
   GET_CUSTOMER_FETCHING,
   GET_CUSTOMER_FULFILLED,
@@ -33,7 +34,7 @@ const getCustomerRejected = () => ({
 
 export const getCustomers = () => (dispatch) => {
   dispatch(getCustomerFetching());
-  return fetch(URL)
+  return requestGet(URL)
     .then((data) => data.json())
     .then((response) => {
       dispatch(getCustomerFulfilled(response));
@@ -71,7 +72,7 @@ export const addCustomer = (
     body: JSON.stringify(dataSend),
   };
 
-  return fetch(URL, requestOptions)
+  return requestPost(URL, requestOptions)
     .then((data) => data.json())
     .then((response) => {
       dispatch(addCustomerFulfilled(response));
@@ -106,7 +107,7 @@ export const delCustomer = (_id) => (dispatch) => {
     body: JSON.stringify(dataSend),
   };
 
-  return fetch(`${URL}/${_id}`, requestOptions)
+  return requestDelete(`${URL}/${_id}`, requestOptions)
     .then((data) => data.json())
     .then((response) => {
       dispatch(delCustomerFulfilled(_id));
@@ -148,7 +149,7 @@ export const editCustomer = (
     body: JSON.stringify(dataSend),
   };
 
-  return fetch(`${URL}/${_id}`, requestOptions)
+  return requestPut(`${URL}/${_id}`, requestOptions)
     .then((data) => data.json())
     .then((response) => {
       dispatch(editCustomerFulfilled(response));

@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import styles from './App.module.css';
 import Navbar from './layout/navbar/navbar';
+import NavbarPublic from './layout/navbar/navbarpublic';
 import Header from './layout/header/header';
 import Appointments from './components/Appointments/Appointments';
 import Boilers from './components/Boilers/Boilers';
@@ -10,13 +11,11 @@ import Customers from './components/Customers/Customers';
 import Technicians from './components/Technicians/Technicians';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import Modal from './SharedComponents/Modal/Modal';
-
 import { bindActionCreators } from "redux";
 import Login from "./components/Login/Login";
 import { setAuthentication } from "./redux/actions/authActions";
 import { tokenListener } from "./firebase";
 import { connect } from "react-redux";
-
 
 const App = ({
   authenticated,
@@ -60,8 +59,7 @@ const App = ({
     <Router>
       <div className="App">
         <div className={styles.wrapper}>
-          <Navbar />
-          <Modal />
+          <NavbarPublic />
           <div className={styles.mainContent}>
             <Header/>
             <Switch>

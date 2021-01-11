@@ -15,7 +15,7 @@ const Login = ({ login }) => {
   return (
     <div>
       <div>
-        <h1>Login</h1>
+        <h3>Login</h3>
         <Form onSubmit={onSubmitLogin}>
           {({ handleSubmit }) => (
             <form onSubmit={handleSubmit}>
