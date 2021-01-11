@@ -28,7 +28,6 @@
     padding: 20px;
     border-bottom: 1px solid rgba(0,0,0,0.05);
     border-top: 1px solid rgba(225,225,225,0.05);
-    color: #fff;
 }
 
 .navbarContainer ul li a{
@@ -37,5 +36,11 @@
 }
 
 .navbarContainer ul li:hover{
-    color: orangered;
+    color: #FC6225
+}
+.mainNav{
+    color:white
+}
+.mainNavActive{
+    color:#FC6225
 }

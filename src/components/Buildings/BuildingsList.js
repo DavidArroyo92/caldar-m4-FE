@@ -9,25 +9,25 @@ class Buildings extends Component{
   render(){
     return (
       <div>
-          <h1 className={styles.title}>
-            Buildings{" "}
-            <input
-              type="button"
-              value="+"
-              className={styles.btnStyleNew}
-              onClick={() =>this.props.handleShowForm()}
-            />
+          <h1>Buildings{" "}
+            <button
+              title="Add"
+              className={styles.btnStyle}
+              onClick={() => this.props.handleShowForm()}
+            >
+              <i className="fas fa-plus"></i>
+            </button>
           </h1>
           <table className={styles.table}>
           <thead>
-              <tr>
+              <tr className={styles.listHead}>
                 <th>Id</th>
                 <th>BoilersId</th>
                 <th>Business Name</th>
                 <th>E-mail</th>
                 <th>Phone</th>
                 <th>Address</th>
-                <th>Actions</th>
+                <th>Options</th>
               </tr>
             </thead>
           <tbody>

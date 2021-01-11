@@ -13,7 +13,7 @@ export class BoilerItem extends Component {
       hourEventualCost,
     } = this.props.boiler;
     return (
-      <tr>
+      <tr className={styles.table}>
         <td>{_id}</td>
         <td>{typeId}</td>
         <td>{maintainceRate}</td>
@@ -21,16 +21,18 @@ export class BoilerItem extends Component {
         <td>{hourEventualCost}</td>
         <td>
           <button
-            onClick={this.props.delBoiler.bind(this, _id)}
-            className={styles.btnStyle}
-          >
-            delete
-          </button>
-          <button
+            title="Edit"
             onClick={this.props.editBoiler.bind(this, this.props.boiler)}
             className={styles.btnStyle}
           >
-            edit
+            <i className="far fa-edit"></i>
+          </button>
+          <button
+            title="Delete"
+            className={styles.btnStyle}
+            onClick={this.props.delBoiler.bind(this, _id)}
+          >
+            <i className="far fa-trash-alt"></i>
           </button>
         </td>
       </tr>

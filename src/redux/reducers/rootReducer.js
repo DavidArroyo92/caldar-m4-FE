@@ -5,6 +5,8 @@ import buildingsReducer from './buildingsReducer';
 import customersReducer from './customersReducer';
 import techniciansReducer from './techniciansReducer';
 import {combineReducers} from 'redux';
+import modalReducer from './modalReducer';
+import authReducer from './authReducer';
 
 const rootReducer = combineReducers({
     appointments: appointmentsReducer,
@@ -13,6 +15,8 @@ const rootReducer = combineReducers({
     buildings: buildingsReducer,
     customers: customersReducer,
     technicians: techniciansReducer,
+    modal: modalReducer,
+    auth: authReducer,
 });
 
 export default rootReducer;

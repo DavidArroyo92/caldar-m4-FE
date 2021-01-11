@@ -12,7 +12,7 @@ export class CustomerItem extends Component {
       fiscalAddress,
     } = this.props.customer;
     return (
-      <tr>
+      <tr className={styles.table}>
         <td>{_id}</td>
         <td>{customerType}</td>
         <td>{email}</td>
@@ -20,16 +20,18 @@ export class CustomerItem extends Component {
         <td>{fiscalAddress}</td>
         <td>
           <button
-            onClick={this.props.delCustomer.bind(this, _id)}
-            className={styles.btnStyle}
-          >
-            delete
-          </button>
-          <button
+            title="Edit"
             onClick={this.props.editCustomer.bind(this, this.props.customer)}
             className={styles.btnStyle}
           >
-            edit
+            <i className="far fa-edit"></i>
+          </button>
+          <button
+            title="Delete"
+            className={styles.btnStyle}
+            onClick={this.props.delCustomer.bind(this, _id)}
+          >
+            <i className="far fa-trash-alt"></i>
           </button>
         </td>
       </tr>
