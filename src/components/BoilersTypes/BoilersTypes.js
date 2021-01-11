@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import BoilerTypeList from "./BoilerTypeList";
+import Chart from './Chart';
 import AddBoilerType from "./AddBoilerType";
 import styles from "../../layout/main/main.module.css";
 import { connect } from "react-redux";
@@ -14,6 +15,40 @@ class BoilerTypes extends Component {
   state = {
     boilerTypeEdit: null,
     showForm: false,
+    showGraph: false,
+    chartData:{},
+  };
+
+  componentWillMount(){
+    this.getChartData();
+  }
+
+  getChartData(){
+   this.setState({
+     chartData:{
+       labels: ['Business', 'Particular'],
+       datasets:[
+         {
+           label:'Boiler types',
+           data:[
+             1,
+             7
+           ],
+           backgroundColor:[
+             'rgba(255, 99, 132, 0.6)',
+             'rgba(54, 162, 235, 0.6)'
+           ]
+         }
+       ]
+     }
+   });
+  }
+
+  handleShowGraph = () => {
+    this.setState({
+      showGraph: !this.state.showGraph,
+    });
+    window.scrollTo(0, 0);
   };
 
   componentDidMount() {
@@ -37,13 +72,24 @@ class BoilerTypes extends Component {
   render() {
     return (
       <div className={styles.info}>
-        {this.state.showForm ? (
-          <AddBoilerType boilerTypeEdit={this.state.boilerTypeEdit} />
+        {/* {this.state.showForm ? (
+          <AddBoilerType boilerTypeEdit={this.state.boilerTypeEdit} /> */}
+        {this.state.showGraph? (
+            <Chart
+            handleShowGraph={this.handleShowGraph}
+            showGraph={this.state.showGraph}
+            chartData={this.state.chartData}
+             legendPosition="bottom"
+             boilerTypes={this.props.boilerTypes}
+
+            />
         ) : (
           <BoilerTypeList
             boilerTypes={this.props.boilerTypes}
             editBoilerType={this.editBoilerType}
             showAddModal={this.showAddModal}
+            handleShowGraph={this.handleShowGraph}
+            showGraph={this.state.showGraph}
           />
         )}
       </div>

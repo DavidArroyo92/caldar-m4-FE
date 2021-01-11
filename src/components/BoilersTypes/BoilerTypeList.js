@@ -32,11 +32,18 @@ class BoilerTypeList extends Component {
               <BoilerTypeItem
                 key={boilerType._id}
                 boilerType={boilerType}
-                editBoilerType={this.props.editBoilerType}
+                // editBoilerType={this.props.editBoilerType}
               />
             ))}
           </tbody>
         </table>
+        <button
+          title="See report"
+          className={styles.btnStyle}
+          onClick={() => this.props.handleShowGraph()}
+        >
+          <i class="fas fa-chart-pie"></i>
+        </button>
       </div>
     );
   }

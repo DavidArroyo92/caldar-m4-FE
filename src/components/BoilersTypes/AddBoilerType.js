@@ -61,25 +61,6 @@ export class AddBoilerType extends Component {
             stock: boilerTypeEdit && boilerTypeEdit.stock,
             description: boilerTypeEdit && boilerTypeEdit.description,
           }}
-          // validate={(values) => {
-          //   const errors = {};
-          //   if (!values.skillsId) {
-          //     errors.skillsId = "Required";
-          //   }
-          //   if (!values.type) {
-          //     errors.type = "Required";
-          //   }
-
-          //   if (!values.stock) {
-          //     errors.stock = "Required";
-          //   }
-
-          //   if (!values.description) {
-          //     errors.description = "Required";
-          //   }
-
-          //   return errors;
-          // }}
           render={({ handleSubmit }) => (
             <form onSubmit={handleSubmit}>
               <Field

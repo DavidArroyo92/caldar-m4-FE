@@ -45,6 +45,27 @@ table {
   background-color: white;
 }
 
+.btnReportStyle {
+  border:none;
+  color: #FC6225;
+  padding: 2px 2px 2px 2px;
+  font-size: 45px;
+  cursor: pointer;
+  border-radius: 50%;
+  background-color: white;
+  float: right;
+}
+
+.btnBackStyle {
+  border:none;
+  color: #020101;
+  padding: 2px 2px 2px 2px;
+  font-size: 45px;
+  cursor: pointer;
+  border-radius: 50%;
+  background-color: white;
+}
+
 .btnStyle:hover{
   color: #fc622580;
 }
@@ -58,4 +79,9 @@ table {
   margin: 5px;
   width: 25%;
   text-align: center;
+}
+
+.Chart{
+  width: 75%;
+  height: auto;
 }
