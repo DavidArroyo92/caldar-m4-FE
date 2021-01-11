@@ -37,7 +37,7 @@ export const loginWithFirebase = credentials => dispatch => {
     })
 };
 
-export const setAuthentification = () => {
+export const setAuthentication = () => {
     return {
         type: SET_AUTHENTIFICATION
     }
