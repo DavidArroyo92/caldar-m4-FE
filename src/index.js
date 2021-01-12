@@ -2,9 +2,11 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import App from "./App";
-import reportWebVitals from "./reportWebVitals";
+import { createStore, applyMiddleware, compose } from "redux";
+import thunk from "redux-thunk";
+//import reportWebVitals from "./reportWebVitals";
 import rootReducer from "./redux/reducers/rootReducer";
-import "./index.css";
+//import "./index.css";
 
 const middleware = [thunk];
 const configureStore = () => {

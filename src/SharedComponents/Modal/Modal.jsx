@@ -15,7 +15,7 @@ import BoilerTypeForm from '../../components/BoilersTypes/BoilerTypeForm';
 import RemoveBoilerTypeMessage from '../../components/BoilersTypes/RemoveBoilerTypeMessage';
 import AddBuilding from '../../components/Buildings/AddBuilding';
 import RemoveBuildingMessage from "../../components/Buildings/RemoveBuildingMessage";
-import EditBuildingMessage from "../../components/Buildings/EditBuildingMesagge";
+import EditBuildingMessage from "../../components/Buildings/EditBuildingMessage";
 import CustomerForm from '../../components/Customers/CustomerForm';
 import RemoveCustomerMessage from '../../components/Customers/RemoveCustomerMessage';
 import TechnicianForm from '../../components/Technicians/TechnicianForm';
