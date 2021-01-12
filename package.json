@@ -7,8 +7,13 @@
     "@testing-library/jest-dom": "^5.11.6",
     "@testing-library/react": "^11.2.2",
     "@testing-library/user-event": "^12.6.0",
+<<<<<<< HEAD
     "axios": "^0.21.0",
     "final-form": "^4.20.1",
+=======
+    "final-form": "^4.20.1",
+    "firebase": "^8.2.1",
+>>>>>>> 86fabfda1be0106646cbe60a0530d5c97deeb86d
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-final-form": "^6.5.2",
@@ -18,7 +23,6 @@
     "redux": "^4.0.5",
     "redux-devtools-extension": "^2.13.8",
     "redux-thunk": "^2.3.0",
-    "uuid": "^8.3.2",
     "web-vitals": "^0.2.4"
   },
   "scripts": {

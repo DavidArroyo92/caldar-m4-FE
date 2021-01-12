@@ -1,3 +1,4 @@
+import { requestGet,requestPost,requestPut,requestDelete } from '../../utils/request';
 import {
     GET_TECHNICIANS_FETCHING,
     GET_TECHNICIANS_FULFILLED,
@@ -29,8 +30,13 @@ const getTechnicianRejected = () => ({
 });
 
 export const getTechnicians = () => (dispatch) => {
+<<<<<<< HEAD
     dispatch(getTechnicianFetching());
     return fetch(URL)
+=======
+    dispatch(getTechniciansFetching());
+    return requestGet(URL)
+>>>>>>> 86fabfda1be0106646cbe60a0530d5c97deeb86d
         .then(data => data.json())
         .then(response => {
             dispatch(getTechnicianFulfilled(response));
@@ -77,7 +83,7 @@ export const addTechnician = (
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(dataSend),
       };
-    return fetch(URL, requestOptions)
+    return requestPost(URL, requestOptions)
         .then(data=> data.json())
         .then(response => {
             dispatch(addTechnicianFulfilled(response));
@@ -127,7 +133,7 @@ export const editTechnician = (
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(dataSend),
       };
-    return fetch(`${URL}/${_id}`, requestOptions)
+    return requestPut(`${URL}/${_id}`, requestOptions)
         .then(data=> data.json())
         .then(response => {
             dispatch(editTechnicianFulfilled(response));
@@ -159,7 +165,7 @@ export const delTechnician = (_id) => (dispatch) => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(dataSend),
     };
-    return fetch(`${URL}/${_id}`, requestOptions)
+    return requestDelete(`${URL}/${_id}`, requestOptions)
         .then(data => data.json())
         .then(response => {
             dispatch(delTechnicianFulfilled(_id));

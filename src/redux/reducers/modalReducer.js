@@ -6,7 +6,7 @@ import {
 const initialState = {
     show: false,
     modalType: null,
-    meta: {},
+    meta: {}
 };
 
 const modalReducer = (state = initialState, action) => {

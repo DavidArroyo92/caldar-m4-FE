@@ -1,3 +1,4 @@
+import { requestGet,requestPost,requestPut,requestDelete } from '../../utils/request';
 import {
     GET_BUILDING_FETCHING,
     GET_BUILDING_FULFILLED,
@@ -34,7 +35,7 @@ const getBuildingRejected = () => ({
 
 export const getBuildings = () => dispatch =>{
     dispatch(getBuildingFetching());
-    return fetch(URL)
+    return requestGet(URL)
         .then((data)=>data.json())
         .then((response)=>{
             dispatch(getBuildingFulfilled(response));
@@ -80,7 +81,7 @@ export const addBuilding = (
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(dataSend),
     };
-    return fetch(URL, requestOptions)
+    return requestPost(URL, requestOptions)
         .then((data)=> data.json())
         .then((response) =>{
             dispatch(addBuildingFulfilled(response));
@@ -115,7 +116,7 @@ export const delBuilding = (_id) => (dispatch) =>{
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(dataSend),
     };
-    return fetch(`${URL}/${_id}`, requestOptions)
+    return requestDelete(`${URL}/${_id}`, requestOptions)
         .then((data) => data.json())
         .then((response) => {
             dispatch(delBuildingFulfilled(_id));
@@ -164,7 +165,7 @@ export const editBuilding = (
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(dataSend),
     }
-    return fetch(`${URL}/${_id}`, requestOptions )
+    return requestPut(`${URL}/${_id}`, requestOptions )
     .then((data)=> data.json())
         .then((response) =>{
             dispatch(editBuildingFulfilled(response));
