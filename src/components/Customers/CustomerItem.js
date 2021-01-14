@@ -1,8 +1,15 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import styles from "../../layout/main/main.module.css";
+import { connect } from "react-redux";
+import modalTypes from "../../redux/types/types-modals.js";
+import { showModal as showModalActions } from "../../redux/actions/modalActions";
 
 export class CustomerItem extends Component {
+  showDeleteModal = (_id) => {
+    this.props.showModal(modalTypes.DEL_CUSTOMER, { id: _id });
+  };
+
   render() {
     const {
       _id,
@@ -29,7 +36,7 @@ export class CustomerItem extends Component {
           <button
             title="Delete"
             className={styles.btnStyle}
-            onClick={this.props.delCustomer.bind(this, _id)}
+            onClick={() => this.showDeleteModal(_id)}
           >
             <i className="far fa-trash-alt"></i>
           </button>
@@ -41,9 +48,12 @@ export class CustomerItem extends Component {
 
 // PropTypes
 CustomerItem.propTypes = {
-  customer: PropTypes.object.isRequired,
-  delCustomer: PropTypes.func.isRequired,
-  editCustomer: PropTypes.func.isRequired,
+    customer: PropTypes.object.isRequired,
 };
 
-export default CustomerItem;
+const mapDispatchToProps = (dispatch) => ({
+  showModal: (modalType, meta) => dispatch(showModalActions(modalType, meta)),
+});
+
+const mapStateToProps = (state) => ({});
+export default connect(mapStateToProps, mapDispatchToProps)(CustomerItem);

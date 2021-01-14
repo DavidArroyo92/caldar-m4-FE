@@ -6,9 +6,11 @@ function Navbar() {
     return (
             <nav className={styles.navbarContainer}>
                 <div className={styles.logo}>
-                    <h3>
-                        CALDAR
-                    </h3>
+                    <NavLink to="/" activeClassName={styles.mainNavActive} className={styles.mainNav}>
+                        <h3>
+                            CALDAR
+                        </h3>
+                    </NavLink>
                 </div>
                 <ul className={styles.navbarLinks}>
                     <NavLink to="/appointments" activeClassName={styles.mainNavActive} className={styles.mainNav}>
