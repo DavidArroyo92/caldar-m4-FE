@@ -16,45 +16,45 @@ import {
 
 const URL = 'https://app-caldar-gm4.herokuapp.com/api/technician';
 
-const getTechniciansFetching = () => ({
+const getTechnicianFetching = () => ({
     type: GET_TECHNICIANS_FETCHING,
 });
 
-const getTechniciansFulfilled = (payload) => ({
+const getTechnicianFulfilled = (payload) => ({
     type: GET_TECHNICIANS_FULFILLED,
     payload,
 });
 
-const getTechniciansRejected = () => ({
+const getTechnicianRejected = () => ({
     type: GET_TECHNICIANS_REJECTED,
 });
 
 export const getTechnicians = () => (dispatch) => {
-    dispatch(getTechniciansFetching());
-    return requestGet(URL)
+    dispatch(getTechnicianFetching());
+    return fetch(URL)
         .then(data => data.json())
         .then(response => {
-            dispatch(getTechniciansFulfilled(response));
+            dispatch(getTechnicianFulfilled(response));
         })
         .catch(() => {
-            dispatch(getTechniciansRejected ());
+            dispatch(getTechnicianRejected ());
         })
 };
 
-const addTechniciansFetching = () => ({
+const addTechnicianFetching = () => ({
     type: ADD_TECHNICIANS_FETCHING,
 });
 
-const addTechniciansFulfilled = (payload) => ({
+const addTechnicianFulfilled = (payload) => ({
     type: ADD_TECHNICIANS_FULFILLED,
     payload,
 });
 
-const addTechniciansRejected = () => ({
+const addTechnicianRejected = () => ({
     type: ADD_TECHNICIANS_REJECTED,
 });
 
-export const addTechnicians = (
+export const addTechnician = (
     firstName,
     lastName,
     email,
@@ -63,7 +63,7 @@ export const addTechnicians = (
     hour_rate,
     daily_capacity,
 ) => (dispatch) => {
-    dispatch(addTechniciansFetching());
+    dispatch(addTechnicianFetching());
     const dataSend = {
         firstName,
         lastName,
@@ -81,28 +81,28 @@ export const addTechnicians = (
     return requestPost(URL, requestOptions)
         .then(data=> data.json())
         .then(response => {
-            dispatch(addTechniciansFulfilled(response));
+            dispatch(addTechnicianFulfilled(response));
         })
         .then(() => dispatch(getTechnicians()))
         .catch(() => {
-            dispatch(addTechniciansRejected ());
+            dispatch(addTechnicianRejected ());
         })
 };
 
-const editTechniciansFetching = () => ({
+const editTechnicianFetching = () => ({
     type: EDIT_TECHNICIANS_FETCHING,
 });
 
-const editTechniciansFulfilled = (payload) => ({
+const editTechnicianFulfilled = (payload) => ({
     type: EDIT_TECHNICIANS_FULFILLED,
     payload,
 });
 
-const editTechniciansRejected = () => ({
+const editTechnicianRejected = () => ({
     type: EDIT_TECHNICIANS_REJECTED,
 });
 
-export const editTechnicians = (
+export const editTechnician = (
     _id,
     firstName,
     lastName,
@@ -112,7 +112,7 @@ export const editTechnicians = (
     hour_rate,
     daily_capacity,
 ) => (dispatch) => {
-    dispatch(editTechniciansFetching());
+    dispatch(editTechnicianFetching());
     const dataSend = {
         _id,
         firstName,
@@ -131,29 +131,29 @@ export const editTechnicians = (
     return requestPut(`${URL}/${_id}`, requestOptions)
         .then(data=> data.json())
         .then(response => {
-            dispatch(editTechniciansFulfilled(response));
+            dispatch(editTechnicianFulfilled(response));
         })
         .then(() => dispatch(getTechnicians()))
         .catch(() => {
-            dispatch(editTechniciansRejected ());
+            dispatch(editTechnicianRejected ());
         })
 };
 
-const delTechniciansFetching = () => ({
+const delTechnicianFetching = () => ({
     type: DEL_TECHNICIANS_FETCHING,
 });
 
-const delTechniciansFulfilled = (payload) => ({
+const delTechnicianFulfilled = (payload) => ({
     type: DEL_TECHNICIANS_FULFILLED,
     payload,
 });
 
-const delTechniciansRejected = () => ({
+const delTechnicianRejected = () => ({
     type: DEL_TECHNICIANS_REJECTED,
 });
 
-export const delTechnicians = (_id) => (dispatch) => {
-    dispatch(delTechniciansFetching());
+export const delTechnician = (_id) => (dispatch) => {
+    dispatch(delTechnicianFetching());
     const dataSend = { _id };
     const requestOptions = {
       method: "DELETE",
@@ -163,11 +163,11 @@ export const delTechnicians = (_id) => (dispatch) => {
     return requestDelete(`${URL}/${_id}`, requestOptions)
         .then(data => data.json())
         .then(response => {
-            dispatch(delTechniciansFulfilled(_id));
+            dispatch(delTechnicianFulfilled(_id));
         })
         .then(() => dispatch(getTechnicians()))
         .catch(() => {
-            dispatch(delTechniciansRejected ());
+            dispatch(delTechnicianRejected ());
         })
 };
 

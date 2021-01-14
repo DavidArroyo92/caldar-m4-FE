@@ -2,7 +2,21 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import App from "./App";
-import { store } from "./redux/store"
+import { createStore, applyMiddleware, compose } from "redux";
+import thunk from "redux-thunk";
+//import reportWebVitals from "./reportWebVitals";
+import rootReducer from "./redux/reducers/rootReducer";
+//import "./index.css";
+
+const middleware = [thunk];
+const configureStore = () => {
+  return createStore(
+    rootReducer,
+    compose(applyMiddleware(...middleware))
+  );
+};
+
+const store = configureStore( window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 
 ReactDOM.render(
   <React.StrictMode>

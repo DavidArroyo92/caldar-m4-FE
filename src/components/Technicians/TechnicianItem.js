@@ -1,8 +1,16 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from "react-redux";
 import styles from "../../layout/main/main.module.css";
+import modalTypes from "../../redux/types/types-modals.js";
+import { showModal as showModalActions } from "../../redux/actions/modalActions";
 
-export class Technicianitem extends Component {
+export class TechnicianItem extends Component {
+
+    //Show del Modal
+    showDeleteModal = (_id) => {
+        this.props.showModal(modalTypes.DEL_TECHNICIAN, {id: _id});
+      };
 
     render() {
         const { _id, firstName, lastName, email, typeIds, skillsId, hour_rate, daily_capacity} = this.props.technician;
@@ -26,7 +34,7 @@ export class Technicianitem extends Component {
                     <button
                         title="Delete"
                         className={styles.btnStyle}
-                        onClick={this.props.delTechnician.bind(this, _id)}
+                        onClick={() => this.showDeleteModal(_id)}
                     >
                         <i className="far fa-trash-alt"></i>
                     </button>
@@ -35,11 +43,15 @@ export class Technicianitem extends Component {
     }
 }
 
-// Prop types
-Technicianitem.propTypes = {
+// PropTypes
+TechnicianItem.propTypes = {
     technician: PropTypes.object.isRequired,
-    delTechnician: PropTypes.func.isRequired,
-    editTechnician: PropTypes.func.isRequired,
-}
+  };
+  
+  const mapDispatchToProps = (dispatch) => ({
+    showModal: (modalType, meta) => dispatch(showModalActions(modalType, meta)),
+  });
+  
+  const mapStateToProps = (state) => ({});
 
-export default Technicianitem
+  export default connect(mapStateToProps, mapDispatchToProps)(TechnicianItem);

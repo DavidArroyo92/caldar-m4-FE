@@ -1,14 +1,19 @@
 import React, { Component } from "react";
 import TechniciansList from "./TechniciansList";
-import AddTechnician from "./AddTechnician";
+//import AddTechnician from "./AddTechnician";
+import TechnicianForm from './TechnicianForm';
 import styles from "../../layout/main/main.module.css";
 import { connect } from "react-redux";
 import {
-  getTechnicians as getTechniciansActions,
-  delTechnicians as delTechniciansActions,
-  addTechnicians as addTechniciansActions,
-  editTechnicians as updateTechniciansActions,
+  getTechnicians as getTechnicianActions,
+  //delTechnicians as delTechniciansActions,
+  //addTechnicians as addTechniciansActions,
+  //editTechnicians as updateTechniciansActions,
 } from "../../redux/actions/techniciansActions";
+import {
+  showModal as showModalAction
+} from '../../redux/actions/modalActions';
+import modalTypes from "../../redux/types/types-modals.js";
 
 class Technicians extends Component {
   state = {
@@ -20,15 +25,6 @@ class Technicians extends Component {
     this.props.getTechnicians();
   }
 
-  // Show form
-  handleShowForm = () => {
-    this.setState({
-      showForm: !this.state.showForm,
-      technicianEdit: null
-    });
-    window.scrollTo(0, 0);
-  };
-
   // Edit Technician
   editTechnician = (technician) => {
     this.setState({
@@ -38,23 +34,25 @@ class Technicians extends Component {
     window.scrollTo(0, 0);
   };
 
+  //Show add Modal
+  showAddModal = () => {
+    this.props.showModal(modalTypes.ADD_TECHNICIAN);
+  };
+
   render() {
     return (
       <div className={styles.info}>
           {this.state.showForm ? (
-          <AddTechnician
-            addTechnician={this.props.addTechnicians}
-            updateTechnician={this.props.updateTechnicians}
+          <TechnicianForm
             technicianEdit={this.state.technicianEdit}
-            handleShowForm={this.handleShowForm}
           />
           ) : (
           <TechniciansList
             technicians={this.props.technicians}
-            delTechnician={this.props.delTechnicians}
+            //delTechnician={this.props.delTechnicians}
             editTechnician={this.editTechnician}
-            handleShowForm={this.handleShowForm}
-            showForm={this.state.showForm}
+            showAddModal={this.showAddModal}
+            //showDelModal={this.showDelModal} 
           />
         )}
       </div>
@@ -63,42 +61,9 @@ class Technicians extends Component {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  getTechnicians: () => dispatch(getTechniciansActions()),
-  delTechnicians: (_id) => dispatch(delTechniciansActions(_id)),
-  addTechnicians: (firstName, lastName, email, typeIds, skillsId, hour_rate, daily_capacity) =>
-    dispatch(
-      addTechniciansActions(
-        firstName,
-        lastName,
-        email,
-        typeIds,
-        skillsId,
-        hour_rate,
-        daily_capacity,
-      )
-    ),
-  updateTechnicians: (
-    _id,
-    firstName,
-    lastName,
-    email,
-    typeIds,
-    skillsId,
-    hour_rate,
-    daily_capacity,
-  ) =>
-    dispatch(
-      updateTechniciansActions(
-        _id,
-        firstName,
-        lastName,
-        email,
-        typeIds,
-        skillsId,
-        hour_rate,
-        daily_capacity,
-      )
-    ),
+  showModal: (modalType) => dispatch(showModalAction(modalType)),
+  getTechnicians: () => dispatch(getTechnicianActions()),
+  //delTechnicians: (_id) => dispatch(delTechniciansActions(_id)),
 });
 
 const mapStateToProps = (state) => ({

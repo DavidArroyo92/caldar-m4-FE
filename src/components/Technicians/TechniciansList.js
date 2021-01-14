@@ -11,7 +11,7 @@ class TechniciansList extends Component {
             <button
               title="Add"
               className={styles.btnStyle}
-              onClick={() => this.props.handleShowForm()}
+              onClick={() => this.props.showAddModal()}
             >
               <i className="fas fa-plus"></i>
             </button>
@@ -31,12 +31,12 @@ class TechniciansList extends Component {
             </tr>
           </thead>
           <tbody>
-            {this.props.technicians.map((technician, index) => (
+            {this.props.technicians?.map((technician) => (
               <TechnicianItem
-                key={index}
+                key={technician._id}
                 technician={technician}
                 editTechnician={this.props.editTechnician}
-                delTechnician={this.props.delTechnician}
+                //delTechnician={this.props.delTechnician}
               />
             ))}
           </tbody>
@@ -49,10 +49,9 @@ class TechniciansList extends Component {
 // Prop types
 TechniciansList.propTypes = {
     technicians: PropTypes.array.isRequired,
-    delTechnician: PropTypes.func.isRequired,
+    //delTechnician: PropTypes.func.isRequired,
     editTechnician: PropTypes.func.isRequired,
-    handleShowForm: PropTypes.func.isRequired,
-    showForm: PropTypes.bool.isRequired,
+    showAddModal: PropTypes.func.isRequired,
 }
 
 export default TechniciansList;
