@@ -1,3 +1,4 @@
+import { requestGet,requestPost,requestPut,requestDelete } from '../../utils/request';
 import {
     GET_TECHNICIANS_FETCHING,
     GET_TECHNICIANS_FULFILLED,
@@ -30,7 +31,7 @@ const getTechniciansRejected = () => ({
 
 export const getTechnicians = () => (dispatch) => {
     dispatch(getTechniciansFetching());
-    return fetch(URL)
+    return requestGet(URL)
         .then(data => data.json())
         .then(response => {
             dispatch(getTechniciansFulfilled(response));
@@ -77,7 +78,7 @@ export const addTechnicians = (
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(dataSend),
       };
-    return fetch(URL, requestOptions)
+    return requestPost(URL, requestOptions)
         .then(data=> data.json())
         .then(response => {
             dispatch(addTechniciansFulfilled(response));
@@ -127,7 +128,7 @@ export const editTechnicians = (
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(dataSend),
       };
-    return fetch(`${URL}/${_id}`, requestOptions)
+    return requestPut(`${URL}/${_id}`, requestOptions)
         .then(data=> data.json())
         .then(response => {
             dispatch(editTechniciansFulfilled(response));
@@ -159,7 +160,7 @@ export const delTechnicians = (_id) => (dispatch) => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(dataSend),
     };
-    return fetch(`${URL}/${_id}`, requestOptions)
+    return requestDelete(`${URL}/${_id}`, requestOptions)
         .then(data => data.json())
         .then(response => {
             dispatch(delTechniciansFulfilled(_id));

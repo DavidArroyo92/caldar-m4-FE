@@ -1,3 +1,4 @@
+import { requestGet,requestPost,requestPut,requestDelete } from '../../utils/request';
 import {
     GET_APPOINTMENT_FETCHING,
     GET_APPOINTMENT_FULFILLED,
@@ -32,7 +33,7 @@ const getAppointmentRejected = () => ({
 
 export const getAppointments = () => dispatch =>{
     dispatch(getAppointmentFetching());
-    return fetch(URL)
+    return requestGet(URL)
         .then(data=>data.json())
         .then(response=>{
             dispatch(getAppointmentFulfilled(response));
@@ -65,7 +66,7 @@ export const addAppointment = (buildingId,boilerId,start_timestamp,end_timestamp
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(dataSend),
     };
-    return fetch(URL,requestOptions)
+    return requestPost(URL,requestOptions)
         .then(data=> data.json())
         .then(response =>{
             dispatch(addAppointmentFulfilled(response));
@@ -99,7 +100,7 @@ export const delAppointment = (_id) => dispatch =>{
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(dataSend),
     };
-    return fetch(`${URL}/${_id}`, requestOptions)
+    return requestDelete(`${URL}/${_id}`, requestOptions)
     .then(data=> data.json())
         .then(response =>{
             dispatch(delAppointmentFulfilled(_id));
@@ -133,7 +134,7 @@ export const editAppointment = (_id,buildingId,boilerId,start_timestamp,end_time
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(dataSend),
   };
-    return fetch(`${URL}/${_id}`, requestOptions)
+    return requestPut(`${URL}/${_id}`, requestOptions)
         .then(data=> data.json())
         .then(response => {
             dispatch(editAppointmentFulfilled(response));

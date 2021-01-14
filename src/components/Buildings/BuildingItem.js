@@ -1,8 +1,19 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types';
 import styles from '../../layout/main/main.module.css';
+import { showModal as showModalActions } from "../../redux/actions/modalActions";
+import modalTypes from "../../redux/types/types-modals.js";
+import { connect } from "react-redux";
 
 export class BuildingItem extends Component {
+
+    showDeleteModal = (_id) => {
+        this.props.showModal(modalTypes.DEL_BUILDING, {id: _id});
+      };
+
+      showEditModal = (_id) => {
+        this.props.showModal(modalTypes.EDIT_BUILDING, {id: _id});
+      };
 
     render() {
         const
@@ -37,7 +48,7 @@ export class BuildingItem extends Component {
                         <td>
                             <button
                                 title="Edit"
-                                onClick={this.props.editBuilding.bind(this, this.props.building)}
+                                onClick={() =>this.showEditModal(_id)}
                                 className={styles.btnStyle}
                             >
                                 <i className="far fa-edit"></i>
@@ -45,7 +56,7 @@ export class BuildingItem extends Component {
                             <button
                                 title="Delete"
                                 className={styles.btnStyle}
-                                onClick={this.props.delBuilding.bind(this, _id)}
+                                onClick={this.showDeleteModal(_id)}
                             >
                                 <i className="far fa-trash-alt"></i>
                             </button>
@@ -55,11 +66,15 @@ export class BuildingItem extends Component {
     }
 }
 
-//proptypes
+// proptypes 
 BuildingItem.propTypes = {
     building: PropTypes.object.isRequired,
-    delBuilding: PropTypes.func.isRequired,
-    editBuilding: PropTypes.func.isRequired,
   };
 
-export default BuildingItem;
+  const mapDispatchToProps = (dispatch) => ({
+    showModal: (modalType, meta) => dispatch(showModalActions(modalType, meta)),
+  });
+  
+  const mapStateToProps = (state) => ({});
+  
+  export default connect( mapStateToProps, mapDispatchToProps)(BuildingItem);

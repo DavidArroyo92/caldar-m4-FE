@@ -1,3 +1,4 @@
+import { requestGet,requestPost,requestPut,requestDelete } from '../../utils/request';
 import {
     GET_BOILERTYPE_FETCHING,
     GET_BOILERTYPE_FULFILLED,
@@ -33,7 +34,7 @@ const getBoilerTypeRejected = () => ({
 
 export const getBoilerTypes = () => (dispatch) =>{
     dispatch(getBoilerTypeFetching());
-    return fetch(URL)
+    return requestGet(URL)
         .then((data)=>data.json())
         .then((response)=>{
             dispatch(getBoilerTypeFulfilled(response));
@@ -65,7 +66,7 @@ export const addBoilerType = (skillsId,type,stock,description ) => dispatch =>{
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(dataSend),
     };
-    return fetch(URL,requestOptions)
+    return requestPost(URL,requestOptions)
         .then(data=> data.json())
         .then(response =>{
             dispatch(addBoilerTypeFulfilled(response));
@@ -102,7 +103,7 @@ export const deleteBoilerType = (_id) => (dispatch) =>{
     body: JSON.stringify(dataSend),
   };
 
-    return fetch(`${URL}/${_id}`, requestOptions).then((data)=> data.json())
+    return requestDelete(`${URL}/${_id}`, requestOptions).then((data)=> data.json())
         .then((response) =>{
             dispatch(deleteBoilerTypeFulfilled(_id));
         })
@@ -138,7 +139,7 @@ export const editBoilerType = (_id, skillsId, type, stock, description ) => (dis
         body: JSON.stringify(dataSend),
   };
 
-    return fetch(`${URL}/${_id}`, requestOptions)
+    return requestPut(`${URL}/${_id}`, requestOptions)
         .then((data)=> data.json())
         .then((response) =>{
             dispatch(editBoilerTypeFulfilled(response));
