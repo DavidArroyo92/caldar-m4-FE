@@ -114,23 +114,78 @@ const Modal = ({
     );
 };
 
-const mapStateToProps = (state) =>{
-    return {
-        show: state.modal.show,
-        modalType: state.modal.modalType,
-        meta: state.modal.meta
-    }
-}
+  let modalComponent;
+  switch (modalType) {
+    case modalTypes.ADD_APPOINTMENT:
+      modalComponent = <AppointmentForm />;
+      break;
+    case modalTypes.DEL_APPOINTMENT:
+      modalComponent = <RemoveAppointmentMessage appointmentId={meta.id} />;
+      break;
+    case modalTypes.ADD_BOILER:
+      modalComponent = <AddBoiler />;
+      break;
+    case modalTypes.DEL_BOILER:
+      modalComponent = <RemoveBoilerMessage boilerId={meta.id} />;
+      break;
+    case modalTypes.ADD_BOILERTYPE:
+      modalComponent = <BoilerTypeForm />;
+      break;
+    case modalTypes.DEL_BOILERTYPE:
+      modalComponent = <RemoveBoilerTypeMessage boilerTypeId={meta.id} />;
+      break;
+    case modalTypes.ADD_BUILDING:
+      modalComponent = <BuildingForm />;
+      break;
+    case modalTypes.DEL_BUILDING:
+      modalComponent = <RemoveBuildingMessage buildingId={meta.id} />;
+      break;
+    case modalTypes.ADD_CUSTOMER:
+      modalComponent = <AddCustomer />;
+      break;
+    case modalTypes.DEL_CUSTOMER:
+      modalComponent = <RemoveCustomerMessage customerId={meta.id} />;
+      break;
+    case modalTypes.ADD_TECHNICIAN:
+      modalComponent = <TechnicianForm />;
+      break;
+    case modalTypes.DEL_TECHNICIAN:
+      modalComponent = <RemoveTechnicianMessage technicianId={meta.id} />;
+      break;
+    default:
+      modalComponent = null;
+      break;
+  }
 
-const mapDispatchToProps = (dispatch) =>{
-    return bindActionCreators (
-        {
-        closeModal: closeModalAction,
-        },
-        dispatch
-    );
-}
+  return (
+    <MaterialModal
+      open={show}
+      onClose={closeModal}
+      aria-labelledby="simple-modal-title"
+      aria-describedby="simple-modal-description"
+    >
+      <div style={modalStyle} className={classes.paper}>
+        {modalComponent}
+      </div>
+    </MaterialModal>
+  );
+};
 
-export default connect(mapStateToProps, mapDispatchToProps)(Modal);  
+const mapStateToProps = (state) => {
+  return {
+    show: state.modal.show,
+    modalType: state.modal.modalType,
+    meta: state.modal.meta,
+  };
+};
 
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators(
+    {
+      closeModal: closeModalAction,
+    },
+    dispatch
+  );
+};
 
+export default connect(mapStateToProps, mapDispatchToProps)(Modal);
