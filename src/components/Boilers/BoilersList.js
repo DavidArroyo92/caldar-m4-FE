@@ -11,7 +11,7 @@ class BoilersList extends Component {
           <button
             title="Add"
             className={styles.btnStyle}
-            onClick={() => this.props.handleShowForm()}
+            onClick={() => this.props.showAddModal()}
           >
             <i className="fas fa-plus"></i>
           </button>
@@ -33,7 +33,6 @@ class BoilersList extends Component {
                 key={boiler._id}
                 boiler={boiler}
                 editBoiler={this.props.editBoiler}
-                delBoiler={this.props.delBoiler}
               />
             ))}
           </tbody>
@@ -46,10 +45,8 @@ class BoilersList extends Component {
 // PropTypes
 BoilersList.propTypes = {
   boilers: PropTypes.array.isRequired,
-  delBoiler: PropTypes.func.isRequired,
   editBoiler: PropTypes.func.isRequired,
-  handleShowForm: PropTypes.func.isRequired,
-  showForm: PropTypes.bool.isRequired,
+  showAddModal: PropTypes.func.isRequired,
 };
 
 export default BoilersList;
