@@ -15,7 +15,7 @@ import BoilerTypeForm from '../../components/BoilersTypes/BoilerTypeForm';
 import RemoveBoilerTypeMessage from '../../components/BoilersTypes/RemoveBoilerTypeMessage';
 import AddBuilding from '../../components/Buildings/AddBuilding';
 import RemoveBuildingMessage from "../../components/Buildings/RemoveBuildingMessage";
-import EditBuildingMessage from "../../components/Buildings/EditBuildingMesagge";
+//import EditBuildingMessage from "../../components/Buildings/EditBuildingMesagge";
 import CustomerForm from '../../components/Customers/CustomerForm';
 import RemoveCustomerMessage from '../../components/Customers/RemoveCustomerMessage';
 import TechnicianForm from '../../components/Technicians/TechnicianForm';
@@ -80,9 +80,9 @@ const Modal = ({
         case modalTypes.DEL_BUILDING:
             modalComponent = <RemoveBuildingMessage buildingId={meta.id} />
             break;
-        case modalTypes.EDIT_BUILDING:
+        /*case modalTypes.EDIT_BUILDING:
             modalComponent = <EditBuildingMessage buildingId={meta.id} />
-            break;
+            break;*/
         case modalTypes.ADD_CUSTOMER:
             modalComponent = <CustomerForm />
             break;
