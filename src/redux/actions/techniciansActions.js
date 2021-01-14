@@ -31,7 +31,7 @@ const getTechnicianRejected = () => ({
 
 export const getTechnicians = () => (dispatch) => {
     dispatch(getTechnicianFetching());
-    return fetch(URL)
+    return requestGet(URL)
         .then(data => data.json())
         .then(response => {
             dispatch(getTechnicianFulfilled(response));

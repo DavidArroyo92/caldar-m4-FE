@@ -16,7 +16,7 @@ import RemoveBoilerTypeMessage from '../../components/BoilersTypes/RemoveBoilerT
 import AddBuilding from '../../components/Buildings/AddBuilding';
 import RemoveBuildingMessage from "../../components/Buildings/RemoveBuildingMessage";
 //import EditBuildingMessage from "../../components/Buildings/EditBuildingMesagge";
-import CustomerForm from '../../components/Customers/CustomerForm';
+import AddCustomer from '../../components/Customers/AddCustomer';
 import RemoveCustomerMessage from '../../components/Customers/RemoveCustomerMessage';
 import TechnicianForm from '../../components/Technicians/TechnicianForm';
 import RemoveTechnicianMessage from '../../components/Technicians/RemoveTechnicianMessage';
@@ -84,7 +84,7 @@ const Modal = ({
             modalComponent = <EditBuildingMessage buildingId={meta.id} />
             break;*/
         case modalTypes.ADD_CUSTOMER:
-            modalComponent = <CustomerForm />
+            modalComponent = <AddCustomer />
             break;
         case modalTypes.DEL_CUSTOMER:
             modalComponent = <RemoveCustomerMessage customerId={meta.id} />
@@ -112,63 +112,6 @@ const Modal = ({
         </div>
         </MaterialModal>
     );
-};
-
-  let modalComponent;
-  switch (modalType) {
-    case modalTypes.ADD_APPOINTMENT:
-      modalComponent = <AppointmentForm />;
-      break;
-    case modalTypes.DEL_APPOINTMENT:
-      modalComponent = <RemoveAppointmentMessage appointmentId={meta.id} />;
-      break;
-    case modalTypes.ADD_BOILER:
-      modalComponent = <AddBoiler />;
-      break;
-    case modalTypes.DEL_BOILER:
-      modalComponent = <RemoveBoilerMessage boilerId={meta.id} />;
-      break;
-    case modalTypes.ADD_BOILERTYPE:
-      modalComponent = <BoilerTypeForm />;
-      break;
-    case modalTypes.DEL_BOILERTYPE:
-      modalComponent = <RemoveBoilerTypeMessage boilerTypeId={meta.id} />;
-      break;
-    case modalTypes.ADD_BUILDING:
-      modalComponent = <BuildingForm />;
-      break;
-    case modalTypes.DEL_BUILDING:
-      modalComponent = <RemoveBuildingMessage buildingId={meta.id} />;
-      break;
-    case modalTypes.ADD_CUSTOMER:
-      modalComponent = <AddCustomer />;
-      break;
-    case modalTypes.DEL_CUSTOMER:
-      modalComponent = <RemoveCustomerMessage customerId={meta.id} />;
-      break;
-    case modalTypes.ADD_TECHNICIAN:
-      modalComponent = <TechnicianForm />;
-      break;
-    case modalTypes.DEL_TECHNICIAN:
-      modalComponent = <RemoveTechnicianMessage technicianId={meta.id} />;
-      break;
-    default:
-      modalComponent = null;
-      break;
-  }
-
-  return (
-    <MaterialModal
-      open={show}
-      onClose={closeModal}
-      aria-labelledby="simple-modal-title"
-      aria-describedby="simple-modal-description"
-    >
-      <div style={modalStyle} className={classes.paper}>
-        {modalComponent}
-      </div>
-    </MaterialModal>
-  );
 };
 
 const mapStateToProps = (state) => {
